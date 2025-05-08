@@ -1,6 +1,6 @@
 # FOCUS360
 
-FOCUS360 (First Overview Central User Service) ist ein völlig neues Element in der STP-Landschaft und das zentrale Element in der landesstellenübergreifenden Darstellung von Versichertendaten der
+FOCUS360 (First Overview Central User Service) ist ein völlig neues Element in der STP-Landschaft und das zentrale Element in der landesstellenübergreifenden Darstellung von Versichertendaten und dazugehörigen Leistungsdaten der
 Österreichischen Gesundheitskasse. Der Sachbearbeiterin bzw. dem Sachbearbeiter werden auf einen Blick Daten aus einer Vielzahl von SV Fachapplikationen im Überblick dargestellt.
 
 ## Development
