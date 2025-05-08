@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="focus360_ng-test" type="js.build_tools.npm">
+    <package-json value="$PROJECT_DIR$/focus-parent/focus-frontend-angular/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="ng" />
+    </scripts>
+    <arguments value="test" />
+    <node-interpreter value="$PROJECT_DIR$/focus-parent/focus-frontend-angular/bin/node/node" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="focus360_installEPortalJBoss" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="C:\DEV\workspaces\IntelliJ\projects\FOCUS360\focus-config-dev\jboss\scripts\focus360_installEPortalJBoss.ps1" scriptParameters="-EPortalJBossArchetypeVersion 8.0.11" workingDirectory="$ProjectFileDir$\focus-config-dev\jboss" executablePath="C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe">
+    <envs>
+      <env name="JAVA_HOME" value="C:\DEV\progs\java\java-17-openjdk-17.0.11.0.9-1.win.x86_64" />
+      <env name="MAVEN_HOME" value="C:\DEV\progs\maven\apache-maven-3.9.9" />
+      <env name="JAVA_OPTS" value="-Xms256m -Xmx2048m" />
+    </envs>
+    <method v="2">
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="focus360_deleteEPortalJBoss" run_configuration_type="MavenRunConfiguration" />
+    </method>
+  </configuration>
+</component>
