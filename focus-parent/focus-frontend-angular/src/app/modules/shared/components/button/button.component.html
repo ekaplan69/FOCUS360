@@ -1,0 +1,19 @@
+<button
+    (click)="clickButton($event)"
+    [disabled]="disabled"
+    class="focus360-button"
+    mat-raised-button
+    type="{{ type }}"
+>
+    @if (prefixIcon) {
+        <mat-icon class="focus360-button-prefix-icon"
+            >{{ prefixIcon }}
+        </mat-icon>
+    }
+    {{ label }}
+    @if (suffixIcon) {
+        <mat-icon class="focus360-button-suffix-icon"
+            >{{ suffixIcon }}
+        </mat-icon>
+    }
+</button>

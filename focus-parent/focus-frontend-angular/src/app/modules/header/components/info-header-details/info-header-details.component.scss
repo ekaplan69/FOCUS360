@@ -1,0 +1,280 @@
+@import "../../../../styles/base/variables";
+
+$columns: 12; // Number of columns in the grid system
+
+.info-header-container {
+    box-sizing: border-box;
+    display: flex;
+    padding: $info-header-padding;
+    width: 100%;
+}
+
+.info-header-avatar {
+    flex: 0 auto;
+}
+
+.person-icon {
+    color: $info-header-details-left-prefix-icon-color;
+    font-size: $info-header-details-left-prefix-icon-size;
+    height: $info-header-details-left-prefix-icon-size;
+    padding-right: $info-header-details-left-prefix-icon-padding-right;
+    width: $info-header-details-left-prefix-icon-size;
+}
+
+.info-header-main-area {
+    flex: 1 auto;
+}
+
+.info-header-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-header-row:first-of-type {
+    flex-wrap: wrap-reverse;
+}
+
+.info-header-row .daten-links {
+    font-family: $font-family-roboto-medium;
+}
+
+.spacer {
+    flex: 1 1 $name-basis-width;
+}
+
+.name {
+    color: $info-header-details-left-person-name-font-color;
+    flex: 1 1 $name-basis-width;
+    font-family: $font-family-roboto;
+    font-size: $info-header-details-left-person-name-font-size;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.daten {
+    align-items: center;
+
+    color: $info-header-details-left-person-daten-font-color;
+    display: flex;
+    flex: 1 1 auto;
+
+    flex-wrap: wrap;
+    font-size: $info-header-details-left-person-daten-font-size;
+}
+
+.daten-rechts {
+    justify-content: flex-end;
+}
+
+.brightness img:hover {
+    background-color: lightgreen;
+}
+
+.daten .vsnr,
+.daten .geburtsdatum,
+.sterbedatum,
+.daten .gender,
+.daten .suen,
+.daten .vertretung,
+.daten .lohnpf {
+    line-height: 2rem;
+    padding-right: $info-header-padding;
+}
+
+.daten .suen,
+.daten .vertretung,
+.daten .gender,
+.daten .lohnpf {
+    align-items: center;
+    display: flex;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info-header-icon {
+    padding-right: $info-header-details-icon-padding;
+}
+
+.info-header-icon-link {
+    color: $primary-link-color;
+    cursor: pointer;
+    margin-left: $info-header-details-icon-padding;
+    transition: color 0.33s cubic-bezier(0.35, 0, 0.25, 1);
+    vertical-align: middle;
+}
+
+.kva-leistungsanspruch {
+    color: $tertiary-color;
+}
+
+.info-header__div__icon-container {
+    align-items: center;
+    display: flex;
+    line-height: 2rem;
+    overflow: hidden;
+    padding-right: $info-header-padding;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.info-header--warning {
+    color: $tertiary-color;
+}
+
+.info-header-icon-link:hover {
+    color: $primary-text-color;
+}
+
+.info {
+    margin-left: $info-header-padding;
+    position: relative;
+}
+
+.gebuehrenbefreiung {
+    z-index: 109;
+}
+
+.notizen {
+    z-index: 108;
+}
+
+.info-button {
+    display: block;
+    min-width: 24rem;
+}
+
+.info-button.info-button-empty {
+    min-width: 5rem;
+}
+
+.info-content {
+    background-color: $dashlet-background-color;
+
+    border-top: 1px solid rgba(0.5, 0.5, 0.5, 0.2);
+
+    box-shadow: $dashlet-box-shadow;
+    display: block;
+
+    position: absolute;
+
+    white-space: pre-wrap;
+    width: 100%;
+}
+
+.info-content-wrapper {
+    overflow: hidden;
+    overflow-wrap: break-word;
+    padding: 7px;
+}
+
+.edit-notiz-button {
+    display: block;
+    height: 50px;
+}
+
+.max-length-constraint {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.gebuehrenbefreiung .info-content .title {
+    font-weight: bold;
+    padding-left: 1em;
+}
+
+.gebuehrenbefreiung .info-content .text {
+    color: #808080;
+    left: -1em;
+    list-style: inside;
+    position: relative;
+    top: -0.5em;
+}
+
+.auskunftssperre {
+    flex: 0 0 min-content;
+    position: relative;
+    z-index: 110;
+}
+
+.auskunftssperre .info-content .title {
+    font-weight: bold;
+    padding-left: 1em;
+}
+
+.auskunftssperre .info-content .text {
+    color: #808080;
+    left: -1em;
+    list-style: inside;
+    position: relative;
+    top: -0.5em;
+}
+
+.auskunftssperre .info-content .icon-styling {
+    padding-left: 0.5em;
+}
+
+.storniert > .info-button.storniert-button button.focus360-button {
+    background-color: $tertiary-color;
+    color: $secondary-text-color;
+}
+
+.button--div--Icon {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+.storniert--div {
+    align-items: center;
+    background-color: $tertiary-color;
+    color: $secondary-text-color;
+    display: flex;
+    flex-direction: row;
+    font-size: $info-header-details-right-button-font-size;
+    height: $info-header-details-right-button-height;
+    justify-content: center;
+    padding: 0 $info-header-details-right-button-padding;
+    width: 100%;
+}
+
+.storniert--div > span {
+    margin: auto;
+}
+
+.button--div--twoIcons {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: space-evenly;
+    width: fit-content;
+}
+
+.mat-gebuehren {
+    background-color: $secondary-color !important;
+    color: $secondary-text-color !important;
+    min-width: 24rem !important;
+}
+
+.mat-auskunftssperre {
+    background-color: $tertiary-color !important;
+    color: $secondary-text-color !important;
+    min-width: 24rem !important;
+}
+
+.mat-wichtigeInfo__empty {
+    background-color: $secondary-color !important;
+    color: $secondary-text-color !important;
+}
+
+.mat-wichtigeInfo {
+    background-color: $tertiary-color !important;
+    color: $secondary-text-color !important;
+    min-width: 24rem !important;
+}
+
+.infoEdit--button {
+    float: right;
+}

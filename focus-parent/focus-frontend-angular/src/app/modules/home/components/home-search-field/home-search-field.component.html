@@ -1,0 +1,59 @@
+@if (searchFieldForm != null) {
+    @if (userInfo?.organisationseinheiten == null) {
+        <div style="width: 100%">
+            <f360-loading-indicator></f360-loading-indicator>
+        </div>
+    }
+    @if (userInfo?.organisationseinheiten != null) {
+        <form [formGroup]="searchFieldForm">
+            <mat-form-field
+                appearance="fill"
+                class="focus360-home-select-panel"
+            >
+                <mat-label>Bitte wählen Sie ein Kundenservice</mat-label>
+                <mat-select (selectionChange)="onSelectChange($event.value)">
+                    @for (
+                        orgeinheit of userInfo?.organisationseinheiten;
+                        track orgeinheit
+                    ) {
+                        <mat-option [value]="orgeinheit">
+                            {{ orgeinheit }}
+                        </mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            @if (this.userService?.userInfo?.showAufgabengebiet()) {
+                <mat-form-field
+                    appearance="fill"
+                    class="focus360-home-select-panel"
+                >
+                    <mat-label>Bitte wählen Sie ein Aufgabengebiet</mat-label>
+                    <mat-select
+                        (selectionChange)="
+                            onAufgabengebietChanged($event.value)
+                        "
+                    >
+                        @for (
+                            aufggebiet of userInfo?.aufgabengebiete;
+                            track aufggebiet
+                        ) {
+                            <mat-option [value]="aufggebiet">
+                                {{ aufggebiet }}
+                            </mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+            }
+            @if (this.userService?.userInfo?.showProceedToDash()) {
+                <button
+                    mat-flat-button
+                    style="width: 100%; margin-top: 3rem"
+                    class="focus360-button"
+                    (click)="proceedToDash()"
+                >
+                    Weiter zum Dashboard
+                </button>
+            }
+        </form>
+    }
+}

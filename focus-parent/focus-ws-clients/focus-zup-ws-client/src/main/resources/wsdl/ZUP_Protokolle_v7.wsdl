@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:p2="http://xmlns.oracle.com/Zupws" xmlns:p1="urn:itsv.at:sap:pi:egov:zup:v7" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+				  xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="ZUP_Protokolle_OUTBOUND_SYNC"
+				  targetNamespace="urn:itsv.at:sap:pi:egov:zup:v7">
+  <wsdl:documentation />
+  <wsp:UsingPolicy wsdl:required="true" />
+  <wsp:Policy wsu:Id="OP_ZUP_Protokolle_OUTBOUND_SYNC" />
+  <wsdl:types>
+	<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://xmlns.oracle.com/Zupws" xmlns="http://xmlns.oracle.com/Zupws">
+	  <xsd:element name="Protokolle">
+		<xsd:annotation>
+		  <xsd:documentation>Protokolle: eine Sequenz von ein oder mehreren Protokollen, die geschrieben werden</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+		  <xsd:sequence>
+			<xsd:element name="Dateiversion" type="VersionEnum" form="qualified">
+			  <xsd:annotation>
+				<xsd:documentation>Version der Protokolldatei, soll für das Datenformat V1.8 den Wert = 7.0.0.0 beinhalten.</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Prot" maxOccurs="5000" form="qualified">
+			  <xsd:complexType>
+				<xsd:sequence>
+				  <xsd:element name="ProtLogID" type="S20" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Geschäftsprozess/LOGCODE des Protokollsatzes</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="ApplBetreiber" type="S2" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Träger, bei dem die Applikation betrieben wird</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Applikation" type="S8" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Kurzbezeichnung der aufrufenden Applikation (siehe ITSV-Webservice Standard)</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="QuellsystemID" type="S64" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>SystemID des aufrufenden Systems</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Version" type="Nummer_4Stellig" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Version des Protokollsatzes</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Protokollierungspflicht" type="Protokollierungspflicht" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>
+						<![CDATA[Ist der Protokollsatz protokollierungspflichtig im Sinne des SVSTD-69? Oder handelt es sich um ein Auditprotokoll, wo der/dem BenutzerIn nicht aktiv personenbezogene Daten angezeigt werden?]]>
+					  </xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Mod" type="ModEnum" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Kennzeichen, ob Batch- oder Onlineverarbeitung</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="VSTR" type="S2" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Träger, dem der Benutzer zugeordnet ist</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="BenutzerID" type="S128" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>BenutzerID: 8-Stellen aus HVB-BERE oder 128-Stellen für Email-Adresse als ID aus dem Portalverbund (PVP)</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="BerechtigungssystemID" type="S64" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>ID des Berechtigungssystems von welchem die Benutzer ID stammt</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Org" type="S30" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Organisationseinheit des Benutzers</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Grund" type="S250" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Bearbeitungsgrund</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Datum" type="xsd:dateTime" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Protokollierungsdatum</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Trans" type="S72" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Transaktionskennung (applikationsspezifisch)</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="TransKurz" type="S13" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>TransaktionsID kurz</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Fehler" type="S6" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Fehlerschlüssel aus dem Service</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Systemumgebung" type="S3" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Systemumgebung: V..Trägertest P..Produktion 1..9 Werte</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="KRIT_TYP1" type="S50" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Typ des Kriteriums, nach dem gesucht werden kann</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="KRIT_WERT1" type="S20" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Ordnungsbegriff für Auswertungen</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="KRIT_TYP2" type="S30" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Typ des Kriteriums, nach dem gesucht werden kann</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="KRIT_WERT2" type="S20" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Zusätzlicher Ordnungsbegriff für Auswertungen</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="KRIT_TYP3" type="S30" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Typ des Kriteriums, nach dem gesucht werden kann</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="KRIT_WERT3" type="S20" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Zusätzlicher Ordnungsbegriff für Auswertungen</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="TRAEGER_VERURSACHER_ID" type="S2" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Träger, der Verursacher dieses Eintrages ist</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="INFOTEXT" type="S4000" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Kommentar</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="MD5" type="S256" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>MD5 Summe</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT1" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT2" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT3" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT4" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT5" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT6" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT7" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="OPT8" type="S200" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="Datei" type="S512" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Ursprung Datei oder Hostname</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="ClientName" type="S5-50" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Absender</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="IP" type="IPAddress" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>IP Adresse des Ursprungsreschner</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="MODUL" type="S20" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Die Abkürzung des ZUP Modules</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="TrackingID" type="xsd:integer" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Eine von der SAP PO generierte ID erstellt aus dem Timestamp und einer dreiställigen zufälligen Zahl</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="MessageID" type="S32" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Die SAP PO Nachrichten ID</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="E7" type="S100" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Interntes Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="E8" type="S100" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Interntes Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="E9" type="S100" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Interntes Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				  <xsd:element name="E10" type="S100" minOccurs="0" form="qualified">
+					<xsd:annotation>
+					  <xsd:documentation>Interntes Optionales Feld</xsd:documentation>
+					</xsd:annotation>
+				  </xsd:element>
+				</xsd:sequence>
+			  </xsd:complexType>
+			</xsd:element>
+		  </xsd:sequence>
+		</xsd:complexType>
+	  </xsd:element>
+	  <xsd:element name="ZupwsProcessResponse">
+		<xsd:annotation>
+		  <xsd:documentation>Antwort des Systems</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+		  <xsd:sequence>
+			<xsd:element name="status" type="ResponseStatusEnum" form="qualified">
+			  <xsd:annotation>
+				<xsd:documentation>Status der Nachricht. &quot;S&quot; für Erfolg, &quot;E&quot; für Fehler</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="fehlerCode" type="xsd:string" form="qualified" />
+			<xsd:element name="fehlerMessage" type="xsd:string" form="qualified" />
+			<xsd:element name="TrackingID" type="xsd:long" minOccurs="0" form="qualified" nillable="true">
+			  <xsd:annotation>
+				<xsd:documentation>Eine von der SAP PO generierte ID erstellt aus dem Timestamp und einer dreiställigen zufälligen Zahl</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+			<xsd:element name="MessageID" type="S32" minOccurs="0" form="qualified" nillable="true">
+			  <xsd:annotation>
+				<xsd:documentation>Die SAP PO Nachrichten ID</xsd:documentation>
+			  </xsd:annotation>
+			</xsd:element>
+		  </xsd:sequence>
+		</xsd:complexType>
+	  </xsd:element>
+	  <xsd:simpleType name="VersionEnum">
+		<xsd:restriction base="xsd:string">
+		  <xsd:enumeration value="7.0.0.0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="IPAddress">
+		<xsd:restriction base="xsd:string">
+		  <xsd:pattern value="(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S4000">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="4000" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S3">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="3" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="Protokollierungspflicht">
+		<xsd:restriction base="xsd:string">
+		  <xsd:enumeration value="P" />
+		  <xsd:enumeration value="A" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S512">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="512" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S128">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="128" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="ResponseStatusEnum">
+		<xsd:restriction base="xsd:string">
+		  <xsd:enumeration value="E" />
+		  <xsd:enumeration value="S" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S100">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="100" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S72">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="72" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S50">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="50" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S20">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="20" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S64">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="64" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S30">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="30" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S32">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="32" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S8">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="8" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S6">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="6" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="Nummer_4Stellig">
+		<xsd:restriction base="xsd:integer">
+		  <xsd:minInclusive value="0" />
+		  <xsd:maxInclusive value="9999" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S2">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="2" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S256">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="256" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S5-50">
+		<xsd:restriction base="xsd:string">
+		  <xsd:minLength value="5" />
+		  <xsd:maxLength value="50" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S200">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="200" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="ModEnum">
+		<xsd:restriction base="xsd:string">
+		  <xsd:enumeration value="B" />
+		  <xsd:enumeration value="O" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S250">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="250" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	  <xsd:simpleType name="S13">
+		<xsd:restriction base="xsd:string">
+		  <xsd:maxLength value="13" />
+		  <xsd:minLength value="0" />
+		</xsd:restriction>
+	  </xsd:simpleType>
+	</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="p2.ZupwsRequestMessage">
+	<wsdl:documentation />
+	<wsdl:part name="payload" element="p2:Protokolle" />
+  </wsdl:message>
+  <wsdl:message name="p2.ZupwsResponseMessage">
+	<wsdl:documentation />
+	<wsdl:part name="payload" element="p2:ZupwsProcessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ZUP_Protokolle_OUTBOUND_SYNC">
+	<wsdl:documentation />
+	<wsdl:operation name="ZUP_Protokolle_OUTBOUND_SYNC">
+	  <wsdl:documentation />
+	  <wsp:Policy>
+		<wsp:PolicyReference URI="#OP_ZUP_Protokolle_OUTBOUND_SYNC" />
+	  </wsp:Policy>
+	  <wsdl:input message="p1:p2.ZupwsRequestMessage" />
+	  <wsdl:output message="p1:p2.ZupwsResponseMessage" />
+	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ZUP_Protokolle_OUTBOUND_SYNCBinding" type="p1:ZUP_Protokolle_OUTBOUND_SYNC">
+	<soap:binding xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:operation name="ZUP_Protokolle_OUTBOUND_SYNC">
+	  <soap:operation xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://sap.com/xi/WebService/soap1.1" />
+	  <wsdl:input>
+		<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+	  </wsdl:input>
+	  <wsdl:output>
+		<soap:body xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ZUP_Protokolle_OUTBOUND_SYNCService">
+	<wsdl:port name="DEV" binding="p1:ZUP_Protokolle_OUTBOUND_SYNCBinding">
+	  <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+					location="https://middleware01-entw01.sozvers.at:81/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_SVAPPS&amp;receiverParty=&amp;receiverService=&amp;interface=ZUP_Protokolle_OUTBOUND_SYNC&amp;interfaceNamespace=urn%3Aitsv.at%3Asap%3Api%3Aegov%3Azup%3Av7" />
+	</wsdl:port>
+	<wsdl:port name="TEST" binding="p1:ZUP_Protokolle_OUTBOUND_SYNCBinding">
+	  <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+					location="https://middleware01-ttzup.sozvers.at:81/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_SVAPPS&amp;receiverParty=&amp;receiverService=&amp;interface=ZUP_Protokolle_OUTBOUND_SYNC&amp;interfaceNamespace=urn%3Aitsv.at%3Asap%3Api%3Aegov%3Azup%3Av7" />
+	</wsdl:port>
+	<wsdl:port name="PROD" binding="p1:ZUP_Protokolle_OUTBOUND_SYNCBinding">
+	  <soap:address xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+					location="https://middleware01-prod03.sozvers.at:81/XISOAPAdapter/MessageServlet?senderParty=&amp;senderService=BC_SVAPPS&amp;receiverParty=&amp;receiverService=&amp;interface=ZUP_Protokolle_OUTBOUND_SYNC&amp;interfaceNamespace=urn%3Aitsv.at%3Asap%3Api%3Aegov%3Azup%3Av7" />
+	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

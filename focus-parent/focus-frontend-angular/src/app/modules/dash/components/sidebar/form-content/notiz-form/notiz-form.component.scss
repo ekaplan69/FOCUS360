@@ -1,0 +1,62 @@
+@import "src/app/styles/base/_layout.scss";
+@import "src/app/styles/vendor/icons/_material_icons.scss";
+
+.content-body {
+    display: inline-block;
+    font-family: $primary-font-family;
+    height: 150px;
+    width: 100%;
+}
+
+.content-body > * {
+    display: inline-block;
+    vertical-align: top;
+}
+
+f360-textarea {
+    width: 60%;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li {
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+mat-icon {
+    color: $primary-color;
+    margin-right: 0.5rem;
+    transform: rotate(90deg);
+    vertical-align: middle;
+}
+
+.control-section {
+    border-top: 1px solid $primary-border-color;
+    bottom: 0;
+    display: block;
+    margin: 2rem -2rem 0;
+
+    padding: 0 2rem 0;
+    position: absolute;
+
+    width: 100%;
+}
+
+.button-group {
+    padding-top: 1rem;
+}
+
+.erfassen-button {
+    background-color: $primary-color;
+    color: $secondary-text-color;
+    float: right;
+}
+
+.notiz-form-wrapper {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}

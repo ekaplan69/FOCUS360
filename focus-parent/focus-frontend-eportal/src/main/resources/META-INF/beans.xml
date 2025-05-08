@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/beans_4_0.xsd" bean-discovery-mode="all">
+  <interceptors>
+	<class>at.sozvers.noegkk.focus.interceptors.RequestLoggingInterceptor</class>
+	<class>at.sozvers.noegkk.focus.interceptors.ExceptionMeldungsMapperInterceptor</class>
+	<class>at.sozvers.noegkk.focus.scheduling.interceptor.LockingInterceptor</class>
+	<class>at.sozvers.noegkk.architektur.zup.ProtokollierungsInterceptor</class>
+  </interceptors>
+</beans>

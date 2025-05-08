@@ -1,0 +1,44 @@
+<f360-dashlet id="angehoerige">
+    <f360-dashlet-header dashletIcon="supervised_user_circle"
+        >Angehörige
+    </f360-dashlet-header>
+    <f360-dashlet-content class="focus360-dashlet-content--without-footer">
+        @if (contentAvailable()) {
+            @if (!(angehoerige?.length == 0 && versicherte?.length == 0)) {
+                <mat-tab-group
+                    [selectedIndex]="
+                        angehoerige?.length == 0 && versicherte?.length > 0
+                            ? 1
+                            : 0
+                    "
+                    class="content"
+                >
+                    <mat-tab class="content" label="Angehörige">
+                        <f360-tab-angehoerige
+                            [angehoerige]="angehoerige"
+                            [angError]="angError"
+                            class="content"
+                        ></f360-tab-angehoerige>
+                    </mat-tab>
+                    <mat-tab class="content" label="Angehörige von">
+                        <f360-tab-versicherte
+                            [versicherte]="versicherte"
+                            [verError]="verError"
+                            class="content"
+                        ></f360-tab-versicherte>
+                    </mat-tab>
+                </mat-tab-group>
+            }
+            @if (angehoerige?.length == 0 && versicherte?.length == 0) {
+                <div id="all_empty" class="dashletMeldung">
+                    <span class="data-header info"
+                        ><i class="material-icons">not_interested</i> Keine
+                        Angehörigen vorhanden.</span
+                    >
+                </div>
+            }
+        } @else {
+            <f360-loading-indicator></f360-loading-indicator>
+        }
+    </f360-dashlet-content>
+</f360-dashlet>

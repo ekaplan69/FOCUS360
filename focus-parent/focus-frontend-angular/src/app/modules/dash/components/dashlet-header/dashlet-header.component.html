@@ -1,0 +1,44 @@
+<mat-card-header class="focus360-dashlet-header-container">
+    @if (dashletIcon) {
+        <mat-icon mat-card-avatar class="focus360-dashlet-header__dashlet-icon"
+            >{{ dashletIcon }}
+        </mat-icon>
+    }
+    <mat-card-title class="focus360-dashlet-header__title">
+        <ng-content></ng-content>
+    </mat-card-title>
+    <div class="focus360-dashlet-header__action-icons">
+        @if (launch && !actionIcon) {
+            <a href="{{ launch }}" target="_blank">
+                <mat-icon
+                    class="focus360-dashlet-header__launch-icon"
+                    matTooltip="{{ launchTooltipText }}"
+                    matTooltipPosition="left"
+                >
+                    launch
+                </mat-icon>
+            </a>
+        }
+        @if (launch && actionIcon) {
+            <a href="{{ launch }}" target="_blank">
+                <mat-icon
+                    class="focus360-dashlet-header__launch-icon"
+                    matTooltip="{{ launchTooltipText }}"
+                    matTooltipPosition="left"
+                >
+                    {{ actionIcon }}
+                </mat-icon>
+            </a>
+        }
+        @if (actionIcon && !launch) {
+            <mat-icon
+                class="focus360-dashlet-header__launch-icon"
+                matTooltip="{{ actionIconTooltipText }}"
+                matTooltipPosition="left"
+                (click)="emitActionIconClicked()"
+            >
+                {{ actionIcon }}
+            </mat-icon>
+        }
+    </div>
+</mat-card-header>

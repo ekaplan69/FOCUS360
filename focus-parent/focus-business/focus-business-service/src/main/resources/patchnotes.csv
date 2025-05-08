@@ -1,0 +1,47 @@
+releaseDate;releaseNr;kind;group;description
+2024-05-23T10:27:00Z;4.8.7;a;FOCUS360.ZPVLESEN;Patchnotes Pop-Up wurden eingeführt.
+2024-05-23T10:27:00Z;4.8.7;c;FOCUS360.DOKUANZ;Die Anzahl der angezeigten Dokumente im Dokumente-Dashlet wurde auf 5 eingeschränkt.
+2024-05-23T10:27:00Z;4.8.7;c;FOCUS360.BESWLESE;Diverse UI-Änderungen bei Kundenfeedback erfassen.
+2024-05-23T10:27:00Z;4.8.7;a;FOCUS360.BESWLESE;Kundenfeedback kann am Tag des Erstellens bearbeitet werden.
+2024-05-23T10:27:00Z;4.8.7;c;FOCUS360.ZPVLESEN;Beim Eingeben einer Fehlerhaften VSNR bleibt diese nun im Eingabefeld stehen.
+2024-05-23T10:27:00Z;4.8.7;c;FOCUS360.ADMIVERW;Neue Material Icons eingebunden.
+2024-05-23T10:27:00Z;4.8.7;c;FOCUS360.LGKKLESE;VS-Leistungsübersicht zeigt nun die richtigen Werte an, wenn sie über FOCUS aufgerufen wird.
+2024-05-23T10:27:00Z;4.8.7;f;FOCUS360.DOKUANZ;Es wurde ein Fehler behoben, durch welchen nicht vorhandene Dokumente angezeigt wurden.
+2024-05-23T10:27:00Z;4.8.7;f;FOCUS360.LGKKLESE;Es wurde ein Fehler behoben, durch welchen keine Daten im LGK Dashlet angezeigt wurden.
+2024-05-23T10:27:00Z;4.8.7;f;FOCUS360.DOKUANZ;Es wurde ein Fehler behoben, durch welchen Umlaute falsch angezeigt wurden.
+2024-05-23T10:27:00Z;4.8.7;f;FOCUS360.ZPVLESEN;Es wurde ein Fehler behoben, durch welchen Organisationseinheiten nach Browseraktualisierung nicht verfügbar waren.
+
+2024-06-07T10:27:00Z;4.9.0;c;FOCUS360.ADMIVERW;Alte Kontakt & Beschwerdeklassen wurden entfernt.
+2024-06-07T10:27:00Z;4.9.0;f;FOCUS360.LGKKLESE;Es wurde ein Fehler behoben, durch den im LGK Dashlet nicht alle Daten angezeigt wurden.
+2024-06-07T10:27:00Z;4.9.0;c;FOCUS360.ADMIVERW;KVA_WS wurde auf Version 2_0 hochgezogen.
+2024-06-07T10:27:00Z;4.9.0;c;FOCUS360.KONTVERW;Bei Kontakten ist das Textfeld 'Anmerkung' nun ein Pflichtfeld, wenn das Thema 'Sonstiges' ausgewählt wird.
+2024-05-23T10:27:00Z;4.9.0;c;FOCUS360.BESWLESE;Kundenfeedback: Logikprüfung auf EMail und Telefonnummer. Status ist nicht mehr vorbelegt. Anzeige von Ort wurde entfernt.
+2024-06-07T10:27:00Z;4.9.0;f;FOCUS360.ZPVLESEN;Es wurde ein Fehler behoben, durch den eingefügte VSNR im Eingabefeld von FOCUS als ungültig angesehen wurden.
+
+2024-07-02T10:27:00Z;4.9.1;f;FOCUS360.LGKKLESE;Es wurde ein Fehler behoben, bei dem im LGK-Dashlet nicht alle Daten angezeigt wurden.
+2024-07-02T10:27:00Z;4.9.1;c;FOCUS360.ZPVLESEN;Mitarbeitern mit rein lesenden Zugriffen ist es nun möglich, ohne Organisationseinheit in Focus einzusteigen.
+
+2024-07-25T10:27:00Z;4.9.2;f;FOCUS360.ADMIVERW;Es wurde ein Fehler behoben, bei dem Exceptions aus LGK Landesstellen nicht richtig behandelt wurden.
+
+2024-07-29T10:27:00Z;4.9.3;f;FOCUS360.LGKKLESE;Es wurde ein Fehler behoben, bei dem das LGK Dashlet immer als 'Nicht erreichbar' gekennzeichnet wurde.
+
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.ADMIVERW;Die Teststruktur wurde von DELTASPIKE auf JUnit5 umgebaut.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.ADMIVERW;Die Angular Version wurde auf 18 angehoben.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.ADMIVERW;Die Komponenten wurden auf Angular Material umgebaut.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.ADMIVERW;ZVD Upgrade wurde durchgeführt.
+2024-09-16T10:27:00Z;4.9.4;a;FOCUS360.KONTVERW;Wenn bei Kundenkontakten das Thema 'Sonstiges' ausgewählt wird können nun zusätzlich 'Unterthemen' ausgewählt werden. Wurde ein solches Unterthema ausgewählt ist eine Beschreibung nicht mehr zwingend notwendig.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.KONTVERW;Der Hinweis zur Eingabe einer Beschreibung bzw. Auswahl eines Unterthemas bei Thema 'Sonstige' wird nun in rot dargestellt.
+2024-09-16T10:27:00Z;4.9.4;a;FOCUS360.ZPVLESEN;Eine Anzeige des Sterbedatums wurde eingebaut.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.ADMIVERW;Wenn man auf das Dashboard wechselt, ohne eine Organisationseinheit ausgewählt zu haben, wird man nun auf den homescreen redirected.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.BESWVERW;Am Formular für Kundenfeedback wurden einige Änderungen vorgenommen.
+2024-09-16T10:27:00Z;4.9.4;c;FOCUS360.ADMIVERW;Die Dashlets 'Dokumente' und 'Kundenkontakte' wurden getauscht.
+
+2025-03-20T16:00:00Z;4.10.2;c;FOCUS360.ADMIVERW;Releaseschein-Upgrade auf RS KIEL
+2025-03-20T16:00:00Z;4.10.2;c;FOCUS360.ADMIVERW;Anpassung ZPV-Schnittstellen
+2025-03-20T16:00:00Z;4.10.2;c;FOCUS360.ADMIVERW;Umstellung der Authentifizierungsvariante für den Aufruf von ECM-AWF
+2025-03-20T16:00:00Z;4.10.2;f;FOCUS360.ADMIVERW;Doppelte Anzeige von Kontaktarten wurde korrigiert
+
+2025-05-00T12:00:00Z;2023.2.0.0;c;FOCUS360.ADMIVERW;Links zu Onlinehilfe und Releaseinformationen auf neuen Confluence Space umstellen
+2025-05-00T12:00:00Z;2023.2.0.0;c;FOCUS360.KONTVERW;neues Kontaktformular an MitarbeiterIn koppeln
+2025-05-00T12:00:00Z;2023.2.0.0;f;FOCUS360.ADMIVERW;Reihenfolge der Releasenotes verdreht
+2025-05-00T12:00:00Z;2023.2.0.0;f;FOCUS360.ADMIVERW;Unterschiedliche Anzeige im Dokumente-Dashlet

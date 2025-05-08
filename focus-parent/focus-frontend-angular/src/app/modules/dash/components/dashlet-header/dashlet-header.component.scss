@@ -1,0 +1,60 @@
+@import "src/app/styles/base/variables";
+
+.focus360-dashlet-header-container {
+    align-items: center;
+    background-color: $dashlet-header-background-color;
+    border-top-left-radius: $border-radius-size;
+    border-top-right-radius: $border-radius-size;
+    box-sizing: border-box;
+    color: $dashlet-header-title-font-color;
+    display: flex;
+    height: $dashlet-header-height;
+    justify-content: space-between;
+    margin: 0;
+    padding: $dashlet-header-padding;
+}
+
+:host ::ng-deep .focus360-dashlet-header-container {
+    .mat-icon {
+        margin-bottom: 0;
+    }
+}
+
+.focus360-dashlet-header-container .focus360-dashlet-header__dashlet-icon {
+    color: $dashlet-header-title-icon-color;
+    cursor: default;
+    font-size: $dashlet-header-title-icon-size;
+    height: $dashlet-header-title-icon-size;
+    width: $dashlet-header-title-icon-size;
+}
+
+.focus360-dashlet-header-container .focus360-dashlet-header__title {
+    color: $dashlet-header-title-font-color;
+    font-family: $font-family-roboto-medium;
+    font-size: $dashlet-header-title-font-size;
+    font-weight: $dashlet-header-title-font-weight;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.focus360-dashlet-header-container .focus360-dashlet-header__action-icons {
+    height: $dashlet-header-title-icon-size;
+    min-width: $dashlet-header-title-icon-size;
+}
+
+.focus360-dashlet-header-container .focus360-dashlet-header__launch-icon {
+    color: $primary-link-color;
+    cursor: pointer;
+    font-size: $dashlet-header-title-icon-size;
+    height: $dashlet-header-title-icon-size;
+
+    transition: color 0.33s cubic-bezier(0.35, 0, 0.25, 1);
+    width: $dashlet-header-title-icon-size;
+}
+
+.focus360-dashlet-header-container .focus360-dashlet-header__launch-icon:hover {
+    color: $primary-text-color;
+}

@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+  <focus_system parameter="INTERVALL_TRANSMIT_ZUP" wert="1-6;0-23;0;0"
+				beschreibung="Intervall für die Durchführung der Batchverarbeitung ProtkollsätzeÜbermitteln (TRANSMIT_ZUP) im Format &lt;wochentag&gt;;&lt;stunde&gt;;&lt;minute&gt;;&lt;sekunde&gt;;"
+				ersteller="FOCUS360" erstell_ts="2019-07-23" letztaend="FOCUS360" letztaend_ts="2019-07-23" updatecount="0" />
+  <focus_system parameter="PACKAGESIZE_TRANSMIT_ZUP" wert="500" beschreibung="Anzahl der Protkollsätze welche pro Webservice Aufruf an ZUP übergeben werden." ersteller="FOCUS360"
+				erstell_ts="2019-07-23" letztaend="FOCUS360" letztaend_ts="2019-07-23" updatecount="0" />
+  <focus_system parameter="SCHEDULE_SECURITY_INTERVALL" wert="13"
+				beschreibung="Sollte ein Task nicht mehr freigegeben werden können, erfolgt nach dieser Dauer (in Stunden) trotzdem ein erneuter Start." ersteller="FOCUS360" erstell_ts="2019-07-23"
+				letztaend="FOCUS360" letztaend_ts="2019-07-23" updatecount="0" />
+</dataset>

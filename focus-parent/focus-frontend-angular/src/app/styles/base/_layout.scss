@@ -1,0 +1,649 @@
+@import "./_variables.scss";
+
+/**
+  ********** Global Stuff
+*/
+html,
+body,
+app-root,
+.app-container {
+    left: 0;
+    margin: 0;
+    padding: 0;
+    top: 0;
+}
+
+body {
+    background-color: $dash-screen-background-color;
+}
+
+.app-container {
+    background-image:
+        linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent 20%),
+        url("~src/assets/images/home_background.jpg");
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(40px, 1fr));
+    grid-template-rows: $header-height minmax(
+            400px,
+            calc(100vh - #{$header-height})
+        );
+    position: absolute;
+    width: 100%;
+}
+
+.app-container.focus360-dash-screen {
+    display: grid;
+    grid-template-rows: max-content auto min-content;
+    height: 100%;
+}
+
+f360-header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+}
+
+//f360-home {
+//
+//    .mat-form-field-appearance-fill {
+//        // Umrandung für Select-Box
+//        /*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.
+//*/
+//        .mat-form-field-infix {
+//            padding: 0;
+//            color: $secondary-text-color;
+//        }
+//        /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//        .mat-select-trigger {
+//            background: rgba($primary-color-darker-1, 0.8);
+//            border: 2px solid $secondary-text-color;
+//            border-radius: calc(1rem + 4px);
+//            padding: 0.5rem 1rem;
+//            height: auto;
+//        }
+//
+//        // Keine untere Linie
+//        /*TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.
+//*/
+//        .mat-form-field-underline {
+//            display: none;
+//        }
+//        /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//        .mat-select-value {
+//            color: $secondary-text-color;
+//        }
+//        /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//        .mat-select-arrow {
+//            color: $secondary-text-color;
+//        }
+//    }
+//
+//    .mat-mdc-form-field.mat-focused.mat-primary {
+//        /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//        .mat-select-trigger {
+//            background: rgba($primary-color-darker-2, 0.8);
+//        }
+//        /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//        .mat-select-arrow {
+//            color: $secondary-text-color;
+//        }
+//    }
+//    /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//    /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//    mat-select[aria-expanded='true'] {
+//        /*TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version.
+//*/
+//        .mat-select-trigger {
+//            border-radius: calc(1rem + 2px) calc(1rem + 2px) 0 0;
+//        }
+//    }
+//
+//    .mat-mdc-button-base {
+//        border-radius: calc(1rem + 4px);
+//        font-size: 1rem;
+//        color: $primary-color-darker-1;
+//    }
+//
+//    .mat-mdc-progress-spinner.loading-indicator-spinner circle {
+//        stroke: $secondary-text-color;
+//    }
+//}
+//
+//.focus360-select-panel.focus360-home-select-panel {
+//    box-sizing: border-box;
+//    border-radius: 0 0 calc(1rem + 2px) calc(1rem + 2px);
+//    background: $primary-color-darker-1;
+//    border: 2px solid;
+//    color: $secondary-text-color;
+//
+//    .mat-mdc-option {
+//        color: $secondary-text-color;
+//    }
+//    .mat-mdc-option:hover:not(.mat-option-disabled), .mat-option:focus:not(.mat-option-disabled) {
+//        background: $primary-color-darker-2;
+//    }
+//    /*TODO(mdc-migration): The following rule targets internal classes of option that may no longer apply for the MDC version.
+//*/
+//    .mat-mdc-option.mat-selected:not(.mat-option-disabled) {
+//        color: $primary-color-darker-1;
+//        background: $secondary-text-color;
+//    }
+//}
+
+f360-home {
+    f360-home-search-field {
+        .focus360-button.mdc-button {
+            background: $primary-background-color;
+            border-radius: $default-button-border-radius;
+            color: $home-button-text-color;
+            font-size: $default-font-size;
+            letter-spacing: normal;
+        }
+    }
+}
+
+.focus360-header-container {
+    align-items: center;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 1;
+    grid-template-columns: min-content 240px min-content auto;
+    grid-template-rows: $header-height;
+    height: $header-height;
+
+    .mat-mdc-button {
+        color: $secondary-text-color;
+        font-size: 1rem;
+        height: 2rem;
+        letter-spacing: normal;
+        line-height: 1rem;
+        --mdc-text-button-label-text-color: #{$secondary-text-color};
+    }
+
+    .mat-mdc-button > .mat-icon {
+        margin: 0 0.25rem 0 0;
+    }
+
+    .mat-mdc-button:hover {
+        background: $primary-color-darker-1;
+    }
+
+    .focus360-button.mat-mdc-raised-button,
+    .focus360-button.mat-raised-button:active {
+        box-shadow: none;
+    }
+
+    f360-button.selected .focus360-button {
+        background: $primary-background-color;
+        /*TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.
+*/
+        .mat-button-wrapper {
+            color: $primary-color-darker-1;
+        }
+    }
+}
+
+//.subaufgabengebiet-button-container {
+//    overflow: auto;
+//    max-height: 100%;
+//
+//    f360-button {
+//        display: inline-block;
+//        margin: 0.25rem;
+//
+//        button {
+//            height: 2rem;
+//            background: none;
+//            /*TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.
+//*/
+//            .mat-button-wrapper {
+//                height: 100%;
+//                color: $secondary-text-color;
+//                font-size: 1rem;
+//            }
+//        }
+//
+//        button:hover {
+//            background: $primary-color-darker-1;
+//        }
+//    }
+//}
+
+.subaufgabengebiet-wrapper {
+    width: 100%;
+
+    f360-form-content {
+        display: block;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+//.focus360-history-menu {
+//    .mat-mdc-chip.mat-mdc-standard-chip.mat-primary {
+//        background-color: transparent;
+//        color: $primary-text-color;
+//        /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//        .mat-chip-remove {
+//            color: $primary-text-color;
+//        }
+//    }
+//
+//    .mat-mdc-chip.mat-mdc-standard-chip.mat-primary:hover {
+//        background-color: $secondary-color-lighter-5;
+//        color: $primary-text-color;
+//        /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//        .mat-chip-remove {
+//            color: $primary-text-color;
+//        }
+//    }
+//    /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//    .mat-mdc-chip.mat-chip-selected.mat-mdc-standard-chip.mat-primary {
+//        background-color: $primary-color;
+//        color: $secondary-text-color;
+//        /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//        .mat-chip-remove {
+//            color: $secondary-text-color;
+//        }
+//    }
+//
+//    .mat-mdc-chip.mat-mdc-standard-chip:active {
+//        box-shadow: none;
+//    }
+//    /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//    .mat-mdc-chip.mat-chip-selected.mat-mdc-standard-chip.mat-primary:hover {
+//        background-color: $primary-color;
+//        color: $secondary-text-color;
+//        /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//        .mat-chip-remove {
+//            color: $secondary-text-color;
+//        }
+//        /*TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version.
+//*/
+//        .mat-chip-remove:hover {
+//            color: $secondary-text-color;
+//        }
+//    }
+//}
+
+f360-home-footer {
+    grid-column: 5;
+    grid-row: 12;
+    text-align: center;
+    width: 400%;
+}
+
+f360-dash-screen-footer {
+    bottom: 0;
+    height: 3em;
+    position: fixed;
+    width: 100%;
+}
+
+.focus360-dash-screen f360-header {
+    background: $primary-background-color;
+    box-shadow: $header-box-shadow;
+    display: grid;
+    grid-template-rows: $header-height auto;
+    height: auto;
+    position: sticky;
+}
+
+f360-info-header {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+f360-home {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    overflow: hidden;
+}
+
+.focus360-dash-screen {
+    background-image: none;
+}
+
+f360-dash {
+    background-color: $dash-screen-background-color;
+    display: flex;
+    flex-flow: row;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    overflow: hidden;
+}
+
+f360-dash .focus360-dashlet-wrapper {
+    flex: 1 1 0;
+    overflow: auto;
+}
+
+f360-dash-screen-empty {
+    flex: 1 1 0;
+}
+
+focus360-dashlet-notizen {
+    grid-column: 4 / 7;
+    grid-row: 1 / 7;
+}
+
+focus360-dashlet-kundenkontakte {
+    grid-column: 7 / -1;
+    grid-row: 1 / 7;
+}
+
+f360-error {
+    background-color: $error-screen-background-color;
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: auto 600px auto;
+    grid-template-rows: repeat(12, 1fr);
+    overflow: auto;
+}
+
+f360-error-image {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
+}
+
+f360-error-titel {
+    grid-column: 2;
+    grid-row: 3;
+    justify-self: center;
+}
+
+f360-error-message {
+    display: -ms-grid;
+    grid-column: 2;
+    grid-row: 5 / -1;
+    justify-self: center;
+}
+
+focus360-playground {
+    background-color: white;
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+/**
+ * Home
+ */
+
+f360-home-logo {
+    display: block;
+    grid-column: 5 / 9;
+    grid-row: 2 / 7;
+    padding-bottom: 2rem;
+}
+
+f360-home-search-field {
+    grid-column: 6 / 8;
+    grid-row: 7 / 8;
+}
+
+f360-header {
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    z-index: 10;
+}
+
+/**
+ * Header
+ */
+
+f360-header-logo {
+    cursor: pointer;
+    grid-column: 1;
+    grid-row: 1;
+    padding-right: 1rem;
+}
+
+f360-header-search-field {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+f360-header-search-field f360-search-field[formcontrolname] {
+    margin-left: 20px;
+    width: 75%;
+}
+
+f360-header-chips {
+    grid-column: 3;
+    grid-row: 1;
+    margin: 0 15px;
+    overflow: hidden;
+}
+
+f360-header-user-menu {
+    grid-column: 4;
+    grid-row: 1;
+    height: 100%;
+    margin-right: 1rem;
+}
+
+.spinner-container {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.data-column {
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    width: calc(100% / 3);
+}
+
+.data-block {
+    margin-bottom: 15px;
+}
+
+.data-text-column {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.spinner-circle {
+    left: calc(50% - 75px);
+    top: calc(50% - 75px);
+}
+
+/** Dashlet Grid **/
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.dashlet-grid {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    margin: 0;
+    padding: ($dashlet-grid-spacing * 0.5);
+    width: 100%;
+}
+
+.full-grid {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.dashlet-grid-col-quarter,
+.dashlet-grid-col-half {
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0;
+    padding: ($dashlet-grid-spacing * 0.5);
+}
+
+.dashlet-grid-col-quarter {
+    width: 25%;
+}
+
+.dashlet-grid-col-half {
+    width: 50%;
+}
+
+.container {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.logo-image {
+    background: url("~src/assets/images/empty_logo.svg") center no-repeat;
+    background-size: contain;
+    height: 100%;
+    opacity: 0.1;
+    position: absolute;
+    width: 100%;
+}
+
+/**
+    Sidebar
+ */
+.sidebar-wrapper {
+    flex: 0 0 max-content;
+    z-index: 1;
+}
+
+f360-sidebar {
+    float: right;
+    padding-top: $dashlet-grid-spacing;
+    width: 2rem;
+}
+
+f360-form-content {
+    background-color: $dashlet-background-color;
+
+    box-shadow:
+        0 0 2px 1px rgba(0, 0, 0, 0.05),
+        3px 0 5px 5px rgba(0, 0, 0, 0.07),
+        6px 0 10px 10px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+    clear: both;
+
+    float: right;
+
+    height: 100%;
+
+    position: relative;
+
+    width: calc(50vw - 2rem);
+    z-index: 10;
+}
+
+/**
+    Collapse
+    Sollte das ganze Fenster eine Breite von 1250px unterschreitten,
+    so werden die Dashlet-Breiten von [25%/50%] auf [50%/100%] erhöht.
+
+    Wird der Editor geöffnet soll dies ebenfalls passieren.
+**/
+
+.collapsed-grid .dashlet-grid-col-half {
+    width: 100%;
+}
+
+.collapsed-grid .dashlet-grid-col-quarter {
+    width: 50%;
+}
+
+.collapsed-grid .dashlet-grid-row .dashlet-grid-col-quarter:nth-child(2n) {
+    margin-left: 1rem;
+}
+
+@media screen and (max-width: 1250px) {
+    .dashlet-grid-col-half {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .dashlet-grid-col-quarter {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1360px) {
+    f360-dash {
+        padding: 0;
+    }
+
+    .collapsed-grid {
+        visibility: hidden;
+    }
+
+    f360-form-content {
+        width: calc(100vw - 4rem);
+    }
+}
+
+// TODO: aus _layout.scss entfernen -> in besser geeignete Files verschieben
+
+// Kundenkontakte Spaltenbreite: Alle Zellen ab der dritten Spalte sollen breiter sein
+
+f360-dashlet-kundenkontakte f360-table mat-cell:nth-of-type(1n + 3),
+f360-dashlet-kundenkontakte f360-table mat-header-cell:nth-of-type(1n + 3) {
+    flex: 2 0 0;
+}
+
+f360-dashlet-kundenkontakte f360-table mat-cell:first-of-type,
+f360-dashlet-kundenkontakte f360-table mat-header-cell:first-of-type {
+    min-width: 8rem;
+}
+
+// Beschwerden Spaltenbreite: Alle Zellen ab der dritten Spalte sollen breiter sein
+f360-dashlet-beschwerden mat-cell:nth-of-type(1n + 3):not(:last-of-type),
+f360-dashlet-beschwerden
+    mat-header-cell:nth-of-type(1n + 3):not(:last-of-type) {
+    flex: 2 0 0;
+}
+
+/*TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.
+*/
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    background-color: $primary-color;
+}
+
+/*TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.
+*/
+.mat-checkbox-disabled.mat-checkbox-checked .mat-checkbox-background,
+.mat-checkbox-disabled.mat-checkbox-indeterminate .mat-checkbox-background {
+    background-color: $disabled-color;
+}

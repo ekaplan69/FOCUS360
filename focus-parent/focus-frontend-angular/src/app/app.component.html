@@ -1,0 +1,16 @@
+@if (!isIEOrEdge()) {
+    <div class="app-container" [ngClass]="currentPage">
+        @if (instantiated) {
+            <f360-header></f360-header>
+            <router-outlet></router-outlet>
+            @if ($showSpinner | async) {
+                <div class="spinner-container">
+                    <mat-spinner
+                        class="spinner-circle"
+                        diameter="150"
+                    ></mat-spinner>
+                </div>
+            }
+        }
+    </div>
+}

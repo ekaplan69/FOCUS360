@@ -1,0 +1,69 @@
+@import "src/app/styles/base/variables";
+
+.data-container {
+    background: $data-background-color;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.table-container {
+    background: inherit;
+    height: 100%;
+}
+
+.table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table__header-row {
+    display: flex;
+}
+
+.table__row {
+    max-width: 100%;
+}
+
+.table__row:nth-of-type(even) {
+    background-color: $data-background-color-even;
+}
+
+.table__row:nth-of-type(odd) {
+    background-color: $data-background-color-odd;
+}
+
+.span--hidden-overflow {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.table__cell {
+    color: $primary-text-color;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table__cell > span {
+    @extend .span--hidden-overflow;
+}
+
+.footer {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    margin-bottom: 0;
+    margin-top: auto;
+    min-height: $dashlet-footer-height;
+}
+
+.paginator {
+    margin: $dashlet-footer-spacing $data-spacing $dashlet-footer-spacing auto;
+}

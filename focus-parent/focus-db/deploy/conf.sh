@@ -1,0 +1,7 @@
+DB_TYPE="%%%ct_alwecc_focus_db_type%%%"
+DB_HOST="%%%ct_alwecc_focus_db_host%%%"
+DB_PORT="%%%ct_alwecc_focus_db_port%%%"
+DB_NAME="%%%ct_alwecc_focus_db_sid%%%"
+DB_USER="%%%ct_alwecc_focus_db_user%%%"
+DB_PASS="%%%ct_alwecc_focus_db_password%%%"
+DB_SFC_TBL="SFC"

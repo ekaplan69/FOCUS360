@@ -1,0 +1,71 @@
+@if (!isClearText() && versicherte?.length > 0) {
+    <div id="ang_load" class="dashletMeldung">
+        <f360-button
+            (onClick)="loadAngehoerige()"
+            label="Angehörige laden"
+        ></f360-button>
+    </div>
+} @else if (versicherte?.length > 0 && verError == null) {
+    <div class="data-container">
+        <div class="table-container">
+            <table mat-table [dataSource]="versicherteTable" class="table">
+                <caption></caption>
+                <th id="header"></th>
+                <ng-container matColumnDef="zeit">
+                    <td mat-cell *matCellDef="let element" class="table__cell">
+                        {{ element.gueltigVon | date: "dd.MM.yyyy" }} -{{
+                            element.gueltigBis.getTime() === 0
+                                ? "laufend"
+                                : (element.gueltigBis | date: "dd.MM.yyyy")
+                        }}<br />{{ element.nachname }} {{ element.vorname }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="typ">
+                    <td mat-cell *matCellDef="let element" class="data-text">
+                        <div class="max-length-constraint">
+                            <span
+                                class="ang-vsnr-color"
+                                (click)="
+                                    readKVAVersicherter(
+                                        element.versicherungsnummer
+                                    )
+                                "
+                                >{{ element.versicherungsnummer | vsnr }}</span
+                            >
+                            <span
+                                matTooltip="{{ element.meldendeStelle }}"
+                                class="table__cell"
+                                >{{ element.meldendeStelle }}</span
+                            >
+                        </div>
+                        <div matTooltip="{{ element.typ }}" class="table__cell">
+                            {{ element.typ }}
+                        </div>
+                    </td>
+                </ng-container>
+                <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                    class="table__row"
+                ></tr>
+            </table>
+        </div>
+        <mat-paginator
+            #versichertePaginator
+            pageSize="2"
+            hidePageSize
+        ></mat-paginator>
+    </div>
+} @else if (verError != null) {
+    <f360-dashlet-error
+        [error]="verError"
+        class="dashletMeldung"
+    ></f360-dashlet-error>
+} @else {
+    <div class="dashletMeldung">
+        <span class="data-header info"
+            ><i class="material-icons">not_interested</i> Keine weiteren
+            Versicherten</span
+        >
+    </div>
+}

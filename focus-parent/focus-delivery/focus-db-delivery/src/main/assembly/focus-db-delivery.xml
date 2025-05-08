@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<assembly>
+  <id>db-delivery</id>
+  <baseDirectory>.</baseDirectory>
+  <formats>
+	<format>zip</format>
+  </formats>
+  <fileSets>
+	<fileSet>
+	  <outputDirectory>database</outputDirectory>
+	  <filtered>false</filtered>
+	  <lineEnding>unix</lineEnding>
+	  <fileMode>0777</fileMode>
+	  <directory>../../focus-db/deploy</directory>
+	  <includes>
+		<include>*.sql</include>
+		<include>*.sh</include>
+	  </includes>
+	</fileSet>
+  </fileSets>
+</assembly>

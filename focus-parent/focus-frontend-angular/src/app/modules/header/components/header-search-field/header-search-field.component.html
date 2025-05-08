@@ -1,0 +1,8 @@
+<form [formGroup]="searchFieldForm">
+    <f360-search-field
+        (onEnter)="onEnter($event)"
+        [value]="searchFieldValue"
+        formControlName="searchField"
+        ngDefaultControl
+    ></f360-search-field>
+</form>

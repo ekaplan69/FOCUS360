@@ -1,0 +1,26 @@
+<div class="form-wrapper">
+    @if (forms?.notizFormOpen()) {
+        <f360-notiz-form
+            [notizForm]="forms.notizForm"
+            (closeFormEvent)="cancelForm(FORM_TYPES.NOTIZ)"
+        ></f360-notiz-form>
+    }
+    @if (forms?.isBeschwerdeFormOpen()) {
+        <f360-beschwerde-form
+            [beschwerdeForm]="forms.beschwerdeForm"
+            (closeFormEvent)="cancelForm(FORM_TYPES.BESCHWERDE)"
+        ></f360-beschwerde-form>
+    }
+    @if (forms?.isKontaktFormOpen()) {
+        <f360-kundenkontakt-form
+            [kontaktForm]="forms.kontaktForm"
+            (closeFormEvent)="cancelForm(FORM_TYPES.KONTAKT)"
+        ></f360-kundenkontakt-form>
+    }
+    @if (forms?.isSubaufgabengebietKontaktFormOpen()) {
+        <f360-subaufgabengbiet-form
+            [subaufgabengebietKontaktForm]="forms.subaufgabengebietKontaktForm"
+            (closeFormEvent)="cancelForm(FORM_TYPES.SUBAUFGABENGEBIETKONTAKT)"
+        ></f360-subaufgabengbiet-form>
+    }
+</div>

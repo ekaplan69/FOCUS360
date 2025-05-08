@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+			 xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+  <persistence-unit name="focusPU" transaction-type="JTA">
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<jta-data-source>java:jboss/datasources/focusDS</jta-data-source>
+	<!-- Entity Classes -->
+	<class>at.sozvers.focus.persistence.focus.FocusNotiz</class>
+	<class>at.sozvers.focus.persistence.focus.FocusQualifikation</class>
+	<class>at.sozvers.focus.persistence.focus.FocusSteuerung</class>
+	<class>at.sozvers.focus.persistence.focus.FocusSystem</class>
+	<class>at.sozvers.focus.persistence.focus.FocusLockTask</class>
+	<class>at.sozvers.focus.persistence.focus.FocusMeldendestelle</class>
+	<class>at.sozvers.noegkk.architektur.zup.model.Zugriffsprotokoll</class>
+	<properties>
+	  <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
+	  <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+	  <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+	  <property name="hibernate.hbm2ddl.auto" value="none" />
+	  <property name="hibernate.show_sql" value="false" />
+	  <property name="hibernate.format_sql" value="true" />
+	  <property name="hibernate.query.plan_cache_max_size" value="40" /> <!-- smallest possible value 40 -->
+	  <property name="hibernate.query.plan_cache_max_soft_references" value="0" />
+	  <property name="hibernate.query.plan_cache_max_strong_references" value="0" />
+	  <property name="hibernate.query.plan_parameter_metadata_max_size" value="40" /> <!-- smallest possible value 40 -->
+	  <property name="hibernate.cache.use_second_level_cache" value="false" />
+	  <property name="hibernate.cache.use_query_cache" value="false" />
+	  <property name="hibernate.jdbc.fetch_size" value="100" />
+	  <property name="hibernate.jdbc.batch_size" value="30" />
+	</properties>
+  </persistence-unit>
+  <persistence-unit name="focusTestPU" transaction-type="RESOURCE_LOCAL">
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<!-- Entity Classes -->
+	<class>at.sozvers.focus.persistence.focus.FocusNotiz</class>
+	<class>at.sozvers.focus.persistence.focus.FocusQualifikation</class>
+	<class>at.sozvers.focus.persistence.focus.FocusSteuerung</class>
+	<class>at.sozvers.focus.persistence.focus.FocusSystem</class>
+	<class>at.sozvers.focus.persistence.focus.FocusLockTask</class>
+	<class>at.sozvers.focus.persistence.focus.FocusMeldendestelle</class>
+	<class>at.sozvers.noegkk.architektur.zup.model.Zugriffsprotokoll</class>
+	<properties>
+	  <property name="hibernate.connection.url" value="jdbc:postgresql://lvgfocusdb01e.test.sozvers.at:5432/focus_e2e" />
+	  <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false" />
+	  <property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />
+	  <property name="hibernate.connection.username" value="focus" />
+	  <property name="hibernate.connection.password" value="focus" />
+	  <property name="hibernate.default_schema" value="PUBLIC" />
+	  <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+	  <property name="hibernate.format_sql" value="true" />
+	  <property name="hibernate.show_sql" value="false" />
+	</properties>
+  </persistence-unit>
+</persistence>

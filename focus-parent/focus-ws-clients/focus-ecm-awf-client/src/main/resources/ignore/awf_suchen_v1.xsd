@@ -1,0 +1,1276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1" xmlns="http://awf.sozvers.at/schema/suchen"
+		   targetNamespace="http://awf.sozvers.at/schema/suchen" elementFormDefault="qualified">
+  <!--
+
+	BEI PROBLEMEN MIT DER KLASSEN-GENERIERUNG:
+
+	rm -rf src/generated-*
+	mvn clean install -Pgenerate-from-schema
+  -->
+  <xs:element name="sucheingabe">
+	<xs:annotation>
+	  <xs:documentation>
+		Die Sucheingabe beinhaltet die Suchbegriffe und Ergebnisaufbereitung zur Suche von Archviablagedokumenten.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="suchbegriffe" type="suchbegriffe">
+		  <xs:annotation>
+			<xs:documentation>
+			  Die Suchbegriffe nach denen die Suche nach Archviablagedokumenten eingeschränkt werden kann.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="ergebnisaufbereitung" type="ergebnis-aufbereitung">
+		  <xs:annotation>
+			<xs:documentation>
+			  Die Einstellungen zur Aufbereitung des Sucherergebnisses.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:complexType name="suchbegriffe">
+	<xs:annotation>
+	  <xs:documentation>
+		Die Suchbegriffe beinhalten die durchsuchbaren Eigenschaften eines Archivablagedokumentes. Mindestens einer der Suchbegriffe muss befüllt werden. Werden mehrere Suchbegriffe befüllt so werden
+		diese mit und verknüpft.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="suchbegriff-allgemein" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Der allgemeine Suchbegriff kann einen oder mehrere durch Leerzeichen getrennte Begriffe enthalten, nach denen Und-Verknüpft in allen durchsuchbaren Eigenschaften des Archivablagedokumentes
+			gesucht wird.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="archiv-ablage" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			ArchivAblage schränkt die Suche auf eine bestimmte Ablage ein. Die Ablage muss mit dem technischen Namen im Format 'AblageModel.Ablage' angegeben werden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="dokument-klasse" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Dokumentklasse schränkt die Suche auf eine bestimmte Dokumentklasse ein. Die Dokumentklasse muss mit technischem Namen im Format 'ObjectModels.ObjectModel' angegeben werden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="dokument-erweiterungen" type="dokumentErweiterungenTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Dokumenterweiterungen schränkt die Suche auf Dokumente ein, die die angegebenen Dokumenterweiterungen besitzen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelldatum-von" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Erstelldatum-von schränkt die Suche auf Dokumente ein, die nach dem angegebenen Datum angelegt wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelldatum-bis" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Erstelldatum-bis schränkt die Suche auf Dokumente ein, die vor zu dem angegebenen Datum angelegt wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="bearbeitungsdatum-von" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Bearbeitungsdatum-von schränkt die Suche auf Dokumente ein, die nach dem angegebenen Datum bearbeitet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="bearbeitungsdatum-bis" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Bearbeitungsdatum-bis schränkt die Suche auf Dokumente ein, die vor zu dem angegebenen Datum bearbeitet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="ersteller" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Ersteller schränkt die Suche auf Dokumente ein, die der angegebene Benutzer erstellt hat. Anzugeben ist der Username des Benutzers.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzterbearbeiter" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			LetzterBearbeiter schränkt die Suche auf Dokumente ein, die der angegebene Benutzer zuletzt bearbeitet hat. Anzugeben ist der Username des Benutzers.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="dokument-enthaelt" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Dokument-enthaelt schränkt die Suche auf Dokumente ein, bei denen der angegebene String im Inhalt vorkommt.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="metadaten" type="metadatenTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Mit den Metadaten kann auf Dokumente eingeschränkt werden, auf denen die angegeben Metadaten vorhanden sind.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="suchkriterien" type="suchkriterienTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Suchkriterien fuer die Suche mit Operatoren (erweiterte Suche)
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="partner-suchkriterien" type="partnerSuchkriterienTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Partner Suchkriterien fuer die Suche mit Operatoren
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="gfSucheingabe">
+	<xs:annotation>
+	  <xs:documentation>
+		Die GfSucheingabe beinhaltet die Suchbegriffe und die Ergebnisaufbereitung zur Suche von Geschäftsfällen.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="suchbegriffe" type="gfSuchbegriffe">
+		  <xs:annotation>
+			<xs:documentation>
+			  Die Suchbegriffe nach denen die Suche nach Geschäftsfällen eingeschränkt werden kann.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="ergebnisaufbereitung" type="ergebnis-aufbereitung">
+		  <xs:annotation>
+			<xs:documentation>
+			  Die Einstellungen zur Aufbereitung des Sucherergebnisses.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:element name="amSucheingabe">
+	<xs:annotation>
+	  <xs:documentation>
+		Die AmSucheingabe beinhaltet die Suchbegriffe und die Ergebnisaufbereitung zur Suche von Arbeitsmappen.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="suchbegriffe" type="amSuchbegriffe">
+		  <xs:annotation>
+			<xs:documentation>
+			  Die Suchbegriffe nach denen die Suche nach Arbeitsmappen eingeschränkt werden kann.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="ergebnisaufbereitung" type="ergebnis-aufbereitung">
+		  <xs:annotation>
+			<xs:documentation>
+			  Die Einstellungen zur Aufbereitung des Sucherergebnisses.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:complexType name="gfSuchbegriffe">
+	<xs:annotation>
+	  <xs:documentation>
+		Die Suchbegriffe beinhalten die durchsuchbaren Eigenschaften eines Geschäftsfalles. Mindestens einer der Suchbegriffe muss befüllt werden. Werden mehrere Suchbegriffe befüllt so werden diese
+		mit und verknüpft.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="suchbegriff-allgemein" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Der allgemeine Suchbegriff kann einen oder mehrere durch Leerzeichen getrennte Begriffe enthalten, nach denen Und-Verknüpft in allen durchsuchbaren Eigenschaften des Geschäftsfalles
+			gesucht wird.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="objekt-klasse" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Die Objektklasse schränkt die Suche auf Geschäftsfälle ein, die die angegeben Objektklasse haben. Anzugeben ist der technische Name im Format 'ObjectModels.ObjectModel'.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="status" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Status schränkt die Suche auf Geschäftsfälle ein, die den angegebenen Status haben. Dieser kann einer der folgenden Werte sein: LAUFEND, ABGEBROCHEN, GELOESCHT, BEENDET
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="fachlicher-status" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			FachlicherStatus schränkt die Suche auf Geschäftsfälle ein, die den angegebenen Fachlichen-Status haben. Die möglichen Werte werden fachlich je Geschäftsfall definiert.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelldatum-von" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Erstelldatum-von schränkt die Suche auf Geschäftsfälle ein, die nach dem angegebenen Datum gestartet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelldatum-bis" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Erstelldatum-bis schränkt die Suche auf Geschäftsfälle ein, die vor zu dem angegebenen Datum gestartet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="bearbeitungsdatum-von" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Bearbeitungsdatum-von schränkt die Suche auf Geschäftsfälle ein, die nach dem angegebenen Datum bearbeitet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="bearbeitungsdatum-bis" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Bearbeitungsdatum-bis schränkt die Suche auf Geschäftsfälle ein, die vor zu dem angegebenen Datum bearbeitet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="ersteller" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Ersteller schränkt die Suche auf Geschäftsfälle ein, die der angegebene Benutzer gestartet hat. Anzugeben ist der Username des Benutzers.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzterbearbeiter" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			LetzterBearbeiter schränkt die Suche auf Geschäftsfälle ein, die der angegebene Benutzer zuletzt bearbeitet hat. Anzugeben ist der Username des Benutzers.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="metadaten" type="metadatenTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Mit den Metadaten kann auf Geschäftsfälle eingeschränkt werden, auf denen die angegeben Metadaten vorhanden sind.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="suchkriterien" type="suchkriterienTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Suchkriterien fuer die Suche mit Operatoren (erweiterte Suche)
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="partner-suchkriterien" type="partnerSuchkriterienTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Partner Suchkriterien fuer die Suche mit Operatoren
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="amSuchbegriffe">
+	<xs:annotation>
+	  <xs:documentation>
+		Die Suchbegriffe beinhalten die durchsuchbaren Eigenschaften einer Arbeitsmappe. Mindestens einer der Suchbegriffe muss befüllt werden. Werden mehrere Suchbegriffe befüllt so werden diese mit
+		und verknüpft.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="suchbegriff-allgemein" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Der allgemeine Suchbegriff kann einen oder mehrere durch Leerzeichen getrennte Begriffe enthalten, nach denen Und-Verknüpft in allen durchsuchbaren Eigenschaften der Arbeitsmappe gesucht
+			wird.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="arbeitsmappe-definition" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Die Definition schränkt die Suche auf Arbeitsmappen ein, die die angegebene Definition haben. Anzugeben ist der technische Name im Format 'ObjectModels.ObjectModel'.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="arbeitsmappenzeichen" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Arbeitsmappenzeichen schränkt die Suche auf Arbeitsmappen ein, die das angegebene Arbeitsmappen-Zeichen enthalten.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelldatum-von" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Erstelldatum-von schränkt die Suche auf Arbeitsmappen ein, die nach dem angegebenen Datum gestartet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelldatum-bis" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Erstelldatum-bis schränkt die Suche auf Arbeitsmappen ein, die vor zu dem angegebenen Datum gestartet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="bearbeitungsdatum-von" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Bearbeitungsdatum-von schränkt die Suche auf Arbeitsmappen ein, die nach dem angegebenen Datum bearbeitet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="bearbeitungsdatum-bis" type="xs:date" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Bearbeitungsdatum-bis schränkt die Suche auf Arbeitsmappen ein, die vor zu dem angegebenen Datum bearbeitet wurden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="ersteller" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Ersteller schränkt die Suche auf Arbeitsmappen ein, die der angegebene Benutzer gestartet hat. Anzugeben ist der Username des Benutzers.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzterbearbeiter" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			LetzterBearbeiter schränkt die Suche auf Arbeitsmappen ein, die der angegebene Benutzer zuletzt bearbeitet hat. Anzugeben ist der Username des Benutzers.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="metadaten" type="metadatenTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Mit den Metadaten kann auf Arbeitsmappen eingeschränkt werden, auf denen die angegeben Metadaten vorhanden sind.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="suchkriterien" type="suchkriterienTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Suchkriterien fuer die Suche mit Operatoren (erweiterte Suche)
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="partner-suchkriterien" type="partnerSuchkriterienTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Partner Suchkriterien fuer die Suche mit Operatoren
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ergebnis-aufbereitung">
+	<xs:annotation>
+	  <xs:documentation>
+		Die Ergebnisaufbereitung definiert wie das Suchergebnis geliefert wird. Die Anzahl pro Seite und die aktuelle Seite müssen angegeben werden.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="anzahl-pro-seite" type="xs:int">
+		<xs:annotation>
+		  <xs:documentation>
+			AnzahlProSeite definiert wieviele Ergebnisse pro Seite geliefert werden. Die Anzahl muss zwischen 1 und 50 liegen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="aktuelle-seite" type="xs:int" default="1">
+		<xs:annotation>
+		  <xs:documentation>
+			Die aktuelle Seite muss größer 0 sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="sortier-feld" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Sortierfeld gibt an nach welchem Metadatenfeld das Suchergebnis sortiert werden soll. Das Sortierfeld ist im Format 'MetadataModel.Metadatafield' anzugeben.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="sortier-reihenfolge" type="sortierreihenfolgeTyp" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Sortierreihenfolge gibt an ob die Suchergebnisse aufsteigend (ASC) oder absteigend (DESC) geliefert werden. Muss angegeben werden, wenn ein Sortierfeld vorhanden ist.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="anzahl-volltext-treffer" type="xs:int" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Anzahl Volltexttreffer gibt an wieviele Treffer der Volltextsuche in den Suchergebnissen angezeigt werden sollen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dokumentErweiterungenTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		DokumenterweiterungenTyp kapselt eine Liste an Dokumenterweiterungen zur Sucheinschränkung.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="dokument-erweiterung" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Dokumenterweiterung zur Sucheinschränkung muss mit dem technischen Namen im Format 'ObjectModels.ObjectModel' angegeben werden.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="metadatenTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		MetadatenTyp kapselt eine Liste an Metadatenfelden in einem einfachen Name-Wert Format.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="feld" type="feldTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Feld ist eine Name-Wert Darstellung eines Metadatenfeldes.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="suchkriterienTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		<![CDATA[<p>Suche mit Operatoren fuer Geschaeftsfall-Metadaten bzw. technischen Daten wie Ersteller/ErstellDatum.</p>
+
+            <p>Metadaten-Felder haben einen Punkt, z.b. resolver.text</p>
+
+            <p>Unterstuetzte Zusatzfelder:  siehe enum LuceneFieldKey in ECMAWF Source Code.
+            Gross-/Kleinschreibung egal.</p>
+
+            <ul>
+                <li>ERSTELLER</li>
+                <li>ERSTELLDATUM</li>
+                <li>BEARBEITER</li>
+                <li>BEARBEITUNGSDATUM</li>
+                <li>GESCHAEFTSZEICHEN</li>
+                <li>NAME</li>
+                <li>TITLE</li>
+                <li>DOKUMENTKLASSE_NAME</li>
+                <li>DOKUMENTERWEITERUNGEN_NAME</li>
+                <li>METADATA_INDEX</li>
+                <li>GESCHAEFTSFALL_GESCHAEFTSZEICHEN</li>
+                <li>GESCHAEFTSFALL_DEFINITION_BEZEICHNUNG</li>
+                <li>GESCHAEFTSFALL_DEFINITION_NAME</li>
+                <li>GESCHAEFTSFALL_INITATOR</li>
+                <li>GESCHAEFTSFALL_STARTDATUM</li>
+                <li>GESCHAEFTSFALL_STATUS</li>
+                <li>GESCHAEFTSFALL_FACHLICHER_STATUS</li>
+                <li>GESCHAEFTSFALL_LINKS_GESPERRT</li>
+                <li>LEGALHOLD</li>
+                <li>LEGALHOLDUSER</li>
+                <li>DELETION_END</li>
+                <li>RETENTION_END</li>
+                <li>BIS_AUF_WEITERES</li>
+                <li>GESCHAEFTSFALLERWEITERUNGEN_NAME</li>
+                <li>ERSTELLTAM</li>
+                <li>OBJECTCLASSTITLE</li>
+                <li>DATEINAME</li>
+                <li>STARTER</li>
+                <li>GESCHAEFTSFALLDEFINITIONBEZEICHNUNG</li>
+                <li>GESTARTETAM</li>
+                <li>GESCHAEFTSFALLTECHNISCHERSTATUS</li>
+                <li>GESCHAEFTSFALLFACHLICHERSTATUS</li>
+                <li>LETZTERBEARBEITER</li>
+                <li>ZULETZTBEARBEITETAM</li>
+                <li>PARENTGESCHAEFTSZEICHEN</li>
+                <li>PARENTGESCHAEFTSFALLDEFINITIONBEZEICHNUNG</li>
+                <li>TECHNISCHERSTATUS</li>
+                <li>FRISTAUSGESETZT</li>
+                <li>LOESCHUNGBIS</li>
+                <li>AUFBEWAHRUNGBIS</li>
+                <li>BISAUFWEITERES</li>
+                <li>AUFGABENBEARBEITER</li>
+                <li>AUFGABENKANDIDATENOE</li>
+                <li>AUFGABENKANDIDATENBENUTZER</li>
+                <li>ARBEITSMAPPENZEICHEN</li>
+            </ul>
+            ]]>
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="feld" type="suchkriterienFeldTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Feld ist eine Name-Wert Darstellung eines Metadatenfeldes.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="partnerSuchkriterienTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		<![CDATA[<p>Suche mit Operatoren fuer ZPV-Partner.</p>
+
+            <p>Unterstuetzte Zusatzfelder</p>
+
+            <ul>
+                <li>parparolle-id-partner</li>
+                <li>partnerrolleart-kurz</li>
+                <li>beteiligungsart</li>
+            </ul>
+            ]]>
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="feld" type="partnerSuchkriterienFeldTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Feld ist eine Name-Wert Darstellung eines ZPV-Partner-Suchen Objekts.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="feldTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		FeldTyp beschreibt ein Metadatenfeld mit Name und Wert.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="name" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der technische Name eines Metadatenfeldes im Format 'Metadatamodel.Metadatafield' oder 'Metadatamodel.Metadataset_Metadatafield'.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="wert" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Wert für das Metadatenfeld mit angegebenem Namen haben auf das die Suche eingeschränkt wird.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <!-- suchkriterienFeldTyp und suchkriterienAndOrTyp sind sehr aehnlich, aber
+	   ohne kopieren gehts nicht wenn wir die struktur flach halten wollen
+
+	   leider -->
+  <xs:complexType name="suchkriterienFeldTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Erweiterte Suche mit Operatoren
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="name" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der technische Name eines Metadatenfeldes im Format 'Metadatamodel.Metadatafield' oder 'Metadatamodel.Metadataset_Metadatafield'.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:choice>
+		<xs:element name="equals" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld wird auf diesen Wert eingeschraenkt
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="not-equals" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld darf diesen Wert nicht haben
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="greater-than" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld muss groesser als dieser Wert sein.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="less-than" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld muss kleiner als dieser Wert sein.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="greater-than-equal" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld muss groesser oder gleich als dieser Wert sein.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="less-than-equal" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld muss kleiner oder gleich als dieser Wert sein.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="contains" type="xs:string">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld muss diesen Wert enthalten.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="empty">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld muss leer sein.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="not-empty">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld darf nicht leer sein.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="and" type="suchkriterienAndOrTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Und-Verknuepfung mehrerer Vergleiche (alternativ kann das Metadaten-Feld zwei mal angegeben werden).
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="or" type="suchkriterienAndOrTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Oder-Verknuepfung mehrerer Vergleiche.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:choice>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="partnerSuchkriterienFeldTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Partner Suche mit Operatoren
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="name" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der technische Name fuer ZPV-Partner. Zurzeit nur PARTNER_ZPV erlaubt.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:choice>
+		<xs:element name="equals" type="zpv-partner-suchen-typ">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld wird auf diesen Wert eingeschraenkt
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="not-equals" type="zpv-partner-suchen-typ">
+		  <xs:annotation>
+			<xs:documentation>
+			  Das Feld darf diesen Wert nicht haben
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="and" type="partnerSuchkriterienAndOrTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Und-Verknuepfung mehrerer Vergleiche (alternativ kann der nächste ZPV-Partner zwei mal angegeben werden).
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="or" type="partnerSuchkriterienAndOrTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Oder-Verknuepfung mehrerer Vergleiche.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:choice>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="suchkriterienAndOrTyp">
+	<xs:choice minOccurs="1" maxOccurs="unbounded">
+	  <xs:element name="equals" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld wird auf diesen Wert eingeschraenkt
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="not-equals" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld darf diesen Wert nicht haben
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="greater-than" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld muss groesser als dieser Wert sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="less-than" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld muss kleiner als dieser Wert sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="greater-than-equal" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld muss groesser oder gleich als dieser Wert sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="less-than-equal" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld muss kleiner oder gleich als dieser Wert sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="contains" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld muss diesen Wert enthalten.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="empty">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld muss leer sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="not-empty">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld darf nicht leer sein.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:choice>
+  </xs:complexType>
+  <xs:complexType name="partnerSuchkriterienAndOrTyp">
+	<xs:choice minOccurs="1" maxOccurs="unbounded">
+	  <xs:element name="equals" type="zpv-partner-suchen-typ">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld wird auf diesen Wert eingeschraenkt
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="not-equals" type="zpv-partner-suchen-typ">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Feld darf diesen Wert nicht haben
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:choice>
+  </xs:complexType>
+  <xs:simpleType name="sortierreihenfolgeTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		SortierreihenfolgeTyp beschreibt ob die Suchergebnisse aufsteigend (ASC) oder absteigend (DESC) sortiert geliefert werden sollen.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:string">
+	  <xs:enumeration value="ASC" />
+	  <xs:enumeration value="DESC" />
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:element name="suchergebnis">
+	<xs:annotation>
+	  <xs:documentation>
+		Das Suchergebnis besteht aus der Gesamtanzahl der gefundenen Dokumente und einer Liste der einzelnen Dokumente.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="gesamtanzahl-dokumente" type="xs:long">
+		  <xs:annotation>
+			<xs:documentation>
+			  Gibt die Gesamtanzahl der gefundenen Dokumente an. In der Liste der Dokumente sind möglicherweise weniger Dokumente enthalten.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="dokumente" type="dokumenteTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Liste der gefundenen Dokumente eingeschränkt auf die Anzahl pro Seite und für die angegebene Seite des Suchergebnisses (Paging).
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:element name="gfSuchergebnis">
+	<xs:annotation>
+	  <xs:documentation>
+		Das GfSuchergebnis besteht aus der Gesamtanzahl der gefundenen Geschäftsfälle und einer Liste der einzelnen Geschäftsfälle.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="gesamtzahl-geschaeftsfaelle" type="xs:long">
+		  <xs:annotation>
+			<xs:documentation>
+			  Gibt die Gesamtanzahl der gefundenen Geschäftsfälle an. In der Liste der Geschäftsfälle sind möglicherweise weniger Geschäftsfälle enthalten.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="geschaeftsfaelle" type="geschaeftsfaelleTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Liste der gefundenen Dokumente eingeschränkt auf die Anzahl pro Seite und für die angegebene Seite des Suchergebnisses (Paging).
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:element name="amSuchergebnis">
+	<xs:annotation>
+	  <xs:documentation>
+		Das AmSuchergebnis besteht aus der Gesamtanzahl der gefundenen Arbeitsmappen und einer Liste der einzelnen Arbeitsmappen.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="gesamtzahl-arbeitsmappen" type="xs:long">
+		  <xs:annotation>
+			<xs:documentation>
+			  Gibt die Gesamtanzahl der gefundenen Arbeitsmappen an. In der Liste der Arbeitsmappen sind möglicherweise weniger Arbeitsmappen enthalten.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+		<xs:element name="arbeitsmappen" type="arbeitsmappenTyp">
+		  <xs:annotation>
+			<xs:documentation>
+			  Liste der gefundenen Arbeitsmappen eingeschränkt auf die Anzahl pro Seite und für die angegebene Seite des Suchergebnisses (Paging).
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:complexType name="dokumenteTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der DokumenteTyp kapselt eine Liste an Dokumenten im Suchergebnis.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="dokument" type="dokumentTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Ein Dokument enthält die notwendigen Informationen zu einem gefundenen Dokument im Suchergebnis.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="dokumentTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Ein Dokument enthält die notwendigen Informationen zu einem gefundenen Dokument im Suchergebnis.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="id" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Die ID eines Dokuments, mit dem es eindeutig identifiziert wird und mit der das Dokument über andere Schnittstellen angesprochen werden kann.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="dokument-klasse" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Die Dokumentklasse des Dokuments in lesbarer Form. Das ist der Titel der Dokumentklasse aus der EMA-Konfiguration.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="geschaeftszeichen" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Dokumentzeichen (Geschäftszeichen) des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="version" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Die aktuelle Versionnummer des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="dateiname" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Dateiname des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="mimetype" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Mimetype des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="ersteller" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Username der Erstellers des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelltAm" type="xs:date">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Datum der Erstellung des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzterBearbeiter" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Username des letzten Bearbeiters des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzteBearbeitungAm" type="xs:date">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Datum der letzten Bearbeitung des Dokuments.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="fachinfos" type="fachinfoTyp">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Liste an definierten Metadaten (Fachinfos). Dies sind die fachlich definierten Metadaten eines Dokuments, die auf den ersten Blick ersichtlich sein sollen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="gefundene-volltexte" type="gefundeneVolltexteTyp">
+		<xs:annotation>
+		  <xs:documentation>
+			Ein Liste an Stellen im Inhalt eines Dokuments, die den Suchbegriffen entsprechen. Wird nur dann befüllt, wenn eine anzahl-volltext-treffer in der Ergebnisaufbereitung angegeben ist.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="relevanz" type="xs:float">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Kennzahl für die Relevanz des Suchergebnisses. Je besser das Dokument zu den Suchbegriffen passt, desto höher ist dieser Wert.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="fachinfoTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der FachinfoTyp definiert eine Liste an Fachinfos (Metadaten).
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="feld" type="feldTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Ein Feld einer Fachinfo besteht aus einer Name-Wert Darstellung eines Metadatenfelde, wobei der Name hier der Titel des Metadatenfeldes ist.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="gefundeneVolltexteTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der GefundeneVolltesteTyp kapselt eine Liste an Stellen im Inhalt eines Dokuments, die den Suchbegriffen entsprechen.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="gefundener-volltext" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			<![CDATA[Eine Stelle im Inhalt eines Dokuments, die den Suchbegriffen entspricht. Der entprechende Stelle ist im Textausschnitt mit <mark></mark> hervorgehoben.]]>
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="geschaeftsfaelleTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der GeschaeftsfaelleTyp kapselt eine Liste an Geschäftsfällen im Suchergebnis.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="geschaeftsfall" type="geschaeftsfallTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Ein Geschäftsfall enthält die notwendigen Informationen zu einem Geschäftsfall im Suchergebnis.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="arbeitsmappenTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der GeschaeftsfaelleTyp kapselt eine Liste an Geschäftsfällen im Suchergebnis.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="arbeitsmappe" type="arbeitsmappeTyp" minOccurs="0" maxOccurs="unbounded">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Arbeitsmappe enthält die notwendigen Informationen zu einer Arbeitsmappe im Suchergebnis.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="geschaeftsfallTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der GeschaeftsfallTyp beinhaltet die Informationen zu einem Geschäftsfall im Suchergebnis.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="id" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Die Id ist eine eindeutige Indentifikation des Geschäftsfalles und kann in den anderen Schnittstellen verwendet werden um den Geschäftsfall anzusprechen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="geschaeftsfall-definition" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Titel der Geschäftsfall-Definition ist ein lesbarer Name des Geschäftsfalles.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="geschaeftszeichen" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Geschäftszeichen des Geschäftsfalles.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="status" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Status des Geschäftsfalles, kann die Werte LAUFEND, ABGEBROCHEN, GELOESCHT, BEENDET annehmen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="fachlicher-status" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der fachlich definierte Status des Geschäftsfalles.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="ersteller" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Username des Benutzers, der den Geschäftsfall gestartet hat.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelltAm" type="xs:date">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Datum des Geschäftsfall-Starts.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzterBearbeiter" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Username des letzten Bearbeiters des Geschäftsfalles.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzteBearbeitungAm" type="xs:date">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Datum der letzten Bearbeitung des Geschäftsfalles.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="fachinfos" type="fachinfoTyp">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Liste an definierten Metadaten (Fachinfos). Dies sind die fachlich definierten Metadaten eines Geschäftsfalles, die auf den ersten Blick ersichtlich sein sollen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="relevanz" type="xs:float">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Kennzahl für die Relevanz des Suchergebnisses. Je besser der Geschäftsfall zu den Suchbegriffen passt, desto höher ist dieser Wert.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="arbeitsmappeTyp">
+	<xs:annotation>
+	  <xs:documentation>
+		Der ArbeitsmappeTyp beinhaltet die Informationen zu einer Arbeitsmappe im Suchergebnis.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="id" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Die Id ist eine eindeutige Indentifikation der Arbeitsmappe und kann in den anderen Schnittstellen verwendet werden um die Arbeitsmappe anzusprechen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="arbeitsmappe-definition" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Titel der Arbeitsmappen-Definition ist ein lesbarer Name der Arbeitsmappe.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="arbeitsmappenzeichen" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Arbeistmappenzeichen der Arbeitsmappe.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="ersteller" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Username des Benutzers, der die Arbeitsmappe erstellt hat.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="erstelltAm" type="xs:date">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Datum des Arbeitsmappe-Erstellens.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzterBearbeiter" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Username des letzten Bearbeiters der Arbeitsmappe.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="letzteBearbeitungAm" type="xs:date">
+		<xs:annotation>
+		  <xs:documentation>
+			Das Datum der letzten Bearbeitung der Arbeitsmappe.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="fachinfos" type="fachinfoTyp">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Liste an definierten Metadaten (Fachinfos). Dies sind die fachlich definierten Metadaten einer Arbeitsmappe, die auf den ersten Blick ersichtlich sein sollen.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="relevanz" type="xs:float">
+		<xs:annotation>
+		  <xs:documentation>
+			Eine Kennzahl für die Relevanz des Suchergebnisses. Je besser die Arbeitsmappe zu den Suchbegriffen passt, desto höher ist dieser Wert.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zpv-partner-suchen-typ">
+	<xs:sequence>
+	  <xs:element name="zpv-partner" type="zpv-partner-suchen">
+		<xs:annotation>
+		  <xs:documentation>
+			ZPV-Partner
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="zpv-partner-suchen">
+	<xs:sequence>
+	  <xs:element name="parparolle-id-partner" type="xs:long">
+		<xs:annotation>
+		  <xs:documentation>
+			Parparrolle ID
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="partnerrolleart-kurz" type="xs:string">
+		<xs:annotation>
+		  <xs:documentation>
+			Partnerrolleart
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="beteiligungsart" type="xs:string" minOccurs="0">
+		<xs:annotation>
+		  <xs:documentation>
+			Beteiligungsart
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+  </xs:complexType>
+</xs:schema>

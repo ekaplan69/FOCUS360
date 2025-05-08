@@ -1,0 +1,45 @@
+@import "../../../../styles/base/variables";
+
+.notes__header {
+    color: $primary-text-color;
+    font-family: $font-family-roboto-medium;
+}
+
+.notes__text {
+    box-sizing: border-box;
+    color: $primary-text-color;
+    font-family: $font-family-roboto-medium;
+    font-size: $dashlet-font-size;
+    font-weight: $default-font-weight;
+    height: 100%;
+    width: 100%;
+}
+
+.notes__text * {
+    color: $primary-text-color;
+    font-family: $font-family-roboto-medium;
+    font-size: $dashlet-font-size;
+    font-weight: $default-font-weight;
+}
+
+.notes__footer {
+    display: flex;
+    width: 100%;
+}
+
+.notes__footer__actions--left {
+    margin-right: auto;
+    width: fit-content;
+}
+
+.notes__footer__actions--right {
+    margin-left: auto;
+    width: fit-content;
+}
+
+.notes__footer__close {
+    color: $primary-text-color;
+    font-family: $font-family-roboto;
+    font-size: $dashlet-font-size;
+    font-weight: $default-font-weight;
+}

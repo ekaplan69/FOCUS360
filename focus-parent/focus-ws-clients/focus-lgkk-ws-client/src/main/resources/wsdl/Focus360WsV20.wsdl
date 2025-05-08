@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://v20.focus360.webservice.lgkk.stp.sozvers.at/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="Focus360WsImplService" targetNamespace="http://v20.focus360.webservice.lgkk.stp.sozvers.at/">
+  <wsdl:types>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://v20.focus360.webservice.lgkk.stp.sozvers.at/" xmlns:ns1="http://types.services.itsv.at/" elementFormDefault="unqualified"
+			   targetNamespace="http://v20.focus360.webservice.lgkk.stp.sozvers.at/" version="1.0">
+	  <xs:import namespace="http://types.services.itsv.at/" />
+	  <xs:element name="sucheLGKDokumenteV1" type="tns:sucheLGKDokumenteV1" />
+	  <xs:element name="sucheLGKDokumenteV1Response" type="tns:sucheLGKDokumenteV1Response" />
+	  <xs:element name="sucheLGKFaelleV2" type="tns:sucheLGKFaelleV2" />
+	  <xs:element name="sucheLGKFaelleV2Response" type="tns:sucheLGKFaelleV2Response" />
+	  <xs:complexType name="sucheLGKDokumenteV1">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="arg0" type="tns:Focus360DokumentRequest" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360DokumentRequest">
+		<xs:complexContent>
+		  <xs:extension base="ns1:standardRequest">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="vonDatum" type="xs:dateTime" />
+			  <xs:element minOccurs="0" name="vsnr" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="bearbeiter">
+		<xs:sequence>
+		  <xs:element name="bearbeiterID" type="xs:string" />
+		  <xs:element minOccurs="0" name="bearbeitungsgrund" type="xs:string" />
+		  <xs:element name="meldendeStelle" type="xs:string" />
+		  <xs:element name="orgeinheitID" type="xs:string" />
+		  <xs:element name="traegerID" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="sucheLGKDokumenteV1Response">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="return" type="tns:Focus360DokumentResponse" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360DokumentResponse">
+		<xs:complexContent>
+		  <xs:extension base="ns1:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="focus360DokumentDto" type="tns:Focus360DokumentDto" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360DokumentDto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="dokumentklasse" type="xs:string" />
+		  <xs:element minOccurs="0" name="dokumentreferenz" type="xs:string" />
+		  <xs:element minOccurs="0" name="einlangdatum" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="kategorie" type="xs:string" />
+		  <xs:element minOccurs="0" name="thema" type="xs:string" />
+		  <xs:element minOccurs="0" name="versendungsart" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="meldungen">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="fehlerMeldungListe" nillable="true" type="tns:meldung" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="hinweisMeldungListe" nillable="true" type="tns:meldung" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="systemfehlerMeldungListe" nillable="true" type="tns:meldung" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="warnungMeldungListe" nillable="true" type="tns:meldung" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="meldung">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="id" type="xs:string" />
+		  <xs:element minOccurs="0" name="kategorie" type="tns:meldungsKategorie" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter" nillable="true" type="xs:string" />
+		  <xs:element minOccurs="0" name="text" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="sucheLGKFaelleV2">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="arg0" type="tns:Focus360RequestV2" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360RequestV2">
+		<xs:complexContent>
+		  <xs:extension base="ns1:standardRequest">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="landesstellen" type="xs:int" />
+			  <xs:element minOccurs="0" name="personPid" type="xs:double" />
+			  <xs:element minOccurs="0" name="stichtagDat" type="xs:dateTime" />
+			  <xs:element minOccurs="0" name="vsnr" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="sucheLGKFaelleV2Response">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="return" type="tns:Focus360ResponseV2" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360ResponseV2">
+		<xs:complexContent>
+		  <xs:extension base="ns1:standardResponse">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="wahWaza" type="tns:Focus360WahWazaElementV2Dto" />
+			  <xs:element minOccurs="0" name="ekos" type="tns:Focus360EkosElementV2Dto" />
+			  <xs:element minOccurs="0" name="unfallerh" type="tns:Focus360UnfallerhElementV2Dto" />
+			  <xs:element minOccurs="0" name="frt" type="tns:Focus360FrtElementV2Dto" />
+			  <xs:element minOccurs="0" name="wazaKo" type="tns:Focus360WazaKoElementV2Dto" />
+			  <xs:element minOccurs="0" name="auMhRgWeg" type="tns:Focus360AuMhRgWegElementV2Dto" />
+			  <xs:element minOccurs="0" name="hbhm" type="tns:Focus360HbHmElementV2Dto" />
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="medSt" type="tns:Focus360MedStElementV2Dto" />
+			  <xs:element minOccurs="0" name="lohnpf" type="tns:Focus360LohnpfElementV2Dto" />
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="betreute" type="tns:Focus360BetreuungszeitenElementV2Dto" />
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="vwst" type="tns:Focus360VwstElementV2Dto" />
+			  <xs:element minOccurs="0" name="kh" type="tns:Focus360KhElementV2Dto" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360WahWazaElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="behDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="lgebiet" type="xs:string" />
+		  <xs:element minOccurs="0" name="status" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360EkosElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="antragStatus" type="xs:string" />
+		  <xs:element minOccurs="0" name="eingelangtDat" type="xs:dateTime" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360UnfallerhElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="eingelangtDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="erstellDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="urgenz1Dat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="urgenz2Dat" type="xs:dateTime" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360FrtElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="status" type="xs:string" />
+		  <xs:element minOccurs="0" name="transportDat" type="xs:dateTime" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360WazaKoElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="antragDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="status" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360AuMhRgWegElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="anweisungDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="lbisDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="lgebiet" type="xs:string" />
+		  <xs:element minOccurs="0" name="lvonDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="status" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360HbHmElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="status" type="xs:string" />
+		  <xs:element minOccurs="0" name="verordDat" type="xs:dateTime" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360MedStElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="gueltigBisDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="lgebiet" type="xs:string" />
+		  <xs:element minOccurs="0" name="stellungnahme" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360LohnpfElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="lohnpfaendung" type="xs:boolean" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360BetreuungszeitenElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="betreuungBis" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="betreuungVon" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="landesstellen" type="xs:int" />
+		  <xs:element minOccurs="0" name="status" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360VwstElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="gueltigBisDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="leistungsType" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Focus360KhElementV2Dto">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="aufnahmeArt" type="xs:string" />
+		  <xs:element minOccurs="0" name="lbisDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="leName" type="xs:string" />
+		  <xs:element minOccurs="0" name="lvonDat" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="vpnr" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:simpleType name="systemmodus">
+		<xs:restriction base="xs:string">
+		  <xs:enumeration value="E" />
+		  <xs:enumeration value="P" />
+		  <xs:enumeration value="S" />
+		  <xs:enumeration value="T" />
+		  <xs:enumeration value="V" />
+		  <xs:enumeration value="1" />
+		  <xs:enumeration value="2" />
+		  <xs:enumeration value="3" />
+		  <xs:enumeration value="4" />
+		  <xs:enumeration value="5" />
+		  <xs:enumeration value="6" />
+		  <xs:enumeration value="7" />
+		  <xs:enumeration value="8" />
+		  <xs:enumeration value="9" />
+		</xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="verarbeitungsmodus">
+		<xs:restriction base="xs:string">
+		  <xs:enumeration value="O" />
+		  <xs:enumeration value="B" />
+		</xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="meldungsKategorie">
+		<xs:restriction base="xs:string">
+		  <xs:enumeration value="S" />
+		  <xs:enumeration value="F" />
+		  <xs:enumeration value="W" />
+		  <xs:enumeration value="H" />
+		</xs:restriction>
+	  </xs:simpleType>
+	</xs:schema>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://types.services.itsv.at/" xmlns:ns1="http://v20.focus360.webservice.lgkk.stp.sozvers.at/"
+			   targetNamespace="http://types.services.itsv.at/" version="1.0">
+	  <xs:import namespace="http://v20.focus360.webservice.lgkk.stp.sozvers.at/" />
+	  <xs:element name="bearbeiter" type="ns1:bearbeiter" />
+	  <xs:element name="meldungen" type="ns1:meldungen" />
+	  <xs:element name="standardRequestHeader" type="tns:standardRequestHeader" />
+	  <xs:element name="verarbeitungsmodus" type="ns1:verarbeitungsmodus" />
+	  <xs:complexType abstract="true" name="standardRequest">
+		<xs:sequence>
+		  <xs:element name="header" type="tns:standardRequestHeader" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="standardRequestHeader">
+		<xs:sequence>
+		  <xs:element name="applikationsID" type="xs:string" />
+		  <xs:element ref="tns:bearbeiter" />
+		  <xs:element name="systemmodus" type="ns1:systemmodus" />
+		  <xs:element name="transaktionsID" type="xs:string" />
+		  <xs:element name="verarbeitungsmodus" type="ns1:verarbeitungsmodus" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType abstract="true" name="standardResponse">
+		<xs:sequence>
+		  <xs:element minOccurs="0" ref="tns:meldungen" />
+		</xs:sequence>
+	  </xs:complexType>
+	</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="sucheLGKDokumenteV1Response">
+	<wsdl:part element="tns:sucheLGKDokumenteV1Response" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sucheLGKDokumenteV1">
+	<wsdl:part element="tns:sucheLGKDokumenteV1" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sucheLGKFaelleV2Response">
+	<wsdl:part element="tns:sucheLGKFaelleV2Response" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sucheLGKFaelleV2">
+	<wsdl:part element="tns:sucheLGKFaelleV2" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Focus360WsV20">
+	<wsdl:operation name="sucheLGKDokumenteV1">
+	  <wsdl:input message="tns:sucheLGKDokumenteV1" name="sucheLGKDokumenteV1"></wsdl:input>
+	  <wsdl:output message="tns:sucheLGKDokumenteV1Response" name="sucheLGKDokumenteV1Response"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="sucheLGKFaelleV2">
+	  <wsdl:input message="tns:sucheLGKFaelleV2" name="sucheLGKFaelleV2"></wsdl:input>
+	  <wsdl:output message="tns:sucheLGKFaelleV2Response" name="sucheLGKFaelleV2Response"></wsdl:output>
+	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Focus360WsImplServiceSoapBinding" type="tns:Focus360WsV20">
+	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:operation name="sucheLGKDokumenteV1">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="sucheLGKDokumenteV1">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="sucheLGKDokumenteV1Response">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="sucheLGKFaelleV2">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="sucheLGKFaelleV2">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="sucheLGKFaelleV2Response">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Focus360WsImplService">
+	<wsdl:port binding="tns:Focus360WsImplServiceSoapBinding" name="Focus360WsV20Port">
+	  <soap:address location="http://elgkk-pt1.sozvers.at:80/elgkk/focus360/Focus360WsV20" />
+	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

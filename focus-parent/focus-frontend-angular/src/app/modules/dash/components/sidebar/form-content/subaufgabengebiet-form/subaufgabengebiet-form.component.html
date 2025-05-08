@@ -1,0 +1,161 @@
+<div #subaufgabengebiet class="kontakt-form-wrapper">
+    @if (
+        subaufgabengebietKontaktForm.currentKontakt !== null &&
+        aufgabengebietOptions !== null
+    ) {
+        @if (
+            this.userService?.userInfo?.containsRolle(rollen.ROLLE_KONT_VERW)
+        ) {
+            <div class="stay-safe-from-footer">
+                <h1>Kontakt erfassen</h1>
+                <!-- Counter -->
+                <f360-kundenkontakt-form-timer
+                    [dateStartTS]="
+                        subaufgabengebietKontaktForm.currentKontakt.startTs
+                    "
+                    [beendet]="
+                        subaufgabengebietKontaktForm.currentKontakt.endeTs !==
+                        null
+                    "
+                    [dateNowOrEndeTS]="
+                        subaufgabengebietKontaktForm.currentKontakt.endeTs
+                    "
+                ></f360-kundenkontakt-form-timer>
+                @if (
+                    kontaktartOptions != null && kontaktartOptions.length > 0
+                ) {
+                    <a class="data-header">Kontaktart *</a
+                    ><!-- Kontaktarten -->
+                    <div #kontaktartSection class="detail-section">
+                        <mat-button-toggle-group
+                            (change)="
+                                handleKontaktartCheckboxEvent(
+                                    true,
+                                    $event.value
+                                )
+                            "
+                            class="button-toggle-group"
+                        >
+                            @for (
+                                kontaktart of kontaktartOptions;
+                                track kontaktart
+                            ) {
+                                <mat-button-toggle
+                                    class="button-toggle"
+                                    [value]="kontaktart.kontaktartId"
+                                    [checked]="kontaktart.ticked"
+                                    >{{ kontaktart.kontaktartBezeichnung }}
+                                </mat-button-toggle>
+                            }
+                        </mat-button-toggle-group>
+                    </div>
+                }
+                @if (
+                    themaOptionsDD != null &&
+                    themaOptionsDD.length > 0 &&
+                    themaAnzeigeAls == "DD"
+                ) {
+                    <a class="data-header">Thema *</a>
+                    <mat-form-field>
+                        @for (thema of themaOptionsDD; track thema) {
+                            <mat-select
+                                (selectionChange)="
+                                    handleThemaSelectionChanged()
+                                "
+                                [(ngModel)]="
+                                    subaufgabengebietKontaktForm.themaSelection
+                                "
+                            >
+                                {{ thema }}
+                            </mat-select>
+                        }
+                    </mat-form-field>
+                }
+                @if (
+                    themaOptions != null &&
+                    themaOptions.length > 0 &&
+                    themaAnzeigeAls == "B"
+                ) {
+                    <a class="data-header">Thema*</a
+                    ><!-- Themen -->
+                    <div class="detail-section">
+                        <mat-button-toggle-group
+                            (change)="
+                                handleThemaCheckboxEvent(true, $event.value)
+                            "
+                            class="button-toggle-group"
+                        >
+                            @for (thema of themaOptions; track thema) {
+                                <mat-button-toggle
+                                    class="button-toggle"
+                                    [value]="thema.themaId"
+                                    [checked]="thema.ticked"
+                                    >{{ thema.themaBezeichnung }}
+                                </mat-button-toggle>
+                            }
+                        </mat-button-toggle-group>
+                    </div>
+                }
+                <!-- ANMERKUNGEN -->
+                <div class="row">
+                    <div style="width: 100%">
+                        <div><a class="data-header">Anmerkung</a></div>
+                        <mat-form-field class="text-area-kontakt">
+                            <textarea
+                                matInput
+                                (change)="
+                                    subaufgabengebietKontaktForm.currentKontakt.anmerkung =
+                                        $event.target['value']
+                                "
+                                [value]="
+                                    subaufgabengebietKontaktForm.currentKontakt
+                                        .anmerkung
+                                "
+                            >
+                            </textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                @if (
+                    abschlussartOptions != null &&
+                    abschlussartOptions.length > 0
+                ) {
+                    <a class="data-header">Abschlussart*</a
+                    ><!-- Abschlussarten -->
+                    <div class="detail-section">
+                        <div class="abschlussButton-wrapper">
+                            @for (
+                                abschlussart of abschlussartOptions;
+                                track abschlussart
+                            ) {
+                                <button
+                                    mat-stroked-button
+                                    class="abschlussButton"
+                                    style=""
+                                    (click)="
+                                        handleAbschlussartCheckboxEvent(
+                                            true,
+                                            abschlussart.abschlussartId
+                                        )
+                                    "
+                                >
+                                    {{ abschlussart.abschlussartBezeichnung }}
+                                </button>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <!-- CONTROL SECTION -->
+        <div class="control-section">
+            <div class="button-group">
+                <button mat-button (click)="closeForm()">
+                    Formular schließen und Kontakt löschen
+                </button>
+            </div>
+        </div>
+    } @else {
+        <f360-loading-indicator></f360-loading-indicator>
+    }
+</div>

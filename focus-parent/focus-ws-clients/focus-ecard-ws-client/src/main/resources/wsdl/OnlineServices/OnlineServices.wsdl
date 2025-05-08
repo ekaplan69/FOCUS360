@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:intf="http://onlineservices.server.ecard.siemens.at" xmlns:tns2="http://valueobject.onlineservices.server.ecard.siemens.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+				  xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://onlineservices.server.ecard.siemens.at">
+  <wsdl:types>
+	<schema xmlns:intf="http://onlineservices.server.ecard.siemens.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+			targetNamespace="http://valueobject.onlineservices.server.ecard.siemens.at" xmlns="http://www.w3.org/2001/XMLSchema">
+	  <complexType name="StdRequest">
+		<sequence>
+		  <element name="mxOriginatorId" nillable="true" type="xsd:string" />
+		  <element name="bearbGrund" nillable="true" type="xsd:string" />
+		  <element name="traegerId" nillable="true" type="xsd:string" />
+		  <element name="version" nillable="true" type="xsd:string" />
+		  <element name="orgEinheitID" type="xsd:string" minOccurs="0" />
+		  <element name="idApp" type="xsd:string" minOccurs="0" />
+		</sequence>
+	  </complexType>
+	  <complexType name="StdResponse">
+		<sequence>
+		  <element name="mxSVCApplReturn" type="xsd:int" />
+		  <element name="mxOriginatorId" nillable="true" type="xsd:string" />
+		  <element name="fehleranzahl" type="xsd:int" />
+		  <element name="fehlerueberlauf" nillable="true" type="xsd:boolean" />
+		  <element name="kritischerFehler" nillable="true" type="xsd:short" />
+		  <element maxOccurs="unbounded" name="fehlerbeschreibung" nillable="true" type="tns2:Fehlerbeschreibung" />
+		</sequence>
+	  </complexType>
+	  <complexType name="Fehlerbeschreibung">
+		<sequence>
+		  <element name="fehlercode" nillable="true" type="xsd:string" />
+		  <element maxOccurs="unbounded" name="fehlerTextParm" nillable="true" type="xsd:string" />
+		</sequence>
+	  </complexType>
+	  <complexType name="SVPersonKonsultationV2">
+		<sequence>
+		  <element name="versicherungsTraegerCodeL" nillable="true" type="xsd:string" />
+		  <element name="fachgebietCode" nillable="true" type="xsd:string" />
+		  <element name="konDatum" nillable="true" type="xsd:string" />
+		  <element name="konsultationsID" type="xsd:long" />
+		  <element name="nr" type="xsd:int" />
+		  <element name="art" nillable="true" type="xsd:string" />
+		  <element name="konErfassungDatum" nillable="true" type="xsd:string" />
+		  <element name="behandlung" nillable="true" type="xsd:string" />
+		  <element name="limit" nillable="true" type="xsd:string" />
+		  <element name="vvnr" nillable="true" type="xsd:string" />
+		  <element name="vorName" type="xsd:string" minOccurs="0" />
+		  <element name="famName" type="xsd:string" minOccurs="0" />
+		  <element name="versichertenkat" type="xsd:int" minOccurs="0" />
+		  <element name="kab" nillable="true" type="xsd:string" />
+		  <element name="rebf" nillable="true" type="xsd:string" />
+		  <element name="vpnr" nillable="true" type="xsd:string" />
+		  <element name="famNameArzt" type="xsd:string" minOccurs="0" />
+		  <element name="vorNameArzt" type="xsd:string" minOccurs="0" />
+		  <element name="ordination" nillable="true" type="xsd:string" />
+		  <element name="versicherungsTraegerCodeV" nillable="true" type="xsd:string" />
+		  <element name="konStatus" nillable="true" type="xsd:string" />
+		  <element name="limitPruef" nillable="true" type="xsd:string" />
+		  <element name="ersatzbelegCode" minOccurs="0" type="xsd:string" />
+		</sequence>
+	  </complexType>
+	  <complexType name="SVPersonKonsultationenAuskunftV4Req">
+		<complexContent>
+		  <extension base="tns2:StdRequest">
+			<sequence>
+			  <element name="vsNr" nillable="true" type="xsd:string" />
+			  <element name="behandlungAb" nillable="true" type="xsd:string" />
+			  <element name="behandlungBis" nillable="true" type="xsd:string" />
+			</sequence>
+		  </extension>
+		</complexContent>
+	  </complexType>
+	  <complexType name="SVPersonKonsultationenAuskunftV4Resp">
+		<complexContent>
+		  <extension base="tns2:StdResponse">
+			<sequence>
+			  <element name="anzahl" type="xsd:int" />
+			  <element maxOccurs="unbounded" minOccurs="0" name="SVPersonKonsultation" type="tns2:SVPersonKonsultationV2" />
+			</sequence>
+		  </extension>
+		</complexContent>
+	  </complexType>
+	  <xsd:complexType name="ECardAuskunftV2Req">
+		<complexContent>
+		  <extension base="tns2:StdRequest">
+			<sequence>
+			  <element name="vsNr" type="xsd:string" minOccurs="0" />
+			  <element name="kartennummer" type="xsd:string" minOccurs="0" />
+			</sequence>
+		  </extension>
+		</complexContent>
+	  </xsd:complexType>
+	  <xsd:complexType name="ECardAuskunftV2Resp">
+		<complexContent>
+		  <extension base="tns2:StdResponse">
+			<sequence>
+			  <element name="anzahl" type="xsd:int" />
+			  <element name="ECards" type="tns2:ECardV2" maxOccurs="unbounded" minOccurs="0" />
+			  <element name="zustelladresse" type="tns2:Zustelladresse" minOccurs="0" />
+			</sequence>
+		  </extension>
+		</complexContent>
+	  </xsd:complexType>
+	  <xsd:complexType name="ECardV2">
+		<sequence>
+		  <element name="vsNr" type="xsd:string" />
+		  <element name="eCard" type="xsd:string" />
+		  <element name="versendeDatum" minOccurs="0" type="xsd:string" />
+		  <element name="sperrDatum" minOccurs="0" type="xsd:string" />
+		  <element name="sperrGrund" minOccurs="0" type="xsd:string" />
+		  <element name="kartenStatus" type="xsd:int" />
+		  <element name="bemerkung" minOccurs="0" type="xsd:string" />
+		  <element name="bemerkungsdatum" minOccurs="0" type="xsd:string" />
+		  <element name="eCardZeile1" minOccurs="0" type="xsd:string" />
+		  <element name="eCardZeile2" minOccurs="0" type="xsd:string" />
+		  <element name="eCardZeile3" minOccurs="0" type="xsd:string" />
+		  <element name="ekvk" minOccurs="0" type="xsd:string" />
+		  <element name="ekvkBisDatum" minOccurs="0" type="xsd:string" />
+		  <element name="ekvkZeile1" minOccurs="0" type="xsd:string" />
+		  <element name="ekvkZeile2" minOccurs="0" type="xsd:string" />
+		  <element name="svZerfkEnde" minOccurs="0" type="xsd:string" />
+		  <element name="meldendeStelle" type="xsd:string" />
+		  <element name="absender" type="xsd:string" />
+		  <element name="fotoinformationscode" type="xsd:string" minOccurs="0" />
+		  <element name="register" type="xsd:string" minOccurs="0" />
+		  <element name="ausstellungsdatumFotodokument" type="xsd:string" minOccurs="0" />
+		</sequence>
+	  </xsd:complexType>
+	  <complexType name="Zustelladresse">
+		<sequence>
+		  <element name="zuakz" nillable="true" type="xsd:string" />
+		  <element name="staatIsoA3" nillable="true" type="xsd:string" />
+		  <element name="postleitzahl" nillable="true" type="xsd:string" />
+		  <element name="postort" nillable="true" type="xsd:string" />
+		  <element name="strasse" nillable="true" type="xsd:string" />
+		  <element name="postfach" nillable="true" type="xsd:string" />
+		  <element name="anschriftserwtrg" nillable="true" type="xsd:string" />
+		  <element name="anrede" nillable="true" type="xsd:int" />
+		  <element name="famName" nillable="true" type="xsd:string" />
+		  <element name="vorName" nillable="true" type="xsd:string" />
+		  <element name="titelVorne" nillable="true" type="xsd:string" />
+		  <element name="titelHinten" nillable="true" type="xsd:string" />
+		</sequence>
+	  </complexType>
+	</schema>
+	<schema xmlns:intf="http://onlineservices.server.ecard.siemens.at" xmlns:tns2="http://valueobject.onlineservices.server.ecard.siemens.at" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://onlineservices.server.ecard.siemens.at" xmlns="http://www.w3.org/2001/XMLSchema">
+	  <import namespace="http://valueobject.onlineservices.server.ecard.siemens.at" />
+	  <element name="SVPersonKonsultationenAuskunftV4" type="tns2:SVPersonKonsultationenAuskunftV4Req" />
+	  <element name="SVPersonKonsultationenAuskunftV4Response" type="tns2:SVPersonKonsultationenAuskunftV4Resp" />
+	  <element name="ECardAuskunftV2" type="tns2:ECardAuskunftV2Req" />
+	  <element name="ECardAuskunftV2Response" type="tns2:ECardAuskunftV2Resp" />
+	</schema>
+  </wsdl:types>
+  <!-- messages -->
+  <wsdl:message name="SVPersonKonsultationenAuskunftV4Request">
+	<wsdl:part name="parameters" element="intf:SVPersonKonsultationenAuskunftV4" />
+  </wsdl:message>
+  <wsdl:message name="SVPersonKonsultationenAuskunftV4Response">
+	<wsdl:part name="parameters" element="intf:SVPersonKonsultationenAuskunftV4Response" />
+  </wsdl:message>
+  <wsdl:message name="ECardAuskunftV2Request">
+	<wsdl:part element="intf:ECardAuskunftV2" name="parameters" />
+  </wsdl:message>
+  <wsdl:message name="ECardAuskunftV2Response">
+	<wsdl:part element="intf:ECardAuskunftV2Response" name="parameters" />
+  </wsdl:message>
+  <wsdl:portType name="OnlineServicesFocus360">
+	<wsdl:operation name="SVPersonKonsultationenAuskunftV4">
+	  <wsdl:input message="intf:SVPersonKonsultationenAuskunftV4Request" name="SVPersonKonsultationenAuskunftV4Request" />
+	  <wsdl:output message="intf:SVPersonKonsultationenAuskunftV4Response" name="SVPersonKonsultationenAuskunftV4Response" />
+	</wsdl:operation>
+	<wsdl:operation name="ECardAuskunftV2">
+	  <wsdl:input message="intf:ECardAuskunftV2Request" name="ECardAuskunftV2Request" />
+	  <wsdl:output message="intf:ECardAuskunftV2Response" name="ECardAuskunftV2Response" />
+	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OnlineServicesSoapBinding" type="intf:OnlineServicesFocus360">
+	<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:operation name="SVPersonKonsultationenAuskunftV4">
+	  <wsdlsoap:operation soapAction="" />
+	  <wsdl:input name="SVPersonKonsultationenAuskunftV4Request">
+		<wsdlsoap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="SVPersonKonsultationenAuskunftV4Response">
+		<wsdlsoap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="ECardAuskunftV2">
+	  <wsdlsoap:operation soapAction="" />
+	  <wsdl:input name="ECardAuskunftV2Request">
+		<wsdlsoap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="ECardAuskunftV2Response">
+		<wsdlsoap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OnlineServices_Focus360_Service">
+	<wsdl:port binding="intf:OnlineServicesSoapBinding" name="OnlineServicesFocus360">
+	  <wsdlsoap:address location="http://localhost:8080/EcSrvOls/services/OnlineServices" />
+	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

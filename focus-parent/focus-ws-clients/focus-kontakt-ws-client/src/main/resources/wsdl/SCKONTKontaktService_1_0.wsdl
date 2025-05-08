@@ -1,0 +1,981 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://focus.kontakt.sckont.noegkk.sozvers.at/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  name="SCKONTKontaktService_1_0Service" targetNamespace="http://focus.kontakt.sckont.noegkk.sozvers.at/">
+  <wsdl:types>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://focus.kontakt.sckont.noegkk.sozvers.at/" attributeFormDefault="unqualified" elementFormDefault="unqualified"
+			   targetNamespace="http://focus.kontakt.sckont.noegkk.sozvers.at/" version="1.0">
+	  <xs:complexType name="kontaktUnterthemenErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence />
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="standardRequest">
+		<xs:sequence>
+		  <xs:element name="kontext" type="tns:RqKontext" />
+		  <xs:element name="quellSystem" type="tns:quellSystem" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="RqKontext">
+		<xs:sequence>
+		  <xs:element name="bearbeiter" type="tns:bearbeiter" />
+		  <xs:element minOccurs="0" name="bearbeitungsGrund" type="xs:string" />
+		  <xs:element name="primaerSystemId" type="xs:string" />
+		  <xs:element name="transaktionsId" type="xs:string" />
+		  <xs:element name="verarbeitungsModus" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="bearbeiter">
+		<xs:sequence>
+		  <xs:element name="bearbeiterId" type="xs:string" />
+		  <xs:element name="berechtigungsSystemId" type="xs:string" />
+		  <xs:element name="meldendeStelle" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="quellSystem">
+		<xs:sequence>
+		  <xs:element name="applikationsId" type="xs:string" />
+		  <xs:element name="systemId" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktUnterthemenErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="unterthemen" nillable="true" type="tns:kontaktUnterthema" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="standardResponse">
+		<xs:sequence>
+		  <xs:element name="kontext" type="tns:RsKontext" />
+		  <xs:element name="returnInfo" type="tns:returnInfo" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktUnterthema">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="bezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="id" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="RsKontext">
+		<xs:sequence>
+		  <xs:element name="transaktionsId" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="returnInfo">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="meldungen" nillable="true" type="tns:meldung" />
+		  <xs:element name="returnCode" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="meldung">
+		<xs:sequence>
+		  <xs:element name="id" type="xs:string" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter" nillable="true" type="tns:parameter" />
+		  <xs:element name="text" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="parameter">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="name" type="xs:string" />
+		  <xs:element name="wert" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="gueltigeOeErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="bereOrgs" nillable="true" type="xs:string" />
+			  <xs:element name="mst" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="gueltigeOeErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="gueltigeOes" nillable="true" type="tns:gueltigeOe" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="gueltigeOe">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="bere_org" type="xs:string" />
+		  <xs:element minOccurs="0" name="bezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="id" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktErstellenRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="abschlussartId" type="xs:long" />
+			  <xs:element minOccurs="0" name="agd" type="xs:string" />
+			  <xs:element minOccurs="0" name="agdFachschluessel" type="xs:string" />
+			  <xs:element minOccurs="0" name="agdName" type="xs:string" />
+			  <xs:element minOccurs="0" name="anmerkung" type="xs:string" />
+			  <xs:element minOccurs="0" name="aufgabengebietId" type="xs:long" />
+			  <xs:element minOccurs="0" name="bundesland" type="xs:string" />
+			  <xs:element minOccurs="0" name="externeGewalt" type="xs:string" />
+			  <xs:element minOccurs="0" name="fachschluessel" type="xs:string" />
+			  <xs:element minOccurs="0" name="fachschluesselArtKurz" type="xs:string" />
+			  <xs:element minOccurs="0" name="fremdsystemId" type="xs:string" />
+			  <xs:element minOccurs="0" name="fremdsystemName" type="xs:string" />
+			  <xs:element minOccurs="0" name="gemeinde" type="xs:string" />
+			  <xs:element minOccurs="0" name="gemeindeCode" type="xs:string" />
+			  <xs:element minOccurs="0" name="kontaktartId" type="xs:long" />
+			  <xs:element name="mitarbeiterName" type="xs:string" />
+			  <xs:element minOccurs="0" name="mitarbeiterOe" type="xs:string" />
+			  <xs:element name="mitarbeiterkennung" type="xs:string" />
+			  <xs:element minOccurs="0" name="nacherfassenGrund" type="xs:long" />
+			  <xs:element minOccurs="0" name="nacherfassenText" type="xs:string" />
+			  <xs:element minOccurs="0" name="name" type="xs:string" />
+			  <xs:element minOccurs="0" name="ort" type="xs:string" />
+			  <xs:element minOccurs="0" name="plz" type="xs:string" />
+			  <xs:element minOccurs="0" name="polBezirk" type="xs:string" />
+			  <xs:element minOccurs="0" name="scIdMa" type="xs:long" />
+			  <xs:element minOccurs="0" name="staatIsoa3" type="xs:string" />
+			  <xs:element minOccurs="0" name="subAufgabengebietId" type="xs:long" />
+			  <xs:element minOccurs="0" name="themaId" type="xs:long" />
+			  <xs:element minOccurs="0" name="unterthemaId" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktErstellenResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="id" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="offeneKontakteErmittelnForFSRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="fs" type="xs:string" />
+			  <xs:element name="fsart" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="offeneKontakteErmittelnForFSResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontakte" nillable="true" type="tns:kontaktkontaktKurz" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktKurz">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="abschlussart" type="xs:string" />
+		  <xs:element minOccurs="0" name="aufgabengebiet" type="xs:string" />
+		  <xs:element minOccurs="0" name="endeTs" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="id" type="xs:long" />
+		  <xs:element minOccurs="0" name="kontaktart" type="xs:string" />
+		  <xs:element minOccurs="0" name="mitarbeiterOe" type="xs:string" />
+		  <xs:element minOccurs="0" name="scBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="startTs" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="thema" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktLesenRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktLesenResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="kontaktkontakt" type="tns:kontaktkontakt" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontakt">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="abschlussartId" type="xs:long" />
+		  <xs:element minOccurs="0" name="agd" type="xs:string" />
+		  <xs:element minOccurs="0" name="agdFachschluessel" type="xs:string" />
+		  <xs:element minOccurs="0" name="agdName" type="xs:string" />
+		  <xs:element minOccurs="0" name="anmerkung" type="xs:string" />
+		  <xs:element minOccurs="0" name="aufgabengebietId" type="xs:long" />
+		  <xs:element minOccurs="0" name="bundesland" type="xs:string" />
+		  <xs:element minOccurs="0" name="endeTs" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="erstellt" type="xs:string" />
+		  <xs:element minOccurs="0" name="erstelltName" type="xs:string" />
+		  <xs:element minOccurs="0" name="externeGewalt" type="xs:string" />
+		  <xs:element minOccurs="0" name="fachschluessel" type="xs:string" />
+		  <xs:element minOccurs="0" name="fachschluesselArtKurz" type="xs:string" />
+		  <xs:element minOccurs="0" name="fremdsystemId" type="xs:string" />
+		  <xs:element minOccurs="0" name="fremdsystemName" type="xs:string" />
+		  <xs:element minOccurs="0" name="gemeinde" type="xs:string" />
+		  <xs:element minOccurs="0" name="gemeindeCode" type="xs:string" />
+		  <xs:element name="kontaktId" type="xs:long" />
+		  <xs:element minOccurs="0" name="kontaktartId" type="xs:long" />
+		  <xs:element minOccurs="0" name="letztAend" type="xs:string" />
+		  <xs:element minOccurs="0" name="letztAendName" type="xs:string" />
+		  <xs:element name="mitarbeiterName" type="xs:string" />
+		  <xs:element minOccurs="0" name="mitarbeiterOe" type="xs:string" />
+		  <xs:element minOccurs="0" name="nacherfassenGrund" type="xs:long" />
+		  <xs:element minOccurs="0" name="nacherfassenText" type="xs:string" />
+		  <xs:element minOccurs="0" name="name" type="xs:string" />
+		  <xs:element minOccurs="0" name="ort" type="xs:string" />
+		  <xs:element minOccurs="0" name="plz" type="xs:string" />
+		  <xs:element minOccurs="0" name="polBezirk" type="xs:string" />
+		  <xs:element minOccurs="0" name="scBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="scIdMa" type="xs:long" />
+		  <xs:element minOccurs="0" name="staatIsoa3" type="xs:string" />
+		  <xs:element name="startTs" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="subAufgabengebietId" type="xs:long" />
+		  <xs:element minOccurs="0" name="themaId" type="xs:long" />
+		  <xs:element minOccurs="0" name="unterthemaId" type="xs:long" />
+		  <xs:element minOccurs="0" name="updatecount" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktLoeschenRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="id" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktLoeschenResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element name="amountDeleted" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggThemaMstMapErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="mstCode" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggThemaMstMapErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktAufggThemaMstMapList" nillable="true" type="tns:kontaktAufggThemaMstMap" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggThemaMstMap">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="anzeigenAls" type="xs:string" />
+		  <xs:element name="aufgabengebietId" type="xs:long" />
+		  <xs:element name="aufggThemaMstMapId" type="xs:long" />
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element name="mstCode" type="xs:long" />
+		  <xs:element name="themaId" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="offeneKontakteErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="ersteller" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="offeneKontakteErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontakte" nillable="true" type="tns:kontaktkontaktKurz" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="fachschluessel" type="xs:string" />
+			  <xs:element name="fachschlusselArtKurz" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktkontakteKurz" nillable="true" type="tns:kontaktkontaktKurz" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggKtMstMapErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="mstCode" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggKtMstMapErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktAufggKtMstMapList" nillable="true" type="tns:kontaktAufggKtMstMap" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggKtMstMap">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="anzeigenAls" type="xs:string" />
+		  <xs:element name="aufgabengebietId" type="xs:long" />
+		  <xs:element name="aufggKtMstMapId" type="xs:long" />
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element name="kontaktartId" type="xs:long" />
+		  <xs:element name="mstCode" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggSubMapErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="aufgabengebietId" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggSubMapErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktAufggSubMaps" nillable="true" type="tns:kontaktAufggSubMap" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggSubMap">
+		<xs:sequence>
+		  <xs:element name="aufgabengebietId" type="xs:long" />
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element name="id" type="xs:long" />
+		  <xs:element name="subAufgabengebietId" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktAendernRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="abschlussartId" type="xs:long" />
+			  <xs:element minOccurs="0" name="agd" type="xs:string" />
+			  <xs:element minOccurs="0" name="agdFachschluessel" type="xs:string" />
+			  <xs:element minOccurs="0" name="agdName" type="xs:string" />
+			  <xs:element minOccurs="0" name="anmerkung" type="xs:string" />
+			  <xs:element minOccurs="0" name="aufgabengebietId" type="xs:long" />
+			  <xs:element minOccurs="0" name="bundesland" type="xs:string" />
+			  <xs:element minOccurs="0" name="externeGewalt" type="xs:string" />
+			  <xs:element minOccurs="0" name="fachschluessel" type="xs:string" />
+			  <xs:element minOccurs="0" name="fachschluesselArtKurz" type="xs:string" />
+			  <xs:element minOccurs="0" name="fremdsystemId" type="xs:string" />
+			  <xs:element minOccurs="0" name="fremdsystemName" type="xs:string" />
+			  <xs:element minOccurs="0" name="gemeinde" type="xs:string" />
+			  <xs:element minOccurs="0" name="gemeindeCode" type="xs:string" />
+			  <xs:element name="kontaktId" type="xs:long" />
+			  <xs:element minOccurs="0" name="kontaktartId" type="xs:long" />
+			  <xs:element minOccurs="0" name="letztAend" type="xs:dateTime" />
+			  <xs:element minOccurs="0" name="letztAendName" type="xs:string" />
+			  <xs:element name="mitarbeiterName" type="xs:string" />
+			  <xs:element minOccurs="0" name="mitarbeiterOe" type="xs:string" />
+			  <xs:element name="mitarbeiterkennung" type="xs:string" />
+			  <xs:element minOccurs="0" name="nacherfassenGrund" type="xs:long" />
+			  <xs:element minOccurs="0" name="nacherfassenText" type="xs:string" />
+			  <xs:element minOccurs="0" name="name" type="xs:string" />
+			  <xs:element minOccurs="0" name="ort" type="xs:string" />
+			  <xs:element minOccurs="0" name="plz" type="xs:string" />
+			  <xs:element minOccurs="0" name="polBezirk" type="xs:string" />
+			  <xs:element minOccurs="0" name="scIdMa" type="xs:long" />
+			  <xs:element minOccurs="0" name="staatIsoa3" type="xs:string" />
+			  <xs:element minOccurs="0" name="themaId" type="xs:long" />
+			  <xs:element minOccurs="0" name="unterthemaId" type="xs:long" />
+			  <xs:element name="updatecount" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktAendernResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="id" type="xs:long" />
+			  <xs:element name="updatecount" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggAaMstMapErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="mstCode" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggAaMstMapErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktAufggAaMstMapList" nillable="true" type="tns:kontaktAufggAaMstMap" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktAufggAaMstMap">
+		<xs:sequence>
+		  <xs:element name="abschlussartId" type="xs:long" />
+		  <xs:element minOccurs="0" name="anzeigenAls" type="xs:string" />
+		  <xs:element name="aufgabengebietId" type="xs:long" />
+		  <xs:element name="aufggAaMstMapId" type="xs:long" />
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element name="mstCode" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktthemaErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence />
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktthemaErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktthemen" nillable="true" type="tns:kontaktthema" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktthema">
+		<xs:sequence>
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element name="themaBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="themaHilfetext" type="xs:string" />
+		  <xs:element name="themaId" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktabschlussartErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence />
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktabschlussartErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktabschlussarten" nillable="true" type="tns:kontaktabschlussart" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktabschlussart">
+		<xs:sequence>
+		  <xs:element name="abschlussartBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="abschlussartHilfetext" type="xs:string" />
+		  <xs:element name="abschlussartId" type="xs:long" />
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktHistorieErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element name="mitarbeiterkennung" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktHistorieErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktHistorie" nillable="true" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktartErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence />
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktartErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktkontaktarten" nillable="true" type="tns:kontaktkontaktart" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktkontaktart">
+		<xs:sequence>
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element name="kontaktartBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="kontaktartHilfetext" type="xs:string" />
+		  <xs:element name="kontaktartId" type="xs:long" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktaufgabengebietErmittelnRequest">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardRequest">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="mstCode" type="xs:long" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktaufgabengebietErmittelnResponse">
+		<xs:complexContent>
+		  <xs:extension base="tns:standardResponse">
+			<xs:sequence>
+			  <xs:element maxOccurs="unbounded" minOccurs="0" name="kontaktaufgabengebiete" nillable="true" type="tns:kontaktaufgabengebiet" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="kontaktaufgabengebiet">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="anzeigeAls" type="xs:string" />
+		  <xs:element name="aufgabengebietBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="aufgabengebietHilfetext" type="xs:string" />
+		  <xs:element name="aufgabengebietId" type="xs:long" />
+		  <xs:element name="gueltigBis" type="xs:dateTime" />
+		  <xs:element name="gueltigVon" type="xs:dateTime" />
+		  <xs:element minOccurs="0" name="subAufgabengebietJN" type="xs:unsignedShort" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:element name="kontaktUnterthemenErmitteln" nillable="true" type="tns:kontaktUnterthemenErmittelnRequest" />
+	  <xs:element name="kontaktUnterthemenErmittelnResponse" nillable="true" type="tns:kontaktUnterthemenErmittelnResponse" />
+	  <xs:element name="leseGueltigeOes" nillable="true" type="tns:gueltigeOeErmittelnRequest" />
+	  <xs:element name="leseGueltigeOesResponse" nillable="true" type="tns:gueltigeOeErmittelnResponse" />
+	  <xs:element name="kontaktkontaktErstellen" nillable="true" type="tns:kontaktkontaktErstellenRequest" />
+	  <xs:element name="kontaktkontaktErstellenResponse" nillable="true" type="tns:kontaktkontaktErstellenResponse" />
+	  <xs:element name="offeneKontakteErmittelnForFS" nillable="true" type="tns:offeneKontakteErmittelnForFSRequest" />
+	  <xs:element name="offeneKontakteErmittelnForFSResponse" nillable="true" type="tns:offeneKontakteErmittelnForFSResponse" />
+	  <xs:element name="kontaktkontaktLesen" nillable="true" type="tns:kontaktkontaktLesenRequest" />
+	  <xs:element name="kontaktkontaktLesenResponse" nillable="true" type="tns:kontaktkontaktLesenResponse" />
+	  <xs:element name="kontaktkontaktLoeschen" nillable="true" type="tns:kontaktkontaktLoeschenRequest" />
+	  <xs:element name="kontaktkontaktLoeschenResponse" nillable="true" type="tns:kontaktkontaktLoeschenResponse" />
+	  <xs:element name="kontaktAufggThemaMstMapErmitteln" nillable="true" type="tns:kontaktAufggThemaMstMapErmittelnRequest" />
+	  <xs:element name="kontaktAufggThemaMstMapErmittelnResponse" nillable="true" type="tns:kontaktAufggThemaMstMapErmittelnResponse" />
+	  <xs:element name="offeneKontakteErmitteln" nillable="true" type="tns:offeneKontakteErmittelnRequest" />
+	  <xs:element name="offeneKontakteErmittelnResponse" nillable="true" type="tns:offeneKontakteErmittelnResponse" />
+	  <xs:element name="kontaktkontakteErmitteln" nillable="true" type="tns:kontaktkontaktErmittelnRequest" />
+	  <xs:element name="kontaktkontakteErmittelnResponse" nillable="true" type="tns:kontaktkontaktErmittelnResponse" />
+	  <xs:element name="kontaktAufggKtMstMapErmitteln" nillable="true" type="tns:kontaktAufggKtMstMapErmittelnRequest" />
+	  <xs:element name="kontaktAufggKtMstMapErmittelnResponse" nillable="true" type="tns:kontaktAufggKtMstMapErmittelnResponse" />
+	  <xs:element name="kontaktAufggSubMapErmitteln" nillable="true" type="tns:kontaktAufggSubMapErmittelnRequest" />
+	  <xs:element name="kontaktAufggSubMapErmittelnResponse" nillable="true" type="tns:kontaktAufggSubMapErmittelnResponse" />
+	  <xs:element name="kontaktkontaktAendern" nillable="true" type="tns:kontaktkontaktAendernRequest" />
+	  <xs:element name="kontaktkontaktAendernResponse" nillable="true" type="tns:kontaktkontaktAendernResponse" />
+	  <xs:element name="kontaktAufggAaMstMapErmitteln" nillable="true" type="tns:kontaktAufggAaMstMapErmittelnRequest" />
+	  <xs:element name="kontaktAufggAaMstMapErmittelnResponse" nillable="true" type="tns:kontaktAufggAaMstMapErmittelnResponse" />
+	  <xs:element name="kontaktthemaErmitteln" nillable="true" type="tns:kontaktthemaErmittelnRequest" />
+	  <xs:element name="kontaktthemaErmittelnResponse" nillable="true" type="tns:kontaktthemaErmittelnResponse" />
+	  <xs:element name="kontaktabschlussartErmitteln" nillable="true" type="tns:kontaktabschlussartErmittelnRequest" />
+	  <xs:element name="kontaktabschlussartErmittelnResponse" nillable="true" type="tns:kontaktabschlussartErmittelnResponse" />
+	  <xs:element name="kontaktHistorieErmitteln" nillable="true" type="tns:kontaktHistorieErmittelnRequest" />
+	  <xs:element name="kontaktHistorieErmittelnResponse" nillable="true" type="tns:kontaktHistorieErmittelnResponse" />
+	  <xs:element name="kontaktkontaktartErmitteln" nillable="true" type="tns:kontaktkontaktartErmittelnRequest" />
+	  <xs:element name="kontaktkontaktartErmittelnResponse" nillable="true" type="tns:kontaktkontaktartErmittelnResponse" />
+	  <xs:element name="kontaktaufgabengebietErmitteln" nillable="true" type="tns:kontaktaufgabengebietErmittelnRequest" />
+	  <xs:element name="kontaktaufgabengebietErmittelnResponse" nillable="true" type="tns:kontaktaufgabengebietErmittelnResponse" />
+	</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="kontaktHistorieErmittelnResponse">
+	<wsdl:part element="tns:kontaktHistorieErmittelnResponse" name="kontaktHistorieErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktErstellenResponse">
+	<wsdl:part element="tns:kontaktkontaktErstellenResponse" name="kontaktkontaktErstellenResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggSubMapErmittelnResponse">
+	<wsdl:part element="tns:kontaktAufggSubMapErmittelnResponse" name="kontaktAufggSubMapErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktUnterthemenErmitteln">
+	<wsdl:part element="tns:kontaktUnterthemenErmitteln" name="kontaktUnterthemenErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="leseGueltigeOes">
+	<wsdl:part element="tns:leseGueltigeOes" name="leseGueltigeOes"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="offeneKontakteErmittelnForFS">
+	<wsdl:part element="tns:offeneKontakteErmittelnForFS" name="offeneKontakteErmittelnForFS"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggThemaMstMapErmitteln">
+	<wsdl:part element="tns:kontaktAufggThemaMstMapErmitteln" name="kontaktAufggThemaMstMapErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="offeneKontakteErmitteln">
+	<wsdl:part element="tns:offeneKontakteErmitteln" name="offeneKontakteErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontakteErmitteln">
+	<wsdl:part element="tns:kontaktkontakteErmitteln" name="kontaktkontakteErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="offeneKontakteErmittelnForFSResponse">
+	<wsdl:part element="tns:offeneKontakteErmittelnForFSResponse" name="offeneKontakteErmittelnForFSResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktAendern">
+	<wsdl:part element="tns:kontaktkontaktAendern" name="kontaktkontaktAendern"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggAaMstMapErmitteln">
+	<wsdl:part element="tns:kontaktAufggAaMstMapErmitteln" name="kontaktAufggAaMstMapErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggAaMstMapErmittelnResponse">
+	<wsdl:part element="tns:kontaktAufggAaMstMapErmittelnResponse" name="kontaktAufggAaMstMapErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktartErmitteln">
+	<wsdl:part element="tns:kontaktkontaktartErmitteln" name="kontaktkontaktartErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktabschlussartErmittelnResponse">
+	<wsdl:part element="tns:kontaktabschlussartErmittelnResponse" name="kontaktabschlussartErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktaufgabengebietErmitteln">
+	<wsdl:part element="tns:kontaktaufgabengebietErmitteln" name="kontaktaufgabengebietErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktErstellen">
+	<wsdl:part element="tns:kontaktkontaktErstellen" name="kontaktkontaktErstellen"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktLoeschenResponse">
+	<wsdl:part element="tns:kontaktkontaktLoeschenResponse" name="kontaktkontaktLoeschenResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktLesen">
+	<wsdl:part element="tns:kontaktkontaktLesen" name="kontaktkontaktLesen"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktLoeschen">
+	<wsdl:part element="tns:kontaktkontaktLoeschen" name="kontaktkontaktLoeschen"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktaufgabengebietErmittelnResponse">
+	<wsdl:part element="tns:kontaktaufgabengebietErmittelnResponse" name="kontaktaufgabengebietErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontakteErmittelnResponse">
+	<wsdl:part element="tns:kontaktkontakteErmittelnResponse" name="kontaktkontakteErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggKtMstMapErmittelnResponse">
+	<wsdl:part element="tns:kontaktAufggKtMstMapErmittelnResponse" name="kontaktAufggKtMstMapErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggKtMstMapErmitteln">
+	<wsdl:part element="tns:kontaktAufggKtMstMapErmitteln" name="kontaktAufggKtMstMapErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggSubMapErmitteln">
+	<wsdl:part element="tns:kontaktAufggSubMapErmitteln" name="kontaktAufggSubMapErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktLesenResponse">
+	<wsdl:part element="tns:kontaktkontaktLesenResponse" name="kontaktkontaktLesenResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktartErmittelnResponse">
+	<wsdl:part element="tns:kontaktkontaktartErmittelnResponse" name="kontaktkontaktartErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="leseGueltigeOesResponse">
+	<wsdl:part element="tns:leseGueltigeOesResponse" name="leseGueltigeOesResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktthemaErmittelnResponse">
+	<wsdl:part element="tns:kontaktthemaErmittelnResponse" name="kontaktthemaErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktthemaErmitteln">
+	<wsdl:part element="tns:kontaktthemaErmitteln" name="kontaktthemaErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktAufggThemaMstMapErmittelnResponse">
+	<wsdl:part element="tns:kontaktAufggThemaMstMapErmittelnResponse" name="kontaktAufggThemaMstMapErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktUnterthemenErmittelnResponse">
+	<wsdl:part element="tns:kontaktUnterthemenErmittelnResponse" name="kontaktUnterthemenErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktabschlussartErmitteln">
+	<wsdl:part element="tns:kontaktabschlussartErmitteln" name="kontaktabschlussartErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="offeneKontakteErmittelnResponse">
+	<wsdl:part element="tns:offeneKontakteErmittelnResponse" name="offeneKontakteErmittelnResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktkontaktAendernResponse">
+	<wsdl:part element="tns:kontaktkontaktAendernResponse" name="kontaktkontaktAendernResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="kontaktHistorieErmitteln">
+	<wsdl:part element="tns:kontaktHistorieErmitteln" name="kontaktHistorieErmitteln"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="SCKONTKontaktService_1_0">
+	<wsdl:operation name="kontaktUnterthemenErmitteln">
+	  <wsdl:input message="tns:kontaktUnterthemenErmitteln" name="kontaktUnterthemenErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktUnterthemenErmittelnResponse" name="kontaktUnterthemenErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="leseGueltigeOes">
+	  <wsdl:input message="tns:leseGueltigeOes" name="leseGueltigeOes"></wsdl:input>
+	  <wsdl:output message="tns:leseGueltigeOesResponse" name="leseGueltigeOesResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktErstellen">
+	  <wsdl:input message="tns:kontaktkontaktErstellen" name="kontaktkontaktErstellen"></wsdl:input>
+	  <wsdl:output message="tns:kontaktkontaktErstellenResponse" name="kontaktkontaktErstellenResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="offeneKontakteErmittelnForFS">
+	  <wsdl:input message="tns:offeneKontakteErmittelnForFS" name="offeneKontakteErmittelnForFS"></wsdl:input>
+	  <wsdl:output message="tns:offeneKontakteErmittelnForFSResponse" name="offeneKontakteErmittelnForFSResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktLesen">
+	  <wsdl:input message="tns:kontaktkontaktLesen" name="kontaktkontaktLesen"></wsdl:input>
+	  <wsdl:output message="tns:kontaktkontaktLesenResponse" name="kontaktkontaktLesenResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktLoeschen">
+	  <wsdl:input message="tns:kontaktkontaktLoeschen" name="kontaktkontaktLoeschen"></wsdl:input>
+	  <wsdl:output message="tns:kontaktkontaktLoeschenResponse" name="kontaktkontaktLoeschenResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggThemaMstMapErmitteln">
+	  <wsdl:input message="tns:kontaktAufggThemaMstMapErmitteln" name="kontaktAufggThemaMstMapErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktAufggThemaMstMapErmittelnResponse" name="kontaktAufggThemaMstMapErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="offeneKontakteErmitteln">
+	  <wsdl:input message="tns:offeneKontakteErmitteln" name="offeneKontakteErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:offeneKontakteErmittelnResponse" name="offeneKontakteErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontakteErmitteln">
+	  <wsdl:input message="tns:kontaktkontakteErmitteln" name="kontaktkontakteErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktkontakteErmittelnResponse" name="kontaktkontakteErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggKtMstMapErmitteln">
+	  <wsdl:input message="tns:kontaktAufggKtMstMapErmitteln" name="kontaktAufggKtMstMapErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktAufggKtMstMapErmittelnResponse" name="kontaktAufggKtMstMapErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggSubMapErmitteln">
+	  <wsdl:input message="tns:kontaktAufggSubMapErmitteln" name="kontaktAufggSubMapErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktAufggSubMapErmittelnResponse" name="kontaktAufggSubMapErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktAendern">
+	  <wsdl:input message="tns:kontaktkontaktAendern" name="kontaktkontaktAendern"></wsdl:input>
+	  <wsdl:output message="tns:kontaktkontaktAendernResponse" name="kontaktkontaktAendernResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggAaMstMapErmitteln">
+	  <wsdl:input message="tns:kontaktAufggAaMstMapErmitteln" name="kontaktAufggAaMstMapErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktAufggAaMstMapErmittelnResponse" name="kontaktAufggAaMstMapErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktthemaErmitteln">
+	  <wsdl:input message="tns:kontaktthemaErmitteln" name="kontaktthemaErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktthemaErmittelnResponse" name="kontaktthemaErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktabschlussartErmitteln">
+	  <wsdl:input message="tns:kontaktabschlussartErmitteln" name="kontaktabschlussartErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktabschlussartErmittelnResponse" name="kontaktabschlussartErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktHistorieErmitteln">
+	  <wsdl:input message="tns:kontaktHistorieErmitteln" name="kontaktHistorieErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktHistorieErmittelnResponse" name="kontaktHistorieErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktartErmitteln">
+	  <wsdl:input message="tns:kontaktkontaktartErmitteln" name="kontaktkontaktartErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktkontaktartErmittelnResponse" name="kontaktkontaktartErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktaufgabengebietErmitteln">
+	  <wsdl:input message="tns:kontaktaufgabengebietErmitteln" name="kontaktaufgabengebietErmitteln"></wsdl:input>
+	  <wsdl:output message="tns:kontaktaufgabengebietErmittelnResponse" name="kontaktaufgabengebietErmittelnResponse"></wsdl:output>
+	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SCKONTKontaktService_1_0ServiceSoapBinding" type="tns:SCKONTKontaktService_1_0">
+	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:operation name="kontaktUnterthemenErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktUnterthemenErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktUnterthemenErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="leseGueltigeOes">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="leseGueltigeOes">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="leseGueltigeOesResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktErstellen">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktkontaktErstellen">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktkontaktErstellenResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="offeneKontakteErmittelnForFS">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="offeneKontakteErmittelnForFS">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="offeneKontakteErmittelnForFSResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktLesen">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktkontaktLesen">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktkontaktLesenResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktLoeschen">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktkontaktLoeschen">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktkontaktLoeschenResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggThemaMstMapErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktAufggThemaMstMapErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktAufggThemaMstMapErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="offeneKontakteErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="offeneKontakteErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="offeneKontakteErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontakteErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktkontakteErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktkontakteErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggKtMstMapErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktAufggKtMstMapErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktAufggKtMstMapErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggSubMapErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktAufggSubMapErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktAufggSubMapErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktAendern">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktkontaktAendern">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktkontaktAendernResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktAufggAaMstMapErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktAufggAaMstMapErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktAufggAaMstMapErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktthemaErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktthemaErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktthemaErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktabschlussartErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktabschlussartErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktabschlussartErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktHistorieErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktHistorieErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktHistorieErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktkontaktartErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktkontaktartErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktkontaktartErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+	<wsdl:operation name="kontaktaufgabengebietErmitteln">
+	  <soap:operation soapAction="" style="document" />
+	  <wsdl:input name="kontaktaufgabengebietErmitteln">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="kontaktaufgabengebietErmittelnResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SCKONTKontaktService_1_0Service">
+	<wsdl:port binding="tns:SCKONTKontaktService_1_0ServiceSoapBinding" name="SCKONTKontaktService_1_0Port">
+	  <soap:address location="https://entwintranet-backend.sozvers.at/servicecenter-extern/SCKONTKontaktService_1_0" />
+	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

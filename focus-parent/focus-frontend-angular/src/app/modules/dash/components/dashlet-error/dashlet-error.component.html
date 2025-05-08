@@ -1,0 +1,24 @@
+@if (error) {
+    <div class="dashlet-meldung">
+        <div class="meldung-container">
+            <div
+                class="data-header info"
+                [ngClass]="{ 'cursor-pointer': error.hasMeldungsText() }"
+                (click)="error.toggleOpenIfHasMeldungsText()"
+            >
+                <mat-icon class="error-icon">error</mat-icon>
+                {{ error.fehlerkategorie }}
+                @if (error.hasMeldungsText()) {
+                    <mat-icon class="dropdown-icon">
+                        {{ error.open ? "arrow_drop_up" : "arrow_drop_down" }}
+                    </mat-icon>
+                }
+            </div>
+            @if (error.open) {
+                <div class="data-text info">
+                    {{ error.meldungstext }}
+                </div>
+            }
+        </div>
+    </div>
+}

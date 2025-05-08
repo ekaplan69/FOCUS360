@@ -1,0 +1,89 @@
+@import "../../../../styles/base/variables";
+
+// Verhindert umgebene Komponenten Positionierung zu verändern
+:host {
+    display: grid;
+    width: 100%;
+}
+
+:host ::ng-deep .focus360-input-prefix-icon,
+:host ::ng-deep .focus360-input-suffix-icon {
+    position: relative;
+    top: 8px;
+}
+
+// Abstand der Eingabe zum Label darüber und zur Linie darunter
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host
+::ng-deep
+f360-input
+.mat-form-field-appearance-legacy
+.mat-form-field-infix {
+    padding: 4px 0 6px 0;
+}
+
+// Höhe des Feldes bzw. Position der Eingabe/Linie
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host
+::ng-deep
+f360-input
+.mat-form-field-appearance-legacy
+.mat-form-field-wrapper {
+    margin-bottom: 3px;
+    padding-bottom: 0;
+}
+
+// Position der Linie
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host
+::ng-deep
+f360-input
+.mat-form-field-appearance-legacy
+.mat-form-field-underline {
+    bottom: 0;
+}
+
+// Die Linie soll rot werden, wenn man etwas nicht valides eingibt bzw. die Form submitted und das Feld nicht valide ist.
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host
+::ng-deep
+f360-input.ng-invalid.ng-dirty
+.mat-form-field-appearance-legacy
+.mat-form-field-ripple,
+:host
+::ng-deep
+f360-input.ng-invalid.ng-dirty
+.mat-form-field-appearance-legacy
+.mat-form-field-underline,
+:host
+::ng-deep
+f360-input
+.mat-form-field-appearance-legacy.invalid
+.mat-form-field-ripple,
+:host
+::ng-deep
+f360-input
+.mat-form-field-appearance-legacy.invalid
+.mat-form-field-underline {
+    background-color: $error-underline-color;
+}
+
+// Label rot färben, wenn man etwas nicht valides eingibt bzw. die Form submitted und das Feld nicht valide ist.
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host ::ng-deep f360-input .mat-mdc-form-field.invalid .mat-form-field-label {
+    color: $error-font-color;
+}
+
+// Label soll nicht abgeschnitten sein, wenn es hochgeklappt ist
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
+:host ::ng-deep f360-input .mat-form-field-label-wrapper {
+    line-height: 22px;
+}
+
+// Blauen Hintergrund bei Text entfernen
+//focus360-input input:-webkit-autofill,
+//focus360-input input:-webkit-autofill:hover,
+//focus360-input input:-webkit-autofill:focus,
+//focus360-input input:-webkit-autofill:active {
+//    transition: background-color 5000s ease-in-out 0s;
+//}

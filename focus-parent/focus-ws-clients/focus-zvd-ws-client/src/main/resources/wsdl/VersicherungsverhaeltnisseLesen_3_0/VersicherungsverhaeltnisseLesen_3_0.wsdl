@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="VersicherungsverhaeltnisseLesen" targetNamespace="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3">
+  <wsdl:types>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://types.svstd11.services.itsv.at/" elementFormDefault="qualified" targetNamespace="http://types.svstd11.services.itsv.at/"
+			   version="1.0">
+	  <xs:complexType abstract="true" name="StandardRequest">
+		<xs:sequence>
+		  <xs:element name="Header" type="tns:StandardRequestHeader" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="StandardRequestHeader">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="ZielSystem" type="tns:ZielSystem" />
+		  <xs:element name="QuellSystem" type="tns:QuellSystem" />
+		  <xs:element name="Kontext" type="tns:RequestKontext" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="ZielSystem">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="SystemModus" type="xs:string" />
+		  <xs:element minOccurs="0" name="SystemId" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="QuellSystem">
+		<xs:sequence>
+		  <xs:element name="ApplikationsId" type="xs:string" />
+		  <xs:element name="SystemId" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="RequestKontext">
+		<xs:sequence>
+		  <xs:element name="TransaktionsId" type="xs:string" />
+		  <xs:element name="Verarbeitungsmodus" type="tns:Verarbeitungsmodus" />
+		  <xs:element name="PrimaerSystemId" type="xs:string" />
+		  <xs:element name="BearbeitungsGrund" type="xs:string" />
+		  <xs:element name="Bearbeiter" type="tns:Bearbeiter" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Bearbeiter">
+		<xs:sequence>
+		  <xs:element name="BerechtigungsSystemId" type="xs:string" />
+		  <xs:element name="BearbeiterId" type="xs:string" />
+		  <xs:element name="MeldendeStelle" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType abstract="true" name="StandardResponse">
+		<xs:sequence>
+		  <xs:element name="Kontext" type="tns:ResponseKontext" />
+		  <xs:element name="ReturnInfo" type="tns:ReturnInfo" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="ResponseKontext">
+		<xs:sequence>
+		  <xs:element name="TransaktionsId" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="ReturnInfo">
+		<xs:sequence>
+		  <xs:element name="ReturnCode" type="xs:int" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="Meldungen" type="tns:Meldung" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Meldung">
+		<xs:sequence>
+		  <xs:element name="Id" type="xs:string" />
+		  <xs:element name="Kategorie" type="xs:string" />
+		  <xs:element name="Text" type="xs:string" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="Parameter" type="tns:Parameter" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="Parameter">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="Name" type="xs:string" />
+		  <xs:element name="Wert" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:simpleType name="Verarbeitungsmodus">
+		<xs:restriction base="xs:string">
+		  <xs:enumeration value="O" />
+		  <xs:enumeration value="B" />
+		</xs:restriction>
+	  </xs:simpleType>
+	  <xs:simpleType name="Kategorie">
+		<xs:restriction base="xs:string">
+		  <xs:enumeration value="H" />
+		  <xs:enumeration value="W" />
+		  <xs:enumeration value="F" />
+		  <xs:enumeration value="S" />
+		</xs:restriction>
+	  </xs:simpleType>
+	</xs:schema>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3/types" xmlns:ns1="http://types.svstd11.services.itsv.at/"
+			   elementFormDefault="qualified" targetNamespace="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3/types" version="1.0">
+	  <xs:import namespace="http://types.svstd11.services.itsv.at/" />
+	  <xs:complexType name="VersicherungsverhaeltnisseLesenRequestWrapper">
+		<xs:sequence>
+		  <xs:element name="Request" type="tns:VersicherungsverhaeltnisseLesenRequest" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="VersicherungsverhaeltnisseLesenRequest">
+		<xs:complexContent>
+		  <xs:extension base="ns1:StandardRequest">
+			<xs:sequence>
+			  <xs:element name="versicherungsnummer" type="xs:string" />
+			  <xs:element name="vonDatum" type="xs:date" />
+			  <xs:element minOccurs="0" name="bisDatum" type="xs:date" />
+			  <xs:element minOccurs="0" name="hvbBeitragskontonummer" type="xs:string" />
+			  <xs:element minOccurs="0" name="meldendeStelle" type="xs:string" />
+			  <xs:element minOccurs="0" name="kontonummerKennzeichen" type="xs:string" />
+			  <xs:element name="bgErmitteln" type="xs:boolean" />
+			  <xs:element minOccurs="0" name="beitragsgrundlageFilter" type="tns:beitragsgrundlageFilter" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="beitragsgrundlageFilter">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="bgZeitendeckung" type="xs:string" />
+		  <xs:element minOccurs="0" name="bgExOffo" type="xs:string" />
+		  <xs:element minOccurs="0" name="bgArt" type="xs:string" />
+		  <xs:element minOccurs="0" name="bgUeberschreitungHBG" type="xs:string" />
+		  <xs:element minOccurs="0" name="bgInteressensvertretung" type="xs:string" />
+		  <xs:element minOccurs="0" name="bgPruefung" type="xs:boolean" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="VersicherungsverhaeltnisseLesenResponseWrapper">
+		<xs:sequence>
+		  <xs:element name="Response" type="tns:VersicherungsverhaeltnisseLesenResponse" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="VersicherungsverhaeltnisseLesenResponse">
+		<xs:complexContent>
+		  <xs:extension base="ns1:StandardResponse">
+			<xs:sequence>
+			  <xs:element name="versicherungsverhaeltnisse" type="tns:versicherungsverhaeltnisse" />
+			  <xs:element minOccurs="0" name="fehlerliste" type="tns:fehlerliste" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="versicherungsverhaeltnisse">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="versicherungsverhaeltnis" nillable="true" type="tns:versicherungsverhaeltnis" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="versicherungsverhaeltnis">
+		<xs:sequence>
+		  <xs:element name="hvbBeitragskontonummer" type="xs:string" />
+		  <xs:element name="vvhKey" type="tns:vvhKey" />
+		  <xs:element name="hvbBeitragskontonummerKennzeichen" type="xs:string" />
+		  <xs:element name="laufnummer" type="xs:int" />
+		  <xs:element name="meldendeStelle" type="xs:string" />
+		  <xs:element name="aenderungsdatum" type="xs:date" />
+		  <xs:element name="bearbeiter" type="xs:string" />
+		  <xs:element name="updateCount" type="xs:int" />
+		  <xs:element name="versicherungszeiten" type="tns:versicherungszeiten" />
+		  <xs:element name="beitragsgrundlagenJahr" type="tns:beitragsgrundlagenJahr" />
+		  <xs:element name="beitragsgrundlagenMonat" type="tns:beitragsgrundlagenMonat" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="vvhKey">
+		<xs:sequence>
+		  <xs:element name="vvhId" type="xs:long" />
+		  <xs:element name="pruefziffer" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="versicherungszeiten">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="versicherungszeit" nillable="true" type="tns:versicherungszeit" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="versicherungszeit">
+		<xs:sequence>
+		  <xs:element name="vonDatum" type="xs:date" />
+		  <xs:element name="bisDatum" type="xs:date" />
+		  <xs:element name="vvhKey" type="tns:vvhKey" />
+		  <xs:element name="qualifikation" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="beitragsgrundlagenJahr">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="beitragsgrundlageJahr" nillable="true" type="tns:beitragsgrundlageJahr" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="beitragsgrundlageJahr">
+		<xs:complexContent>
+		  <xs:extension base="tns:beitragsgrundlage">
+			<xs:sequence>
+			  <xs:element minOccurs="0" name="sonderzahlungWert" type="xs:decimal" />
+			  <xs:element name="zeitenVeraenderungKennzeichen" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="beitragsgrundlage">
+		<xs:sequence>
+		  <xs:element name="bgWert" type="xs:decimal" />
+		  <xs:element name="vonDatum" type="xs:date" />
+		  <xs:element name="bisDatum" type="xs:date" />
+		  <xs:element minOccurs="0" name="durchschnittlicheWochenarbeitszeit" type="xs:decimal" />
+		  <xs:element name="vvhKey" type="tns:vvhKey" />
+		  <xs:element name="waehrungKennzeichen" type="xs:string" />
+		  <xs:element name="steuerfeld" type="xs:string" />
+		  <xs:element minOccurs="0" name="teilentgeltTage" type="xs:int" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="beitragsgrundlageMonat">
+		<xs:complexContent>
+		  <xs:extension base="tns:beitragsgrundlage">
+			<xs:sequence>
+			  <xs:element name="bgArt" type="xs:string" />
+			  <xs:element name="bgInteressensvertretung" type="xs:string" />
+			  <xs:element name="bgUeberschreitungHBG" type="xs:string" />
+			  <xs:element name="bgZeitendeckung" type="xs:string" />
+			  <xs:element name="bgExOffo" type="xs:string" />
+			  <xs:element name="bgDubios" type="xs:string" />
+			</xs:sequence>
+		  </xs:extension>
+		</xs:complexContent>
+	  </xs:complexType>
+	  <xs:complexType name="beitragsgrundlagenMonat">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="beitragsgrundlageMonat" nillable="true" type="tns:beitragsgrundlageMonat" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="fehlerliste">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="fehler" nillable="true" type="tns:fehler" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="fehler">
+		<xs:sequence>
+		  <xs:element name="vvhKeys" type="tns:vvhKeys" />
+		  <xs:element name="vonDatum" type="xs:date" />
+		  <xs:element name="bisDatum" type="xs:date" />
+		  <xs:element name="fehlercode" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="vvhKeys">
+		<xs:sequence>
+		  <xs:element maxOccurs="unbounded" name="vvhKey" type="tns:vvhKey" />
+		</xs:sequence>
+	  </xs:complexType>
+	</xs:schema>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3/types"
+			   targetNamespace="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3" version="1.0">
+	  <xs:import namespace="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3/types" />
+	  <xs:element name="VersicherungsverhaeltnisseLesen" type="ns1:VersicherungsverhaeltnisseLesenRequestWrapper" />
+	  <xs:element name="VersicherungsverhaeltnisseLesenResponse" type="ns1:VersicherungsverhaeltnisseLesenResponseWrapper" />
+	</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="VersicherungsverhaeltnisseLesenResponse">
+	<wsdl:part element="tns:VersicherungsverhaeltnisseLesenResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="VersicherungsverhaeltnisseLesen">
+	<wsdl:part element="tns:VersicherungsverhaeltnisseLesen" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="VersicherungsverhaeltnisseLesenService">
+	<wsdl:operation name="VersicherungsverhaeltnisseLesen">
+	  <wsdl:input message="tns:VersicherungsverhaeltnisseLesen" name="VersicherungsverhaeltnisseLesen"></wsdl:input>
+	  <wsdl:output message="tns:VersicherungsverhaeltnisseLesenResponse" name="VersicherungsverhaeltnisseLesenResponse"></wsdl:output>
+	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VersicherungsverhaeltnisseLesenSoapBinding" type="tns:VersicherungsverhaeltnisseLesenService">
+	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:operation name="VersicherungsverhaeltnisseLesen">
+	  <soap:operation soapAction="http://sozvers.at/zvd/ws/VersicherungsverhaeltnisseLesenService/v3/VersicherungsverhaeltnisseLesen" style="document" />
+	  <wsdl:input name="VersicherungsverhaeltnisseLesen">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="VersicherungsverhaeltnisseLesenResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VersicherungsverhaeltnisseLesen">
+	<wsdl:port binding="tns:VersicherungsverhaeltnisseLesenSoapBinding" name="VersicherungsverhaeltnisseLesenPort">
+	  <soap:address location="https://zvdwstt.sozvers.at/vvhle/3_0/VersicherungsverhaeltnisseLesen" />
+	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,2 @@
+-- This file is not needed in FOCUS360 and therefore empty
+-- Do not delete it, as it serves to follow the alwe-cc requirements of the DB-Module

@@ -1,0 +1,26 @@
+npm install -g json-server
+json-server ./src/assets/json/data.json -p 3003
+
+Falls "json-server" als Befehl nicht gefunden wird, muss man "C:\Users\USERNAME\AppData\Roaming\npm" bzw. dort wo
+das npm-Verzeichnis liegt, zu den Umgebungsvariablen - Path hinzugefügt werden.
+
+Das JSON-File muss wie folgt gegliedert werden:
+
+{
+    "url1": [
+        {...},
+        {...},
+    ],
+    "url2": [
+        {...},
+        {...},
+    ]
+}
+
+Dann bekommt man via "localhost:3003/url1" die Daten, die in diesem Objekt/Array gespeichert sind.
+Port muss man nicht angegeben (default 3000), ging bei mir aber nicht, weil besetzt.
+Am besten im Team sucht man sich einen Port, der bei allen funktioniert und passt danach die URLs in den Services an.
+
+Das JSON-File und auch diese Text-Datei können gelöscht werden, wenn keine gemockten Daten mehr benötigt werden.
+
+Fragen @Jürgen Eigelsreiter

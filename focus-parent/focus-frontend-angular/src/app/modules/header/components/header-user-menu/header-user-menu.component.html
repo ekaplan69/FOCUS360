@@ -1,0 +1,65 @@
+<div class="focus360-header-user-menu-container">
+    @if (this.userService?.userInfo?.showSubaufgabengebietButtons()) {
+        <div class="subaufgabengebiet-button-container">
+            @for (
+                aufgabengebiet of this.userService?.aufgabengebiete;
+                track aufgabengebiet
+            ) {
+                <button
+                    mat-button
+                    (click)="loadSubAufgabengebiet(aufgabengebiet)"
+                    class="button"
+                >
+                    {{ aufgabengebiet.aufgabengebietBezeichnung }}
+                </button>
+            }
+        </div>
+    }
+    <div
+        class="focus360-header-user-menu-name"
+        matTooltip="{{
+            userInfo?.getFullName() + getAdditionalUserInfoForHeader()
+        }}"
+    >
+        <span>{{
+            userInfo?.getFullName() + getAdditionalUserInfoForHeader()
+        }}</span>
+    </div>
+    <div class="focus360-header-user-menu-help">
+        <a (click)="openReleasenotes()">
+            <mat-icon
+                class="focus360-header-user-menu-icon"
+                matTooltip="Releasenotes"
+                >list
+            </mat-icon>
+        </a>
+    </div>
+    <div class="focus360-header-user-menu-help">
+        <a
+            href="https://doku.seu.sozvers.at/confluence_secure/x/2Si_FQ"
+            rel="noopener noreferrer"
+            target="_blank"
+        >
+            <mat-icon
+                class="focus360-header-user-menu-icon"
+                matTooltip="Onlinehilfe"
+            >
+                help
+            </mat-icon>
+        </a>
+    </div>
+    <div class="focus360-header-user-menu">
+        <mat-icon
+            [mat-menu-trigger-for]="appMenu"
+            class="focus360-header-user-menu-icon"
+            matTooltip="Applikationsliste"
+            >apps
+        </mat-icon>
+        <mat-menu #appMenu>
+            <f360-application-list
+                [applikationsListe]="applikationsListe"
+                [benutzerAktionenListe]="benutzerAktionenListe"
+            ></f360-application-list>
+        </mat-menu>
+    </div>
+</div>

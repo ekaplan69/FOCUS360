@@ -1,0 +1,143 @@
+@import "src/app/styles/base/variables";
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+f360-loading-indicator {
+    padding: 50px !important;
+}
+
+table__wrapper {
+    flex: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table__header-row {
+    display: flex;
+}
+
+.table__row {
+    cursor: pointer;
+    max-width: 100%;
+}
+
+.table__row:nth-of-type(even) {
+    background-color: $data-background-color-even;
+}
+
+.table__row:nth-of-type(odd):hover {
+    background-color: $primary-text-color;
+}
+
+.table__row:nth-of-type(even):hover {
+    background-color: $primary-text-color;
+}
+
+.table__row:hover > .table__cell > span {
+    color: $secondary-text-color;
+}
+
+.table__row:nth-of-type(odd) {
+    background-color: $data-background-color-odd;
+}
+
+.span--hidden-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.table__cell {
+    color: $primary-text-color;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table__cell > span {
+    @extend .span--hidden-overflow;
+    @extend .table__cell;
+}
+
+.table__cell--datum {
+    @extend .table__cell;
+    flex: 0;
+    min-width: fit-content;
+    text-overflow: unset;
+    width: fit-content;
+}
+
+.table__header-cell--art {
+    flex: 0.5;
+}
+
+.table__header-cell--typ {
+    flex: 0.5;
+}
+
+.table__cell--art {
+    @extend .table__cell;
+    @extend .span--hidden-overflow;
+    flex: 0.5;
+}
+
+.table__cell--typ {
+    @extend .table__cell;
+    @extend .span--hidden-overflow;
+    flex: 0.5;
+}
+
+.table__header-cell--datum {
+    flex: 0;
+    // größe die benötigt wird, um das Datum anzuzeigen relativ zur Schriftgröße,
+    // da flex daktiviert ist
+    min-width: 6.968125rem;
+    padding: 0 1rem 0 1.5rem;
+}
+
+.table__header-cell--datum > span {
+    @extend .span--hidden-overflow;
+}
+
+.footer {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    margin-bottom: 0;
+    margin-top: auto;
+    min-height: $dashlet-footer-height;
+}
+
+.paginator {
+    margin: $dashlet-footer-spacing $data-spacing $dashlet-footer-spacing auto;
+}
+
+.form-field {
+    display: inline-block;
+    margin-bottom: $dashlet-footer-spacing;
+    margin-left: $data-spacing;
+    margin-top: $dashlet-footer-spacing;
+    width: 20%;
+}
+
+.mat-form-field {
+    @extend .form-field;
+    width: 20%;
+}
+
+.mat-form-field--date {
+    @extend .form-field;
+    width: 6.75rem;
+}

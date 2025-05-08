@@ -1,0 +1,389 @@
+@if ((kunde | async) && (kunde | async).fs.fachschluesselArt !== "DGNR") {
+    @if (versicherter) {
+        <div class="info-header-container">
+            <div class="info-header-avatar">
+                <mat-icon class="person-icon">person</mat-icon>
+            </div>
+            <div class="info-header-main-area">
+                <div class="info-header-row">
+                    @if (versicherter.stammdaten) {
+                        <div class="name">
+                            {{ versicherter.stammdaten?.nameFamiliennameGross }}
+                        </div>
+                    }
+                    <div class="auskunftssperre">
+                        <div
+                            class="dropdown-click-wrapper"
+                            (click)="toggleAuskunftssperre()"
+                        >
+                            @if (versicherter.stammdaten?.auskunftsSperre) {
+                                <button
+                                    mat-flat-button
+                                    color="auskunftssperre"
+                                    (click)="isAuskunftssperreOpen()"
+                                >
+                                    <div class="button--div--twoIcons">
+                                        <mat-icon
+                                            fontIcon="pan_tool"
+                                            class="button--div--Icon"
+                                        ></mat-icon>
+                                        <span>AUSKUNFTSSPERRE</span>
+                                        <mat-icon
+                                            fontIcon="pan_tool"
+                                            class="button--div--Icon"
+                                        ></mat-icon>
+                                    </div>
+                                </button>
+                            }
+                        </div>
+                        @if (isAuskunftssperreOpen()) {
+                            <div class="info-content">
+                                <div class="info-content-wrapper">
+                                    <p class="title">
+                                        Grund der Auskunftssperre
+                                    </p>
+                                    @for (
+                                        grund of versicherter.stammdaten
+                                            ?.auskunftsSperreGruende;
+                                        track grund
+                                    ) {
+                                        <div>
+                                            @if (grund) {
+                                                <ul>
+                                                    <li
+                                                        matTooltip="{{ grund }}"
+                                                        class="text max-length-constraint"
+                                                    >
+                                                        {{ grund }}
+                                                    </li>
+                                                </ul>
+                                            }
+                                        </div>
+                                    }
+                                    @if (isKeineAuskunftsperregruende()) {
+                                        <div>
+                                            <i
+                                                class="material-icons icon-styling"
+                                                >not_interested</i
+                                            >
+                                            <span
+                                                class="text"
+                                                style="padding-left: 1.5em"
+                                                >Keine Gründe vorhanden.</span
+                                            >
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="storniert">
+                        @if (versicherter.stammdaten?.storniert) {
+                            <div class="info-button storniert--div">
+                                <div class="button--div--twoIcons">
+                                    <mat-icon
+                                        fontIcon="error"
+                                        class="button--div--Icon"
+                                    ></mat-icon>
+                                    <span>STORNIERT</span>
+                                    <mat-icon
+                                        fontIcon="error"
+                                        class="button--div--Icon"
+                                    ></mat-icon>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="spacer"></div>
+                </div>
+                <div class="info-header-row">
+                    @if (versicherter.stammdaten) {
+                        <div class="daten daten-links">
+                            <div class="vsnr" (click)="copyVSNR()">
+                                {{ versicherter.fs.fachschluessel }}
+                                <mat-icon
+                                    class="info-header-icon-link"
+                                    matTooltip="Fachschlüssel kopieren"
+                                    matTooltipPosition="right"
+                                    >content_copy
+                                </mat-icon>
+                            </div>
+                            @if (versicherter.stammdaten?.geburtsDatum) {
+                                <div class="geburtsdatum">
+                                    geb.{{
+                                        versicherter.stammdaten?.geburtsDatum
+                                            | date: "dd.MM.yyyy"
+                                    }}
+                                </div>
+                            }
+                            @if (versicherter.stammdaten?.geschlecht == "M") {
+                                <div class="gender">
+                                    <img
+                                        class="info-header-icon"
+                                        src="assets/icons/gender_male.svg"
+                                        alt="männlich"
+                                    />
+                                    <span class="gender-text">männlich</span>
+                                </div>
+                            }
+                            @if (versicherter.stammdaten?.geschlecht == "W") {
+                                <div class="gender">
+                                    <img
+                                        class="info-header-icon"
+                                        src="assets/icons/gender_female.svg"
+                                        alt="weiblich"
+                                    />
+                                    <span class="gender-text">weiblich</span>
+                                </div>
+                            }
+                            @if (
+                                versicherter.stammdaten
+                                    ?.bestaetigtesSterbeDat != null
+                            ) {
+                                <div
+                                    class="info-header__div__icon-container info-header--warning"
+                                >
+                                    <mat-icon
+                                        matTooltip="gestorben"
+                                        class="info-header-icon"
+                                        >warning
+                                    </mat-icon>
+                                    <span
+                                        >gest.{{
+                                            versicherter.stammdaten
+                                                ?.bestaetigtesSterbeDat
+                                                | date: "dd.MM.yyyy"
+                                        }}</span
+                                    >
+                                </div>
+                            }
+                            @if (versicherter.stammdaten?.zustimmungSUEN) {
+                                <div class="suen">
+                                    <mat-icon class="info-header-icon"
+                                        >email
+                                    </mat-icon>
+                                    <span class="suen-text"
+                                        >Zustimmung SÜN</span
+                                    >
+                                </div>
+                            }
+                            @if (versicherter.stammdaten?.gesetzlichVertreten) {
+                                <div class="vertretung">
+                                    <mat-icon class="info-header-icon"
+                                        >people_alt
+                                    </mat-icon>
+                                    <span class="vertretung-text"
+                                        >gesetzliche Vertretung</span
+                                    >
+                                </div>
+                            }
+                            @if (
+                                versicherter.leistungen?.lohnPf?.lohnpfaendung
+                            ) {
+                                <div class="lohnpf">
+                                    <mat-icon class="info-header-icon"
+                                        >gavel
+                                    </mat-icon>
+                                    <span class="lohnpf-text"
+                                        >Lohnpfändung</span
+                                    >
+                                </div>
+                            }
+                            @if (versicherter.krankenanspruch == false) {
+                                <div class="lohnpf kva-leistungsanspruch">
+                                    <mat-icon
+                                        class="info-header-icon"
+                                        matTooltip="Kein Leistungsanspruch bei ÖGK!"
+                                    >
+                                        warning
+                                    </mat-icon>
+                                    <span class="lohnpf-text"
+                                        >Kein Leistungsanspruch</span
+                                    >
+                                </div>
+                            }
+                            @if (
+                                versicherter.schutzfrist != null &&
+                                versicherter.schutzfrist != ""
+                            ) {
+                                <div class="lohnpf kva-leistungsanspruch">
+                                    <p class="title max-length-constraint">
+                                        {{ versicherter.schutzfrist }}
+                                    </p>
+                                </div>
+                            }
+                            @if (
+                                versicherter.toleranzfrist != null &&
+                                versicherter.toleranzfrist != ""
+                            ) {
+                                <div class="lohnpf kva-leistungsanspruch">
+                                    <p class="title max-length-constraint">
+                                        {{ versicherter.toleranzfrist }}
+                                    </p>
+                                </div>
+                            }
+                        </div>
+                    }
+                    <div class="daten daten-rechts">
+                        <div class="gebuehrenbefreiung info">
+                            <div
+                                class="dropdown-click-wrapper"
+                                (click)="toggleGebuehrenBefreiung()"
+                            >
+                                @if (
+                                    versicherter.gebuehrenBefreiungen?.length
+                                ) {
+                                    <button
+                                        mat-button
+                                        (click)="isGebuehrenBefreiungOpen()"
+                                        color="gebuehren"
+                                    >
+                                        <mat-icon fontIcon="stars"></mat-icon>
+                                        Gebührenbefreiung
+                                    </button>
+                                }
+                            </div>
+                            @if (isGebuehrenBefreiungOpen()) {
+                                <div class="info-content">
+                                    <div class="info-content-wrapper">
+                                        @for (
+                                            gebuehrenbefreiung of versicherter.gebuehrenBefreiungen;
+                                            track gebuehrenbefreiung
+                                        ) {
+                                            <div>
+                                                <p
+                                                    matTooltip="{{
+                                                        gebuehrenbefreiung.befreiung
+                                                    }}"
+                                                    class="title max-length-constraint"
+                                                >
+                                                    {{
+                                                        gebuehrenbefreiung.befreiung
+                                                    }}
+                                                </p>
+                                                <ul>
+                                                    <li
+                                                        matTooltip="{{
+                                                            gebuehrenbefreiung.befreiungsgrund
+                                                        }}"
+                                                        class="text max-length-constraint"
+                                                    >
+                                                        {{
+                                                            gebuehrenbefreiung.befreiungsgrund
+                                                        }}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="notizen info">
+                            <div class="dropdown-click-wrapper">
+                                @if (versicherter.stammdaten) {
+                                    @if (isWichtigeInfoEmpty()) {
+                                        <button
+                                            mat-icon-button
+                                            color="wichtigeInfo__empty"
+                                            matTooltip="Wichtige Info erfassen"
+                                            (click)="editWichtigeInfo()"
+                                        >
+                                            <mat-icon
+                                                fontIcon="chat_bubble"
+                                            ></mat-icon>
+                                        </button>
+                                    } @else {
+                                        <button
+                                            mat-flat-button
+                                            color="wichtigeInfo"
+                                            (click)="toggleWichtigeInfo()"
+                                        >
+                                            <div class="button--div--twoIcons">
+                                                <mat-icon
+                                                    class="button--div--Icon"
+                                                    fontIcon="announcement"
+                                                ></mat-icon>
+                                                <span>WICHTIGE INFO</span>
+                                                <mat-icon
+                                                    class="button--div--Icon"
+                                                    fontIcon="announcement"
+                                                ></mat-icon>
+                                            </div>
+                                        </button>
+                                    }
+                                }
+                            </div>
+                            @if (isWichtigeInfoOpen()) {
+                                <div class="info-content">
+                                    <div class="info-content-wrapper">
+                                        <p>{{ versicherter.notiz?.text }}</p>
+                                        @if (
+                                            this.userService?.userInfo?.containsRolle(
+                                                rollen.ROLLE_NOTIZ_VERW
+                                            )
+                                        ) {
+                                            <button
+                                                mat-icon-button
+                                                (click)="editWichtigeInfo()"
+                                                matTooltip="Wichtige Info bearbeiten"
+                                                class="infoEdit--button"
+                                            >
+                                                <mat-icon
+                                                    fontIcon="edit"
+                                                ></mat-icon>
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+} @else {
+    @if (dienstgeber) {
+        <div class="info-header-container">
+            <div class="info-header-avatar">
+                <mat-icon class="person-icon">store</mat-icon>
+            </div>
+            <div class="info-header-main-area">
+                <div class="info-header-row">
+                    @if (dienstgeber?.stammdaten) {
+                        <div class="name">
+                            {{ dienstgeber.stammdaten.name }}
+                        </div>
+                    }
+                    <div class="storniert">
+                        @if (dienstgeber.stammdaten?.storniert) {
+                            <div class="info-button storniert--div">
+                                <div class="button--div--twoIcons">
+                                    <mat-icon
+                                        fontIcon="error"
+                                        class="button--div--Icon"
+                                    ></mat-icon>
+                                    <span>STORNIERT</span>
+                                    <mat-icon
+                                        fontIcon="error"
+                                        class="button--div--Icon"
+                                    ></mat-icon>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="info-header-row">
+                    @if (dienstgeber) {
+                        <div class="daten daten-links">
+                            <div class="vsnr">
+                                {{ dienstgeber.fs.fachschluessel }}
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}

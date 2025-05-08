@@ -1,0 +1,187 @@
+<f360-dashlet id="dokumente">
+    <f360-dashlet-header dashletIcon="insert_drive_file"
+        >Dokumente
+    </f360-dashlet-header>
+    <f360-dashlet-content class="focus360-dashlet-content--without-footer">
+        <!-- LOADING SPINNER -->
+        <!-- CONTENT -->
+        @if (dokumente != null || error != null) {
+            <div class="content">
+                @if (dokumente && dokumente.length > 0) {
+                    <div class="table__wrapper">
+                        <table
+                            [dataSource]="dataSource"
+                            class="table"
+                            mat-table
+                            matSort
+                        >
+                            <ng-container matColumnDef="datumString">
+                                <mat-header-cell
+                                    *matHeaderCellDef
+                                    class="table__header-cell--datum"
+                                    mat-sort-header
+                                >
+                                    <span>Datum</span>
+                                </mat-header-cell>
+                                <mat-cell
+                                    *matCellDef="let element"
+                                    class="table__cell--datum"
+                                >
+                                    <span
+                                        >{{ element.datumString }}
+                                    </span></mat-cell
+                                >
+                            </ng-container>
+                            <ng-container matColumnDef="art">
+                                <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                    class="table__header-cell--art"
+                                >
+                                    <span>Art</span>
+                                </mat-header-cell>
+                                <mat-cell
+                                    *matCellDef="let element"
+                                    class="table__cell--art"
+                                >
+                                    <span>{{ element.art }} </span></mat-cell
+                                >
+                            </ng-container>
+                            <ng-container matColumnDef="klasse">
+                                <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                >
+                                    Klasse
+                                </mat-header-cell>
+                                <mat-cell
+                                    *matCellDef="let element"
+                                    class="table__cell"
+                                >
+                                    <span>{{ element.klasse }} </span>
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="kategorie">
+                                <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                >
+                                    Kategorie
+                                </mat-header-cell>
+                                <mat-cell
+                                    *matCellDef="let element"
+                                    class="table__cell"
+                                >
+                                    <span
+                                        >{{ element.kategorie }}
+                                    </span></mat-cell
+                                >
+                            </ng-container>
+                            <ng-container matColumnDef="type">
+                                <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                    class="table__header-cell--typ"
+                                >
+                                    Typ
+                                </mat-header-cell>
+                                <mat-cell
+                                    *matCellDef="let element"
+                                    class="table__cell--typ"
+                                >
+                                    <span>{{ element.type }}</span></mat-cell
+                                >
+                            </ng-container>
+                            <ng-container matColumnDef="thema">
+                                <mat-header-cell
+                                    *matHeaderCellDef
+                                    mat-sort-header
+                                >
+                                    Thema
+                                </mat-header-cell>
+                                <mat-cell
+                                    *matCellDef="let element"
+                                    class="table__cell"
+                                >
+                                    <span>{{ element.thema }}</span></mat-cell
+                                >
+                            </ng-container>
+                            <mat-header-row
+                                *matHeaderRowDef="columnNames"
+                                class=""
+                            ></mat-header-row>
+                            <mat-row
+                                *matRowDef="let row; columns: columnNames"
+                                (click)="openDokument(row)"
+                                class="table__row"
+                                mat-row
+                            ></mat-row>
+                        </table>
+                    </div>
+                } @else {
+                    @if (!error) {
+                        <div class="dashletMeldung">
+                            <span class="data-header info"
+                                ><i class="material-icons">not_interested</i
+                                >Keine Dokumente vorhanden.</span
+                            >
+                        </div>
+                    }
+                    @if (error) {
+                        <f360-dashlet-error
+                            [error]="error"
+                            class="dashletMeldung"
+                        ></f360-dashlet-error>
+                    }
+                }
+                <div class="footer">
+                    <mat-form-field
+                        class="mat-form-field dense-elements"
+                        appearance="outline"
+                        subscriptSizing="dynamic"
+                    >
+                        <mat-label>Filter</mat-label>
+                        <input
+                            matInput
+                            (keyup)="applyFilter($event.target.value)"
+                            class="mat-form-field__input--filter"
+                        />
+                    </mat-form-field>
+                    <mat-form-field
+                        class="mat-form-field--date dense-elements"
+                        appearance="outline"
+                        subscriptSizing="dynamic"
+                        style="margin-right: 0.5rem"
+                    >
+                        <mat-label>Von</mat-label>
+                        <input
+                            matInput
+                            (keyup)="applyVonFilter($event.target.value)"
+                            class="mat-form-field__input--filter"
+                        />
+                    </mat-form-field>
+                    <mat-form-field
+                        class="mat-form-field--date dense-elements"
+                        appearance="outline"
+                        subscriptSizing="dynamic"
+                        style="margin-left: 0"
+                    >
+                        <mat-label>Bis</mat-label>
+                        <input
+                            matInput
+                            (keyup)="applyBisFilter($event.target.value)"
+                            class="mat-form-field__input--filter"
+                        />
+                    </mat-form-field>
+                    <mat-paginator
+                        class="paginator"
+                        hidePageSize
+                        pageSize="6"
+                    ></mat-paginator>
+                </div>
+            </div>
+        } @else {
+            <f360-loading-indicator></f360-loading-indicator>
+        }
+    </f360-dashlet-content>
+</f360-dashlet>

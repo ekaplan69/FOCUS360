@@ -1,0 +1,47 @@
+@import "src/app/styles/base/_variables.scss";
+
+.application-list-wrapper {
+    font-size: $default-font-size;
+    min-width: 225px;
+    padding-top: 0.5rem;
+}
+
+:host ::ng-deep .application-list-wrapper a {
+    color: $primary-text-color;
+    text-decoration: none;
+}
+
+:host ::ng-deep .application-list-wrapper ul {
+    list-style: none;
+    margin: 0 1rem;
+    padding-inline-start: 0;
+}
+
+:host ::ng-deep .application-list-wrapper li,
+.application-list-header {
+    padding-bottom: 0.5rem;
+}
+
+.menu-item-icon {
+    display: inline-block;
+    text-align: center;
+    width: 20%;
+}
+
+.link-wrapper {
+    display: block;
+}
+
+.application-list-icon {
+    vertical-align: middle;
+}
+
+.menu-item-label {
+    display: inline-block;
+}
+
+.application-list-header {
+    display: block;
+    font-family: $font-family-roboto-light;
+    padding: 0 1rem 0.5rem 1rem;
+}

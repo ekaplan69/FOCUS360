@@ -1,0 +1,87 @@
+<f360-dashlet id="versicherungszeiten">
+    <f360-dashlet-header
+        [actionIcon]="'description'"
+        [launchTooltipText]="'VDA öffnen'"
+        [launch]="vdaUrl"
+        dashletIcon="event_available"
+        >{{ isBTNR() ? "Betreuungszeiten" : "Versicherungszeiten" }}
+    </f360-dashlet-header>
+    <f360-dashlet-content class="focus360-dashlet-content--without-footer">
+        <ng-template #noData>
+            @if (!error) {
+                <div class="dashletMeldung">
+                    <span class="data-header info"
+                        ><i class="material-icons">not_interested</i> Keine
+                        Zeiten vorhanden.</span
+                    >
+                </div>
+            }
+            @if (error) {
+                <f360-dashlet-error
+                    [error]="error"
+                    class="dashletMeldung"
+                ></f360-dashlet-error>
+            }
+        </ng-template>
+
+        @if (versicherungszeiten != null || error != null) {
+            <!-- TEMPLATE::VERSICHERUNGSZEITEN -->
+            <ng-template #versicherungsZeiten class="content">
+                <f360-versichert-content
+                    [versicherungszeiten]="versicherungszeiten"
+                    [error]="error"
+                ></f360-versichert-content> </ng-template
+            ><!-- TEMPLATE::BETREUUNGSZEITEN -->
+            <ng-template #betreutenzeiten class="content">
+                <f360-betreut-content
+                    [betreutenZeiten]="betreutenZeiten"
+                    [error]="error"
+                ></f360-betreut-content> </ng-template
+            ><!-- TEMPLATE::VERSICHERT --><!-- TEMPLATE::VERSICHERT UND BETREUT -->
+            <ng-template #betreutUndVersichert>
+                <mat-tab-group class="content" id="tabgroup">
+                    <mat-tab label="Versicherungszeiten" class="tab-body">
+                        <ng-container
+                            [ngTemplateOutlet]="
+                                versicherungszeiten?.length > 0
+                                    ? versicherungsZeiten
+                                    : noData
+                            "
+                        ></ng-container>
+                    </mat-tab>
+                    <mat-tab label="Betreutenzeiten" class="tab-body">
+                        <ng-container
+                            [ngTemplateOutlet]="
+                                betreutenzeiten?.length > 0
+                                    ? betreutenzeiten
+                                    : noData
+                            "
+                        ></ng-container>
+                    </mat-tab>
+                </mat-tab-group> </ng-template
+            ><!-- ACTUAL CONTENT -->
+            @if (isBTNR()) {
+                <ng-container class="content">
+                    <ng-container
+                        [ngTemplateOutlet]="betreutenzeiten"
+                    ></ng-container>
+                </ng-container>
+            } @else {
+                @if (showBetreuungsZeiten()) {
+                    <ng-container class="content">
+                        <ng-container
+                            [ngTemplateOutlet]="betreutUndVersichert"
+                        ></ng-container>
+                    </ng-container>
+                } @else {
+                    <f360-versichert-content
+                        [versicherungszeiten]="versicherungszeiten"
+                        [error]="error"
+                    ></f360-versichert-content>
+                }
+            }
+        } @else {
+            <f360-loading-indicator></f360-loading-indicator>
+        }
+    </f360-dashlet-content>
+</f360-dashlet>

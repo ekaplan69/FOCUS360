@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxws:bindings xmlns:jaxws="http://java.sun.com/xml/ns/jaxws" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+				wsdlLocation="wsdl/Focus360WsV20.wsdl">
+  <jaxws:package name="at.itsv.services.lgkk" />
+  <jaxws:enableWrapperStyle>false</jaxws:enableWrapperStyle>
+  <jaxws:enableAsyncMapping>true</jaxws:enableAsyncMapping>
+  <jaxws:bindings node="//wsdl:definitions/wsdl:types/xs:schema[@targetNamespace='http://types.services.itsv.at/']">
+	<jaxb:schemaBindings>
+	  <jaxb:package name="at.itsv.services.lgkk" />
+	</jaxb:schemaBindings>
+  </jaxws:bindings>
+</jaxws:bindings>

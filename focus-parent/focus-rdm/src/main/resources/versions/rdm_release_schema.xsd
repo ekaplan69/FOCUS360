@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+  <xs:element name="rdmRelease" type="release" />
+  <xs:complexType name="release" final="extension restriction">
+	<xs:sequence>
+	  <xs:element name="paket" type="paket" minOccurs="0" maxOccurs="unbounded" />
+	</xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="paket" final="extension restriction">
+	<xs:sequence>
+	  <xs:element name="releasetyp" type="Pakettyp" minOccurs="0" />
+	  <xs:element name="verteilungstyp" type="Verteilungstype" minOccurs="0" />
+	  <xs:element name="changetyp" type="Changetyp" minOccurs="0" />
+	  <xs:element name="version" type="xs:string" minOccurs="0" />
+	  <xs:element name="releaseschein" type="xs:string" minOccurs="0" />
+	  <xs:element name="vorgaengerpaket" type="xs:string" minOccurs="0" />
+	  <xs:element name="lieferdatum" type="xs:string" minOccurs="0" />
+	  <xs:element name="lieferant" type="xs:string" minOccurs="0" />
+	  <xs:element name="attribute" minOccurs="0">
+		<xs:complexType>
+		  <xs:sequence>
+			<xs:element name="attribut" type="attribute" minOccurs="0" maxOccurs="unbounded" />
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+	  <xs:element name="liefergegenstaende" minOccurs="0">
+		<xs:complexType>
+		  <xs:sequence>
+			<xs:element name="artefakt" type="deliverableartefakt" minOccurs="0" maxOccurs="unbounded" />
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+	  <xs:element name="workflows" minOccurs="0">
+		<xs:complexType>
+		  <xs:sequence>
+			<xs:element name="workflow" type="workflow" minOccurs="0" maxOccurs="unbounded" />
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+	  <xs:element name="paket" type="paket" minOccurs="0" maxOccurs="unbounded" />
+	</xs:sequence>
+	<xs:attribute name="lieferkanal" type="xs:string" use="required" />
+	<xs:attribute name="name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="attribute" final="extension restriction">
+	<xs:simpleContent>
+	  <xs:extension base="xs:string">
+		<xs:attribute name="key" type="xs:string" use="required" />
+		<xs:attribute name="type" type="xs:string" />
+		<xs:attribute name="skip" type="xs:boolean" />
+	  </xs:extension>
+	</xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="workflow" final="extension restriction">
+	<xs:all>
+	  <xs:element name="umgebung" type="xs:string" minOccurs="0" />
+	  <xs:element name="runmode" type="WorkflowRunmode" minOccurs="0" />
+	  <xs:element name="properties" type="xs:string" minOccurs="0" />
+	  <xs:element name="startzeitpunkt" type="xs:string" minOccurs="0" />
+	  <xs:element name="endzeitpunkt" type="xs:string" minOccurs="0" />
+	</xs:all>
+	<xs:attribute name="id" type="xs:string" use="required" />
+	<xs:attribute name="start" type="xs:boolean" />
+  </xs:complexType>
+  <xs:complexType name="artefakt">
+	<xs:sequence>
+	  <xs:element name="artefakt" type="artefakt" minOccurs="0" maxOccurs="unbounded" />
+	</xs:sequence>
+	<xs:attribute name="id" type="xs:string" use="required" />
+  </xs:complexType>
+  <xs:complexType name="deliverableartefakt">
+	<xs:complexContent>
+	  <xs:extension base="artefakt">
+		<xs:sequence>
+		  <xs:element name="changetyp" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	  </xs:extension>
+	</xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="Pakettyp">
+	<xs:restriction base="xs:string">
+	  <xs:enumeration value="Baseline" />
+	  <xs:enumeration value="Hotfix" />
+	  <xs:enumeration value="Patch" />
+	  <xs:enumeration value="Major Release" />
+	  <xs:enumeration value="Minor Release" />
+	  <xs:enumeration value="Nachlieferung" />
+	  <xs:enumeration value="${releasetyp}" />
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Verteilungstype">
+	<xs:restriction base="xs:string">
+	  <xs:enumeration value="FullVersion" />
+	  <xs:enumeration value="Patch" />
+	  <xs:enumeration value="${verteilungstyp}" />
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Changetyp">
+	<xs:restriction base="xs:string">
+	  <xs:enumeration value="CreateOrReplace" />
+	  <xs:enumeration value="Update" />
+	  <xs:enumeration value="Replace" />
+	  <xs:enumeration value="Remove" />
+	  <xs:enumeration value="Add" />
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WorkflowRunmode">
+	<xs:restriction base="xs:string">
+	  <xs:enumeration value="Normal" />
+	  <xs:enumeration value="Retroactive" />
+	  <xs:enumeration value="Simulated" />
+	</xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

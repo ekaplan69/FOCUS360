@@ -1,0 +1,20 @@
+.toast-container .toast-success {
+    background-color: $toast-success-background-color;
+}
+
+.toast-container .toast-error {
+    background-color: $toast-error-background-color;
+}
+
+.toast-container .toast-warning {
+    background-color: $toast-warn-background-color;
+}
+
+.toast-container .toast-info {
+    background-color: $toast-info-background-color;
+}
+
+.toast-top-right {
+    right: 10px;
+    top: 170px;
+}

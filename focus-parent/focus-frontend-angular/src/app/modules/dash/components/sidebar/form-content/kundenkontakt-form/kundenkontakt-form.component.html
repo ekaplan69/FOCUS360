@@ -1,0 +1,474 @@
+<div #kontaktFormWrapper class="kontakt-form-wrapper">
+    <ng-template #loadingSpinner>
+        <f360-loading-indicator></f360-loading-indicator>
+    </ng-template>
+
+    @if (kontaktForm.currentKontakt != null && aufgabengebietOptions != null) {
+        @if (
+            kontaktForm.bearbeitungsmodus == false ||
+            !this.userService?.userInfo?.containsRolle(rollen.ROLLE_KONT_VERW)
+        ) {
+            <div class="stay-safe-from-footer">
+                <div class="header-container">
+                    <h1>Kundenkontakt anzeigen</h1>
+                    @if (
+                        this.userService?.userInfo?.containsRolle(
+                            rollen.ROLLE_KONT_VERW
+                        ) && this.createdTodayByUser()
+                    ) {
+                        <f360-fab-button
+                            [tooltipText]="'Kundenkontakt bearbeiten'"
+                            icon="edit"
+                            (click)="kontaktBearbeitenPressed()"
+                        ></f360-fab-button>
+                    }
+                </div>
+                <div class="row">
+                    <f360-kundenkontakt-form-timer
+                        [dateStartTS]="kontaktForm.currentKontakt.startTs"
+                        [beendet]="kontaktForm.currentKontakt.endeTs !== null"
+                        [dateNowOrEndeTS]="kontaktForm.currentKontakt.endeTs"
+                    ></f360-kundenkontakt-form-timer>
+                </div>
+                <div class="row">
+                    <div class="data-block">
+                        <a class="data-header">Aufgabengebiet</a>
+                        <span class="data-text">{{
+                            kontaktForm.aufgabengebietSelection
+                                ? kontaktForm.aufgabengebietSelection
+                                : "Keine Angabe"
+                        }}</span>
+                    </div>
+                    <div class="data-block">
+                        <a class="data-header">Kundenservicestelle</a>
+                        <span class="data-text">{{
+                            kontaktForm.currentKontakt.scBezeichnung
+                                ? kontaktForm.currentKontakt.scBezeichnung
+                                : "Keine Angabe"
+                        }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="data-block">
+                        <a class="data-header">Kontaktart</a>
+                        <span class="data-text">{{
+                            kontaktForm.kontaktartSelection
+                                ? kontaktForm.kontaktartSelection
+                                : "Keine Angabe"
+                        }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="data-block">
+                        <a class="data-header">Thema</a>
+                        <span class="data-text">{{
+                            kontaktForm.themaSelection
+                                ? kontaktForm.themaSelection
+                                : "Keine Angabe"
+                        }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="data-block">
+                        <a class="data-header">Unterthema</a>
+                        <span class="data-text">{{
+                            kontaktForm.unterthemaSelection
+                                ? kontaktForm.unterthemaSelection
+                                : "Keine Angabe"
+                        }}</span>
+                    </div>
+                </div>
+
+                @if (kontaktForm.currentKontakt.anmerkung) {
+                    <div class="row">
+                        <div class="data-block">
+                            <a class="data-header">Anmerkung</a>
+                            <span class="data-text span-like-input">{{
+                                kontaktForm.currentKontakt.anmerkung
+                                    ? kontaktForm.currentKontakt.anmerkung
+                                    : "Keine Angabe"
+                            }}</span>
+                        </div>
+                    </div>
+                }
+                @if (kontaktForm.currentKontakt.agd) {
+                    <div class="row">
+                        @if (kontaktForm.currentKontakt.agdName) {
+                            <div class="data-block" style="width: 75%">
+                                <a class="data-header">Daten zur Drittperson</a>
+                                <span class="data-text span-like-input">{{
+                                    kontaktForm.currentKontakt.agdName
+                                }}</span>
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="row">
+                    <div class="data-block">
+                        <a class="data-header">Abschlussart</a>
+                        <span class="data-text">{{
+                            kontaktForm.abschlussartSelection
+                                ? kontaktForm.abschlussartSelection
+                                : "Keine Angabe"
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (
+            kontaktForm.bearbeitungsmodus == true &&
+            this.userService?.userInfo?.containsRolle(rollen.ROLLE_KONT_VERW)
+        ) {
+            <div class="stay-safe-from-footer">
+                <h1>
+                    {{
+                        kontaktForm.currentKontakt.updatecount == null
+                            ? "Kundenkontakt erfassen"
+                            : "Kundenkontakt bearbeiten"
+                    }}
+                </h1>
+                <!-- Counter -->
+                <f360-kundenkontakt-form-timer
+                    [dateStartTS]="kontaktForm.currentKontakt.startTs"
+                    [beendet]="kontaktForm.currentKontakt.endeTs !== null"
+                    [dateNowOrEndeTS]="kontaktForm.currentKontakt.endeTs"
+                ></f360-kundenkontakt-form-timer>
+                @if (
+                    kontaktartOptions != null && kontaktartOptions.length > 0
+                ) {
+                    <a class="data-header">Kontaktart *</a
+                    ><!-- Kontaktarten -->
+                    <div #kontaktartSection class="detail-section">
+                        <mat-button-toggle-group
+                            vertical="true"
+                            (change)="
+                                handleKontaktartCheckboxEvent(
+                                    true,
+                                    $event.value
+                                )
+                            "
+                            class="button-toggle-group"
+                        >
+                            @for (
+                                kontaktart of kontaktartOptions;
+                                track kontaktart
+                            ) {
+                                <mat-button-toggle
+                                    class="button-toggle"
+                                    [value]="kontaktart.kontaktartId"
+                                    [checked]="kontaktart.ticked"
+                                    >{{ kontaktart.kontaktartBezeichnung }}
+                                </mat-button-toggle>
+                            }
+                        </mat-button-toggle-group>
+                    </div>
+                }
+                @if (
+                    themaOptionsDD != null &&
+                    themaOptionsDD.length > 0 &&
+                    themaAnzeigeAls == "DD"
+                ) {
+                    <a class="data-header">Thema *</a>
+                    <mat-form-field>
+                        @for (thema of themaOptionsDD; track thema) {
+                            <mat-select
+                                (selectionChange)="
+                                    handleThemaSelectionChanged()
+                                "
+                                [(ngModel)]="kontaktForm.themaSelection"
+                            >
+                                {{ thema }}
+                            </mat-select>
+                        }
+                    </mat-form-field>
+                }
+                @if (
+                    themaOptions != null &&
+                    themaOptions.length > 0 &&
+                    themaAnzeigeAls == "B"
+                ) {
+                    <a class="data-header">Thema*</a
+                    ><!-- Themen -->
+                    <div class="detail-section">
+                        <mat-button-toggle-group
+                            vertical="true"
+                            (change)="
+                                handleThemaCheckboxEvent(
+                                    $event.source.checked,
+                                    $event.value
+                                )
+                            "
+                            class="button-toggle-group"
+                        >
+                            @for (thema of themaOptions; track thema) {
+                                <mat-button-toggle
+                                    class="button-toggle"
+                                    [value]="thema.themaId"
+                                    [checked]="thema.ticked"
+                                    >{{ thema.themaBezeichnung }}
+                                </mat-button-toggle>
+                            }
+                        </mat-button-toggle-group>
+                    </div>
+                    @if (isSelectedThemaSonstige()) {
+                        <a class="data-header" *ngIf="isSelectedThemaSonstige()"
+                            >Unterthema</a
+                        >
+                        <mat-chip-listbox aria-label="Unterthemen">
+                            <mat-chip-option
+                                *ngFor="let unterthema of unterthemen"
+                                [selected]="unterthema.ticked"
+                                (click)="
+                                    handleUnterthemaCheckboxEvent(unterthema)
+                                "
+                            >
+                                {{ unterthema.unterthemaBezeichnung }}
+                            </mat-chip-option>
+                        </mat-chip-listbox>
+                    }
+                }
+                <!-- ANMERKUNGEN -->
+                <div class="row">
+                    <div style="width: 100%">
+                        <div>
+                            <a
+                                *ngIf="!isSelectedThemaSonstige()"
+                                class="data-header"
+                                >Anmerkung</a
+                            >
+                        </div>
+                        <div>
+                            <a
+                                *ngIf="isSelectedThemaSonstige()"
+                                class="data-header"
+                                >Anmerkung*</a
+                            >
+                        </div>
+                        <mat-form-field class="text-area-kontakt">
+                            <textarea
+                                matInput
+                                (change)="
+                                    kontaktForm.currentKontakt.anmerkung =
+                                        $event.target['value']
+                                "
+                                [value]="kontaktForm.currentKontakt.anmerkung"
+                            >
+                            </textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Abgabe durch Dritte -->
+                <div class="row">
+                    <mat-button-toggle
+                        #abgabeDritte
+                        class="button-toggle"
+                        (change)="
+                            handleAGDCheckboxChanged(
+                                kontaktForm.currentKontakt.agd
+                            )
+                        "
+                        checked="{{ kontaktForm.currentKontakt.agd }}"
+                        >Abgabe durch Dritten
+                    </mat-button-toggle>
+                    <div style="width: 100%">
+                        <mat-form-field
+                            [style]="{
+                                display: abgabeDritte.checked
+                                    ? 'inline'
+                                    : 'none',
+                            }"
+                            class="text-area-kontakt"
+                        >
+                            <mat-label>Daten zur Drittperson</mat-label>
+                            <textarea
+                                matInput
+                                (change)="
+                                    kontaktForm.currentKontakt.agdName =
+                                        $event.target['value']
+                                "
+                                [value]="kontaktForm.currentKontakt.agdName"
+                            >
+                            </textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!-- Feedback -->
+                @if (showFeedback()) {
+                    <div>
+                        <a class="data-header">Kundenfeedback</a>
+                        <div class="detail-section">
+                            <mat-button-toggle-group
+                                vertical="true"
+                                multiple
+                                (change)="
+                                    handleFeedbackArtCheckboxEvent($event)
+                                "
+                                class="button-toggle-group"
+                            >
+                                @for (
+                                    art of FeedbackArt.FeedbackArtOptionen;
+                                    track art
+                                ) {
+                                    <mat-button-toggle
+                                        class="button-toggle-feedback"
+                                        [value]="art.id"
+                                        [checked]="art.ticked"
+                                        >{{ art.description }}
+                                    </mat-button-toggle>
+                                }
+                            </mat-button-toggle-group>
+                        </div>
+                        @if (
+                            kontaktForm.currentFeedback.feedbackArt !== null &&
+                            kontaktForm.currentFeedback.feedbackArt !==
+                                undefined
+                        ) {
+                            <div class="feedback__wrapper--border">
+                                <div>Informationen zum Kundenfeedback</div>
+                                <br />
+                                <div class="select-row">
+                                    @if (themaUnterkat.length > 0) {
+                                        <mat-form-field>
+                                            <mat-label
+                                                >Unterkategorie*
+                                            </mat-label>
+                                            <mat-select
+                                                (selectionChange)="
+                                                    getGruendeUnterkat(
+                                                        $event.value
+                                                    )
+                                                "
+                                            >
+                                                @for (
+                                                    themaU of themaUnterkat;
+                                                    track themaU
+                                                ) {
+                                                    <mat-option
+                                                        [value]="themaU"
+                                                    >
+                                                        {{ themaU.bezeichnung }}
+                                                    </mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    }
+                                    <mat-form-field>
+                                        <mat-label>Grund*</mat-label>
+                                        <mat-select
+                                            (selectionChange)="
+                                                handleGrundChanged()
+                                            "
+                                            [(ngModel)]="
+                                                this.kontaktForm.currentFeedback
+                                                    .grundId
+                                            "
+                                        >
+                                            @for (
+                                                grund of gruende;
+                                                track grund
+                                            ) {
+                                                <mat-option [value]="grund.id">
+                                                    {{ grund.bezeichnung }}
+                                                </mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <mat-form-field class="text-area-kontakt">
+                                        <mat-label>Beschreibung</mat-label>
+                                        <textarea
+                                            matInput
+                                            [(ngModel)]="
+                                                kontaktForm.currentFeedback
+                                                    .beschreibung
+                                            "
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                    <br />
+                                    <mat-form-field class="text-area-kontakt">
+                                        <mat-label
+                                            >Verbesserungspotential
+                                        </mat-label>
+                                        <textarea
+                                            matInput
+                                            [(ngModel)]="
+                                                kontaktForm.currentFeedback
+                                                    .verbesserung
+                                            "
+                                            placeholder="Ausführungen in diesem Textfeld werden zur Prüfung einer Prozessverbesserung automatisiert weitergeleitet"
+                                        >
+                                        </textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                @if (
+                    abschlussartOptions != null &&
+                    abschlussartOptions.length > 0
+                ) {
+                    <a class="data-header">Abschlussart*</a
+                    ><!-- Abschlussarten -->
+                    <div class="detail-section">
+                        <mat-button-toggle-group
+                            multiple
+                            vertical="true"
+                            (change)="
+                                handleAbschlussartCheckboxEvent(
+                                    $event.source.checked,
+                                    $event.source.value
+                                )
+                            "
+                            class="button-toggle-group"
+                        >
+                            @for (
+                                abschlussart of abschlussartOptions;
+                                track abschlussart.abschlussartId
+                            ) {
+                                <mat-button-toggle
+                                    class="button-toggle"
+                                    [value]="abschlussart.abschlussartId"
+                                    [checked]="abschlussart.ticked"
+                                    >{{ abschlussart.abschlussartBezeichnung }}
+                                </mat-button-toggle>
+                            }
+                        </mat-button-toggle-group>
+                    </div>
+                }
+            </div>
+        }
+    } @else {
+        <f360-loading-indicator></f360-loading-indicator>
+    }
+    <!-- CONTROL SECTION -->
+    <div class="control-section">
+        <div class="button-group">
+            @if (kontaktForm.currentKontakt?.endeTs === null) {
+                <button mat-button (click)="closeForm()">
+                    Formular schließen und Kontakt löschen
+                </button>
+            }
+            @if (kontaktForm.currentKontakt?.endeTs !== null) {
+                <button mat-button (click)="closeForm()">
+                    Formular schließen
+                </button>
+            }
+            @if (
+                kontaktForm.bearbeitungsmodus == true &&
+                kontaktForm.currentKontakt !== null &&
+                kontaktForm.currentKontakt?.endeTs !== null
+            ) {
+                <button
+                    mat-raised-button
+                    class="erfassen-button"
+                    (click)="saveKontakt(true)"
+                >
+                    Speichern
+                </button>
+            }
+        </div>
+    </div>
+</div>

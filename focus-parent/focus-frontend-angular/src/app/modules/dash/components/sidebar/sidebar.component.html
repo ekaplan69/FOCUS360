@@ -1,0 +1,66 @@
+<!-- BESCHWERDE -->
+@if (
+    formTabs?.beschwerdeForm?.active &&
+    formTabs?.beschwerdeForm?.bearbeitungsModus
+) {
+    @if (formTabs?.beschwerdeForm?.active) {
+        <f360-tab-card
+            [class.active]="formTabs?.isBeschwerdeFormOpen()"
+            [cardTitle]="'Kundenfeedback bearbeiten'"
+            (click)="emitToggleBeschwerde()"
+        ></f360-tab-card>
+    }
+}
+@if (
+    formTabs?.beschwerdeForm?.active &&
+    formTabs?.beschwerdeForm?.bearbeitungsModus == false
+) {
+    @if (formTabs?.beschwerdeForm?.active) {
+        <f360-tab-card
+            [class.active]="formTabs?.isBeschwerdeFormOpen()"
+            [cardTitle]="'Kundenfeedback anzeigen'"
+            (click)="emitToggleBeschwerde()"
+        ></f360-tab-card>
+    }
+}
+
+<!-- KONTAKT -->
+@if (
+    formTabs?.kontaktForm?.active &&
+    formTabs?.kontaktForm?.bearbeitungsmodus == false
+) {
+    <f360-tab-card
+        [cardTitle]="'Kundenkontakt anzeigen'"
+        [class.active]="formTabs?.isKontaktFormOpen()"
+        [class.highlight]="formTabs?.isKontaktFormHighlight()"
+        (click)="formTabs?.toggleForm(forms.KONTAKT)"
+    ></f360-tab-card>
+}
+@if (
+    formTabs?.kontaktForm?.active &&
+    formTabs?.kontaktForm?.bearbeitungsmodus == true
+) {
+    <f360-tab-card
+        [cardTitle]="
+            formTabs.kontaktForm.currentKontakt != null &&
+            formTabs.kontaktForm.currentKontakt.updatecount != null
+                ? 'Kundenkontakt bearbeiten'
+                : 'Kundenkontakt erfassen'
+        "
+        [class.active]="formTabs?.isKontaktFormOpen()"
+        [class.highlight]="formTabs?.isKontaktFormHighlight()"
+        (click)="formTabs?.toggleForm(forms.KONTAKT)"
+    ></f360-tab-card>
+}
+
+<!-- NOTIZ -->
+@if (
+    formTabs?.notizForm?.active &&
+    userService?.userInfo?.containsRolle(rollen.ROLLE_NOTIZ_VERW)
+) {
+    <f360-tab-card
+        [cardTitle]="'Wichtige Info erfassen'"
+        [class.active]="formTabs?.isNotizFormOpen()"
+        (click)="emitToggleNotiz()"
+    ></f360-tab-card>
+}

@@ -1,0 +1,119 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://kva.sozvers.at/definitions/ermittle-krankenversicherungsanspruch" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+				  xmlns:ns1="http://kva.sozvers.at/schema/ermittle-krankenversicherungsanspruch" name="ErmittleKrankenversicherungsanspruchService"
+				  targetNamespace="http://kva.sozvers.at/definitions/ermittle-krankenversicherungsanspruch">
+  <wsdl:types>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kva.sozvers.at/schema/types" elementFormDefault="qualified" targetNamespace="http://kva.sozvers.at/schema/types"
+			   version="1.0">
+	  <xs:complexType abstract="true" name="standardResponse">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="transaktionID" type="xs:string" />
+		  <xs:element name="returnCode" type="xs:integer" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="meldung" nillable="true" type="tns:meldung" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="meldung">
+		<xs:sequence>
+		  <xs:element name="text" type="xs:string" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="parameter" nillable="true" type="tns:meldungenParameter" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required" />
+		<xs:attribute name="kategorie" type="xs:string" use="required" />
+	  </xs:complexType>
+	  <xs:complexType name="meldungenParameter">
+		<xs:simpleContent>
+		  <xs:extension base="xs:string">
+			<xs:attribute name="name" type="xs:string" use="required" />
+		  </xs:extension>
+		</xs:simpleContent>
+	  </xs:complexType>
+	</xs:schema>
+	<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://kva.sozvers.at/schema/ermittle-krankenversicherungsanspruch" xmlns:ns1="http://kva.sozvers.at/schema/types"
+			   elementFormDefault="qualified" targetNamespace="http://kva.sozvers.at/schema/ermittle-krankenversicherungsanspruch" version="1.0">
+	  <xs:import namespace="http://kva.sozvers.at/schema/types" />
+	  <xs:element name="ermittelterKrankenversicherungsanspruch">
+		<xs:complexType>
+		  <xs:complexContent>
+			<xs:extension base="ns1:standardResponse">
+			  <xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="kva" nillable="true" type="tns:krankenversicherungsanspruch" />
+				<xs:element minOccurs="0" name="versicherungsnummer" type="xs:string" />
+				<xs:element name="kvaAnzahl" type="xs:int" />
+			  </xs:sequence>
+			</xs:extension>
+		  </xs:complexContent>
+		</xs:complexType>
+	  </xs:element>
+	  <xs:element name="krankenversicherungsanspruchErmittlung">
+		<xs:complexType>
+		  <xs:sequence>
+			<xs:element name="ermittlungszeitpunkt" type="xs:dateTime" />
+			<xs:element name="kvaBatch" type="xs:boolean" />
+			<xs:element name="kvaOnline" type="xs:boolean" />
+			<xs:element name="qualifikation" type="xs:boolean" />
+			<xs:element name="versicherungsnummer" type="xs:string" />
+			<xs:element name="erstellungsphase" type="xs:boolean" />
+		  </xs:sequence>
+		</xs:complexType>
+	  </xs:element>
+	  <xs:complexType name="krankenversicherungsanspruch">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="kvTraegerKurz" type="xs:string" />
+		  <xs:element minOccurs="0" name="vorname" type="xs:string" />
+		  <xs:element minOccurs="0" name="nachname" type="xs:string" />
+		  <xs:element maxOccurs="unbounded" minOccurs="0" name="gebuehrenbefreiung" nillable="true" type="tns:gebuehrenbefreiung" />
+		  <xs:element minOccurs="0" name="geburtsdatumVersicherter" type="xs:date" />
+		  <xs:element minOccurs="0" name="kvAnspruch" type="xs:string" />
+		  <xs:element minOccurs="0" name="kvaOnline" type="xs:boolean" />
+		  <xs:element minOccurs="0" name="kvaEcs" type="xs:string" />
+		  <xs:element minOccurs="0" name="anspruchZusatzInformation" type="xs:string" />
+		  <xs:element minOccurs="0" name="kvanspruchBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="kvanspruchKurz" type="xs:string" />
+		  <xs:element minOccurs="0" name="meldendeStelle" type="xs:string" />
+		  <xs:element minOccurs="0" name="wurdeGeburtsdatumErmittelt" type="xs:boolean" />
+		  <xs:element minOccurs="0" name="qualifikation" type="xs:string" />
+		  <xs:element minOccurs="0" name="versichertenartBezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="versichertenart" type="xs:string" />
+		  <xs:element minOccurs="0" name="versichertenkategorie" type="xs:int" />
+		  <xs:element minOccurs="0" name="versichertenkategoriebezeichnung" type="xs:string" />
+		  <xs:element minOccurs="0" name="versicherungsnummerVers" type="xs:string" />
+		  <xs:element minOccurs="0" name="erstellungsphaseBezeichnung" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	  <xs:complexType name="gebuehrenbefreiung">
+		<xs:sequence>
+		  <xs:element minOccurs="0" name="gebuehrenbefreiungstyp" type="xs:string" />
+		  <xs:element minOccurs="0" name="gebuehrenbefreiungstypBezeichnung" type="xs:string" />
+		</xs:sequence>
+	  </xs:complexType>
+	</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="ermittleKrankenversicherungsanspruchResponse">
+	<wsdl:part element="ns1:ermittelterKrankenversicherungsanspruch" name="ermittelterKrankenversicherungsanspruch"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ermittleKrankenversicherungsanspruch">
+	<wsdl:part element="ns1:krankenversicherungsanspruchErmittlung" name="krankenversicherungsanspruchErmittlung"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ErmittleKrankenversicherungsanspruch">
+	<wsdl:operation name="ermittleKrankenversicherungsanspruch">
+	  <wsdl:input message="tns:ermittleKrankenversicherungsanspruch" name="ermittleKrankenversicherungsanspruch"></wsdl:input>
+	  <wsdl:output message="tns:ermittleKrankenversicherungsanspruchResponse" name="ermittleKrankenversicherungsanspruchResponse"></wsdl:output>
+	</wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ErmittleKrankenversicherungsanspruchServiceSoapBinding" type="tns:ErmittleKrankenversicherungsanspruch">
+	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+	<wsdl:operation name="ermittleKrankenversicherungsanspruch">
+	  <soap:operation soapAction="ermittleKrankenversicherungsanspruch" style="document" />
+	  <wsdl:input name="ermittleKrankenversicherungsanspruch">
+		<soap:body use="literal" />
+	  </wsdl:input>
+	  <wsdl:output name="ermittleKrankenversicherungsanspruchResponse">
+		<soap:body use="literal" />
+	  </wsdl:output>
+	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ErmittleKrankenversicherungsanspruchService">
+	<wsdl:port binding="tns:ErmittleKrankenversicherungsanspruchServiceSoapBinding" name="ErmittleKrankenversicherungsanspruchPort">
+	  <soap:address location="https://kvatest.sozvers.at/KVAWS/kvkerm/2_0/Krankenversicherungsanspruch" />
+	</wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

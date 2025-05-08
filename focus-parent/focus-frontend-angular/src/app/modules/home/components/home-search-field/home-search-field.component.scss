@@ -1,0 +1,33 @@
+@import "../../../../styles/base/variables";
+
+::ng-deep f360-home-search-field f360-select {
+    .mat-mdc-form-field {
+        font-size: $select-font-size;
+        letter-spacing: normal;
+        line-height: 1rem;
+    }
+
+    .mat-mdc-text-field-wrapper {
+        padding: 0;
+    }
+
+    mat-select.mat-mdc-select {
+        letter-spacing: normal;
+
+        .mat-mdc-select-arrow-wrapper {
+            transform: unset;
+        }
+    }
+
+    .mat-mdc-text-field-wrapper,
+    .mat-mdc-text-field-wrapper:not(.mdc-text-field--outlined) {
+        .mat-mdc-form-field-infix {
+            min-height: unset;
+            padding: 0.5rem 1rem;
+        }
+    }
+}
+
+.focus360-home-select-panel {
+    width: 100%;
+}

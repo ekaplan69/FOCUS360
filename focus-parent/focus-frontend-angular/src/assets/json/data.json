@@ -1,0 +1,161 @@
+{
+    "user": {
+        "benutzername": "TestUser",
+        "vorname": "Philip",
+        "nachname": "Fry",
+        "organisationseinheiten": [
+            "ORGIT"
+        ],
+        "rollen": [
+            "FOCUS360.ADMIVERW"
+        ],
+        "selectedOrganisationseinheit": "ORGIT"
+    },
+    "person": {
+        "metainformation": {
+            "status": "OK"
+        },
+        "response": {
+            "vsnr": "4263060898",
+            "stammdaten": {
+                "adresse": {},
+                "geburtsDatum": "1998-08-06",
+                "geldAdressen": [
+                    {}
+                ],
+                "geschlecht": "M",
+                "zustimmungSUEN": false,
+                "gesetzlichVertreten": false,
+                "auskunftsSperre": "false",
+                "auskunftsSperreGruende": "",
+                "mailAdresse": "me@me.me",
+                "name": "Matthias Steinwendner",
+                "telefonNummer": "018054646",
+                "partnerVersicherterRolleId": "1234567890"
+            }
+        }
+    },
+    "versicherungszeiten": {
+        "metainformation": {
+            "status": "OK"
+        },
+        "response": [
+            {
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "beginnDatum": "2008-04-03",
+                "endeDatum": "2011-05-30",
+                "qualifikation": "Angestellter",
+                "dienstgebername": "Planet Express"
+            },
+            {
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "beginnDatum": "2008-04-03",
+                "endeDatum": "2011-05-30",
+                "qualifikation": "Angestellter",
+                "dienstgebername": "Planet Express"
+            },
+            {
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "beginnDatum": "2008-04-03",
+                "endeDatum": "2011-05-30",
+                "qualifikation": "Angestellter",
+                "dienstgebername": "Planet Express"
+            }
+        ]
+    },
+    "versicherte": {
+        "metainformation": {
+            "status": "OK"
+        },
+        "response": [
+            {
+                "gueltigVon": "2001-04-01",
+                "gueltigBis": null,
+                "vorname": "Max",
+                "nachname": "Mustermann",
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "typ": "Vater",
+                "versicherungsnummer": "1114980263",
+                "anspruchspruefung": true
+            },
+            {
+                "gueltigVon": "2001-04-01",
+                "gueltigBis": null,
+                "vorname": "Max",
+                "nachname": "Mustermann",
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "typ": "Vater",
+                "versicherungsnummer": "1114980263",
+                "anspruchspruefung": true
+            }
+        ]
+    },
+    "angehoerige": {
+        "metainformation": {
+            "status": "OK"
+        },
+        "response": [
+            {
+                "gueltigVon": "2001-04-01",
+                "gueltigBis": null,
+                "vorname": "Max",
+                "nachname": "Mustermann",
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "typ": "Vater",
+                "versicherungsnummer": "1114980263",
+                "anspruchspruefung": true
+            },
+            {
+                "gueltigVon": "2001-04-01",
+                "gueltigBis": null,
+                "vorname": "Max",
+                "nachname": "Mustermann",
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "typ": "Vater",
+                "versicherungsnummer": "1114980263",
+                "anspruchspruefung": true
+            },
+            {
+                "gueltigVon": "2001-04-01",
+                "gueltigBis": null,
+                "vorname": "Max",
+                "nachname": "Mustermann",
+                "meldendeStelle": "14 - ÖGK NÖ",
+                "typ": "Vater",
+                "versicherungsnummer": "1114980263",
+                "anspruchspruefung": true
+            }
+        ]
+    },
+    "ecard": {
+        "metainformation": {
+            "status": "OK"
+        },
+        "response": {
+            "ausstellungsDatum": "2018-11-24",
+            "letzteKonsultation": "2019-08-22",
+            "laufnummer": "0000000000004"
+        }
+    },
+    "leistungen": {
+        "metainformation": {
+            "status": "OK"
+        },
+        "response": {
+            "hbhm": null,
+            "vwst": [],
+            "unfallerh": null,
+            "ekos": {},
+            "medSt": [],
+            "frt": {},
+            "wazaKo": null,
+            "auMhRgWeg": null,
+            "kh": null,
+            "wahWaza": null,
+            "betreute": [],
+            "lohnPf": {
+                "lohnpfaendung": true
+            }
+        }
+    }
+}

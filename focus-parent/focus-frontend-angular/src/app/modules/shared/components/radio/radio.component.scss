@@ -1,0 +1,24 @@
+@import "../../../../styles/base/variables";
+
+// Verhindert umgebene Komponenten Positionierung zu verändern
+:host {
+    display: grid;
+    width: 100%;
+}
+
+// Positionierung der Radios innerhalb der Radio-Group
+.focus360-radio-group-vertical {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 5px 20px;
+}
+
+// Etwas Margin zwischen den Radio-Buttons
+.focus360-radio-button {
+    margin: 5px 0;
+}
+
+// Label rot färben, wenn man etwas nicht valides auswählt (bzw. required) bzw. die Form submitted und das Feld nicht valide ist.
+:host ::ng-deep f360-radio label.invalid {
+    color: $error-font-color;
+}

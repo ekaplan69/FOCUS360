@@ -1,0 +1,111 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://awf.sozvers.at/schema/meldungen" targetNamespace="http://awf.sozvers.at/schema/meldungen" elementFormDefault="qualified">
+  <xs:element name="meldungen">
+	<xs:annotation>
+	  <xs:documentation>
+		Meldungen besteht aus eine Liste von zumindest einer Meldung.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:complexType>
+	  <xs:sequence>
+		<xs:element name="meldung" type="Meldung" minOccurs="1" maxOccurs="64">
+		  <xs:annotation>
+			<xs:documentation>
+			  Liste der Meldungen.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:element>
+	  </xs:sequence>
+	</xs:complexType>
+  </xs:element>
+  <xs:complexType name="Meldung">
+	<xs:annotation>
+	  <xs:documentation>
+		Eine Meldung besteht aus ihrem Code und Kategorie, sowie dem Text der Meldung und einer Liste möglicher Parameter.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:sequence>
+	  <xs:element name="text" type="xs:string" minOccurs="1" maxOccurs="1">
+		<xs:annotation>
+		  <xs:documentation>
+			Der Text der Meldung ist eine lesbare Beschreibung der Meldung.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	  <xs:element name="parameter" type="MeldungParameter" minOccurs="0" maxOccurs="64">
+		<xs:annotation>
+		  <xs:documentation>
+			Die Liste an Parametern enthält zusätzliche Informationen zu der Meldung. Diese sind je nach Meldung unterschiedlich.
+		  </xs:documentation>
+		</xs:annotation>
+	  </xs:element>
+	</xs:sequence>
+	<xs:attribute name="code" type="MeldungCode" use="required">
+	  <xs:annotation>
+		<xs:documentation>
+		  Der Code der Meldung ist eine eindeutig und gibt Aufschluss über die Art der Meldung. So hat beispielsweise jede Fehlermeldung einen eigenen Code.
+		</xs:documentation>
+	  </xs:annotation>
+	</xs:attribute>
+	<xs:attribute name="kategorie" type="MeldungKategorie" use="required">
+	  <xs:annotation>
+		<xs:documentation>
+		  Die Kategorie gibt Aufschluss darüber ob die Meldung einen Systemfehler, Fehler, Warnun oder Hinweis beschreibt.
+		</xs:documentation>
+	  </xs:annotation>
+	</xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="MeldungParameter">
+	<xs:annotation>
+	  <xs:documentation>
+		Ein MeldungParamter besteht aus seinem Namen und dem Wert des Parameters.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:simpleContent>
+	  <xs:extension base="xs:string">
+		<xs:attribute name="name" type="MeldungParamterName">
+		  <xs:annotation>
+			<xs:documentation>
+			  Der Name des MeldungParameters.
+			</xs:documentation>
+		  </xs:annotation>
+		</xs:attribute>
+	  </xs:extension>
+	</xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="MeldungCode">
+	<xs:annotation>
+	  <xs:documentation>
+		MeldungCode definiert einen eindeutigen Code für eine Meldung.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:string">
+	  <xs:maxLength value="16" />
+	</xs:restriction>
+  </xs:simpleType>
+  <!--
+  Systemfehler, Fehler, Warnung, Hinweis
+  -->
+  <xs:simpleType name="MeldungKategorie">
+	<xs:annotation>
+	  <xs:documentation>
+		MeldungKategorie gibt Aufschluss darüber ob die Meldung einen Systemfehler, Fehler, Warnun oder Hinweis beschreibt.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:string">
+	  <xs:enumeration value="S" />
+	  <xs:enumeration value="F" />
+	  <xs:enumeration value="W" />
+	  <xs:enumeration value="H" />
+	</xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MeldungParamterName">
+	<xs:annotation>
+	  <xs:documentation>
+		MeldungParameterName ist der Name eines MeldungParameters.
+	  </xs:documentation>
+	</xs:annotation>
+	<xs:restriction base="xs:string">
+	  <xs:maxLength value="64" />
+	</xs:restriction>
+  </xs:simpleType>
+</xs:schema>

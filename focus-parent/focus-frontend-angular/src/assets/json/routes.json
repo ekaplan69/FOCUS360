@@ -1,0 +1,9 @@
+{
+    "/focus/api/rest/user": "/user",
+    "/focus/api/rest/person/*": "/person",
+    "/focus/api/rest/versicherungszeit/*": "/versicherungszeiten",
+    "/focus/api/rest/coinsurance/versicherte/*": "/versicherte",
+    "/focus/api/rest/coinsurance/angehoerige/*": "/angehoerige",
+    "/focus/api/rest/ecarddaten/*": "/ecard",
+    "/focus/api/rest/leistungen/*": "/leistungen"
+}

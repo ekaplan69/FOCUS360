@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.3.2 generiert 
+Siehe <a href="https://javaee.github.io/jaxb-v2/">https://javaee.github.io/jaxb-v2/</a> 
+Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
+Generiert: 2024.01.30 um 04:01:33 PM CET 
+
+  -->
+  <bindings xmlns:tns="http://awf.sozvers.at/schema/dokument" scd="x-schema::tns">
+	<schemaBindings map="false">
+	  <package name="at.sozvers.focus.ws.geschaeftsfall.starten" />
+	</schemaBindings>
+	<bindings scd="tns:migDokumentErstellen">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigDokumentErstellen" />
+	</bindings>
+	<bindings scd="~tns:komplexerTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.KomplexerTyp" />
+	</bindings>
+	<bindings scd="~tns:migBerechtigungTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigBerechtigungTyp" />
+	</bindings>
+	<bindings scd="~tns:metadatenTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MetadatenTyp" />
+	</bindings>
+	<bindings scd="tns:dokument">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.Dokument" />
+	</bindings>
+	<bindings scd="~tns:dokumentErweiterungenTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.DokumentErweiterungenTyp" />
+	</bindings>
+	<bindings scd="tns:dokumentErstellen">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.DokumentErstellen" />
+	</bindings>
+	<bindings scd="~tns:link">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.Link" />
+	</bindings>
+	<bindings scd="tns:dokumentAblegen">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.DokumentAblegen" />
+	</bindings>
+	<bindings scd="tns:metadatenAendern">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MetadatenAendern" />
+	</bindings>
+	<bindings scd="tns:aufbewahrungsfristAendern">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.AufbewahrungsfristAendern" />
+	</bindings>
+	<bindings scd="tns:externeGuiAnfordern">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.ExterneGuiAnfordern" />
+	</bindings>
+	<bindings scd="tns:batchDokumentErstellen">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.BatchDokumentErstellen" />
+	</bindings>
+	<bindings scd="~tns:migNotiz">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigNotiz" />
+	</bindings>
+	<bindings scd="~tns:migVersion">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigVersion" />
+	</bindings>
+	<bindings scd="~tns:migDateiInfo">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigDateiInfo" />
+	</bindings>
+	<bindings scd="~tns:linkTyp">
+	  <typesafeEnumClass ref="at.sozvers.focus.ws.geschaeftsfall.starten.LinkTyp" />
+	</bindings>
+	<bindings scd="~tns:migRolleTyp">
+	  <typesafeEnumClass ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigRolleTyp" />
+	</bindings>
+  </bindings>
+  <bindings xmlns:tns="http://awf.sozvers.at/schema/geschaeftsfall" scd="x-schema::tns">
+	<schemaBindings map="false">
+	  <package name="at.sozvers.focus.ws.geschaeftsfall.starten" />
+	</schemaBindings>
+	<bindings scd="tns:migGfDokumentErstellen">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigGfDokumentErstellen" />
+	</bindings>
+	<bindings scd="tns:geschaeftsfallStarten">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.GeschaeftsfallStarten" />
+	</bindings>
+	<bindings scd="tns:geschaeftsfall">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.Geschaeftsfall" />
+	</bindings>
+	<bindings scd="tns:migriereGeschaeftsfallAblage">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MigriereGeschaeftsfallAblage" />
+	</bindings>
+	<bindings scd="tns:aufgaben-suchergebnis">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.AufgabenSuchergebnis" />
+	</bindings>
+	<bindings scd="~tns:gefundeneAufgabenTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.GefundeneAufgabenTyp" />
+	</bindings>
+	<bindings scd="tns:aufgabe-bearbeiten">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.AufgabeBearbeiten" />
+	</bindings>
+	<bindings scd="tns:aufgabe">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.Aufgabe" />
+	</bindings>
+	<bindings scd="~tns:gefundeneAufgabeTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.GefundeneAufgabeTyp" />
+	</bindings>
+	<bindings scd="~tns:aufgabenausgaengeTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.AufgabenausgaengeTyp" />
+	</bindings>
+	<bindings scd="tns:verlinkteDokumente">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.VerlinkteDokumente" />
+	</bindings>
+	<bindings scd="~tns:verlinktesDokumentTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.VerlinktesDokumentTyp" />
+	</bindings>
+	<bindings scd="tns:geschaeftsfallLinks">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.GeschaeftsfallLinks" />
+	</bindings>
+	<bindings scd="~tns:geschaeftsfallLinkTyp">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.GeschaeftsfallLinkTyp" />
+	</bindings>
+  </bindings>
+  <bindings xmlns:tns="http://awf.sozvers.at/schema/meldungen" scd="x-schema::tns">
+	<schemaBindings map="false">
+	  <package name="at.sozvers.focus.ws.geschaeftsfall.starten" />
+	</schemaBindings>
+	<bindings scd="tns:meldungen">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.Meldungen" />
+	</bindings>
+	<bindings scd="~tns:Meldung">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.Meldung" />
+	</bindings>
+	<bindings scd="~tns:MeldungParameter">
+	  <class ref="at.sozvers.focus.ws.geschaeftsfall.starten.MeldungParameter" />
+	</bindings>
+	<bindings scd="~tns:MeldungKategorie">
+	  <typesafeEnumClass ref="at.sozvers.focus.ws.geschaeftsfall.starten.MeldungKategorie" />
+	</bindings>
+  </bindings>
+</bindings>
+

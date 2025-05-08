@@ -1,0 +1,228 @@
+<div class="beschwerde-form-wrapper">
+    @if (
+        beschwerdeForm.currentBeschwerde != null &&
+        themaAnzeige &&
+        unterkategorieAnzeige &&
+        grundAnzeige
+    ) {
+        @if (beschwerdeForm.bearbeitungsModus == false) {
+            <div class="stay-safe-from-footer">
+                <div class="header-container">
+                    <h1>{{ getTitle() }}</h1>
+                    @if (
+                        this.userService?.userInfo?.containsRolle(
+                            rollen.ROLLE_BESW_VERW
+                        ) && this.createdTodayByUser()
+                    ) {
+                        <f360-fab-button
+                            [tooltipText]="'Kundenkontakt bearbeiten'"
+                            icon="edit"
+                            (click)="feedbackBearbeitenPressed()"
+                        ></f360-fab-button>
+                    }
+                </div>
+                <div class="first-select-row">
+                    <div class="data-block">
+                        <a class="data-header">Name</a>
+                        <span class="data-text">{{
+                            this.beschwerdeForm.currentBeschwerde.fullName
+                        }}</span>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="second-select-row">
+                    <div class="data-block">
+                        <a class="data-header">Thema</a>
+                        <span class="data-text">{{
+                            getThemaDisplayName()
+                        }}</span>
+                    </div>
+                    <div class="data-block">
+                        <a class="data-header">Unterkategorie</a>
+                        <span class="data-text">{{
+                            getUnterkategorieDisplayName()
+                        }}</span>
+                    </div>
+                </div>
+                <div class="second-select-row">
+                    <div class="data-block">
+                        <a class="data-header">Grund</a>
+                        <span class="data-text">{{
+                            getGrundDisplayName()
+                        }}</span>
+                    </div>
+                    <div class="data-block">
+                        <a class="data-header">Kontaktart</a>
+                        <span class="data-text">{{
+                            getKontaktartDisplayName()
+                        }}</span>
+                    </div>
+                </div>
+                <div class="second-select-row">
+                    <div class="data-block">
+                        <a class="data-header">Kundenservicecenter</a>
+                        <span class="data-text">{{
+                            this.beschwerdeForm.currentBeschwerde.mitarbeiterOE
+                        }}</span>
+                    </div>
+                </div>
+                <div class="focus360-input-field">
+                    <div class="data-block">
+                        <a class="data-header">Beschreibung</a>
+                        <span class="data-text">{{
+                            this.beschwerdeForm.currentBeschwerde.beschreibung
+                        }}</span>
+                    </div>
+                </div>
+                <div class="focus360-input-field">
+                    <div class="data-block">
+                        <a class="data-header">Verbesserung</a>
+                        <span class="data-text">{{
+                            this.beschwerdeForm.currentBeschwerde.verbesserung
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (beschwerdeForm.bearbeitungsModus == true) {
+            @if (feedbackThemenAuswahl) {
+                <div class="stay-safe-from-footer">
+                    <h1>Kundenfeedback bearbeiten</h1>
+                    <div class="content-body">
+                        <div class="first-select-row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Thema*</mat-label>
+                                <mat-select
+                                    (selectionChange)="
+                                        handleThemaChanged($event.value)
+                                    "
+                                    [(ngModel)]="currentFeedback.themaId"
+                                >
+                                    @for (
+                                        thema of feedbackThemenAuswahl;
+                                        track thema
+                                    ) {
+                                        <mat-option [value]="thema.themaId"
+                                            >{{ thema.themaBezeichnung }}
+                                        </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            @if (feedbackUnterkategorieAuswahl.length != 0) {
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Unterkategorie*</mat-label>
+                                    <mat-select
+                                        (selectionChange)="
+                                            handleUnterkategorieChanged(
+                                                $event.value
+                                            )
+                                        "
+                                        [value]="
+                                            currentFeedback.unterkategorieId
+                                        "
+                                    >
+                                        @for (
+                                            unterkategorie of feedbackUnterkategorieAuswahl;
+                                            track feedbackUnterkategorieAuswahl
+                                        ) {
+                                            <mat-option
+                                                [value]="unterkategorie.id"
+                                                >{{
+                                                    unterkategorie.bezeichnung
+                                                }}
+                                            </mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            }
+                        </div>
+                        <div class="first-select-row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Grund*</mat-label>
+                                <mat-select [(value)]="currentFeedback.grundId">
+                                    @for (
+                                        grund of feedbackGruendeAuswahl;
+                                        track grund
+                                    ) {
+                                        <mat-option [value]="grund.id"
+                                            >{{ grund.bezeichnung }}
+                                        </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Kontaktart*</mat-label>
+                                <mat-select
+                                    [(value)]="currentFeedback.kontaktArt"
+                                >
+                                    @for (
+                                        kontaktart of kontaktartAnzeige;
+                                        track kontaktart
+                                    ) {
+                                        <mat-option
+                                            [value]="kontaktart.kontaktartId"
+                                            >{{ kontaktart.label }}
+                                        </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="first-select-row">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Feedbackart*</mat-label>
+                                <mat-select
+                                    [(ngModel)]="currentFeedback.feedbackArt"
+                                >
+                                    @for (
+                                        art of feedbackArtenAuswahl;
+                                        track art
+                                    ) {
+                                        <mat-option [value]="art.id"
+                                            >{{ art.description }}
+                                        </mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <mat-form-field class="text-area">
+                            <mat-label>Beschreibung</mat-label>
+                            <textarea
+                                matInput
+                                [(ngModel)]="currentFeedback.beschreibung"
+                            >
+                            </textarea>
+                        </mat-form-field>
+                        <mat-form-field class="text-area">
+                            <mat-label>Verbesserung</mat-label>
+                            <textarea
+                                matInput
+                                [(ngModel)]="currentFeedback.verbesserung"
+                            >
+                            </textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            } @else {
+                <f360-loading-indicator></f360-loading-indicator>
+            }
+        }
+    } @else {
+        <f360-loading-indicator></f360-loading-indicator>
+    }
+
+    <!-- SECTION::CONTROL -->
+    <div class="control-section">
+        <div class="button-group">
+            <button (click)="closeForm()" mat-button>Abbrechen</button>
+            @if (beschwerdeForm.bearbeitungsModus == true) {
+                <button
+                    mat-raised-button
+                    class="erfassen-button"
+                    (click)="saveBeschwerde()"
+                >
+                    Speichern
+                </button>
+            }
+        </div>
+    </div>
+</div>

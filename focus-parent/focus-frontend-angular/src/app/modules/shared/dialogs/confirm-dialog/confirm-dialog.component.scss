@@ -1,0 +1,17 @@
+.dialog-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.action-group {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: flex-end;
+}
+
+.action-group > * {
+    width: 30%;
+}

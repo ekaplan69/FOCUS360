@@ -1,0 +1,34 @@
+<div class="application-list-wrapper">
+    <span class="application-list-header">Applikationsliste</span>
+    <ul class="application-list">
+        <!-- SECTION::APPLICATIONS -->
+        @for (apps of applikationsListe; track apps) {
+            <li class="application-list-item">
+                <a href="{{ apps.href }}" target="_blank">{{ apps.label }}</a>
+            </li>
+        }
+    </ul>
+    <hr />
+    <!-- SECTION::USER_ACTIONS -->
+    <ul>
+        @for (
+            benutzerAktionen of benutzerAktionenListe;
+            track benutzerAktionen
+        ) {
+            <li>
+                <a href="{{ benutzerAktionen.href }}" class="link-wrapper">
+                    <div class="menu-item-icon">
+                        @if (benutzerAktionen.icon) {
+                            <mat-icon class="application-list-icon">
+                                {{ benutzerAktionen.icon }}
+                            </mat-icon>
+                        }
+                    </div>
+                    <span class="menu-item-label">{{
+                        benutzerAktionen.label
+                    }}</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>

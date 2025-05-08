@@ -1,0 +1,152 @@
+@import "src/app/styles/base/variables";
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/*TODO: Wenn f360-loading-indicator überarbeitet wird anschauen (bad practice)*/
+f360-loading-indicator {
+    padding: 50px !important;
+}
+
+.dashletMeldung > *:first-child {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table__wrapper {
+    flex: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+.table {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table__header-row {
+    display: flex;
+}
+
+.table__row {
+    cursor: pointer;
+    max-width: 100%;
+}
+
+.table__row:nth-of-type(even) {
+    background-color: $data-background-color-even;
+}
+
+.table__row:nth-of-type(odd) {
+    background-color: $data-background-color-odd;
+}
+
+.table__row:nth-of-type(odd):hover {
+    background-color: $primary-text-color;
+}
+
+.table__row:nth-of-type(even):hover {
+    background-color: $primary-text-color;
+}
+
+.table__row:hover > .table__cell > span {
+    color: $secondary-text-color;
+}
+
+.span--hidden-overflow {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.table__cell {
+    color: $primary-text-color;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.table__cell > span {
+    @extend .span--hidden-overflow;
+}
+
+.table__cell--datum {
+    @extend .table__cell;
+    flex: 0;
+    min-width: fit-content;
+    text-overflow: unset;
+    width: fit-content;
+}
+
+.table__cell--beginn {
+    @extend .table__cell;
+    flex: 0;
+    min-width: fit-content;
+    text-overflow: unset;
+}
+
+.table__cell--ende {
+    @extend .table__cell;
+    flex: 0;
+    min-width: fit-content;
+    text-overflow: unset;
+}
+
+.table__header-cell--datum {
+    flex: 0;
+    // größe die benötigt wird, um das Datum anzuzeigen relativ zur Schriftgröße,
+    // da flex daktiviert ist
+    min-width: 6.968125rem;
+    padding: 0 1rem 0 1.5rem;
+}
+
+.table__header-cell--beginn {
+    flex: 0;
+    // größe die benötigt wird, um die Uhrzeit anzuzeigen relativ zur Schriftgröße,
+    // da flex daktiviert ist
+    min-width: 4.721875rem;
+    padding: 0 0.5rem 0 1rem;
+}
+
+.table__header-cell--ende {
+    flex: 0;
+    // größe die benötigt wird, um die Uhrzeit anzuzeigen relativ zur Schriftgröße,
+    // da flex daktiviert ist
+    min-width: 4.221875rem;
+    padding: 0 1rem 0 0.5rem;
+}
+
+.table__header-cell--beginn > span,
+.table__header-cell--datum > span,
+.table__header-cell--ende > span {
+    @extend .span--hidden-overflow;
+}
+
+.footer {
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    margin-bottom: 0;
+    margin-top: auto;
+    min-height: $dashlet-footer-height;
+}
+
+.paginator {
+    margin: $dashlet-footer-spacing $data-spacing $dashlet-footer-spacing auto;
+}
+
+.form-field {
+    display: inline-block;
+    margin-bottom: $dashlet-footer-spacing;
+    margin-left: $data-spacing;
+    margin-top: $dashlet-footer-spacing;
+    width: 20%;
+}

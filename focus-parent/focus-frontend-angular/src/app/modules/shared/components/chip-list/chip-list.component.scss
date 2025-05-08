@@ -1,0 +1,30 @@
+@import "../../../../styles/base/variables";
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+:host ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
+::ng-deep mat-chip-list .mat-chip-list-wrapper {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
+::ng-deep mat-chip-list .mat-chip-list-wrapper f360-chip {
+    display: block;
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper,
+:host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-infix {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+::ng-deep .mat-mdc-tooltip {
+    font-size: 0.8rem !important;
+}

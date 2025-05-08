@@ -1,0 +1,11 @@
+@import "../../styles/base/variables";
+
+:host-context(.focus360-dash-screen) .focus360-header-container {
+    background-color: $primary-color;
+    background-image: url("~src/assets/images/header_background.jpg");
+    background-position-x: right;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    box-sizing: border-box;
+}

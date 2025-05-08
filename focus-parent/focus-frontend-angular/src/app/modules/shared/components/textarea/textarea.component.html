@@ -1,0 +1,21 @@
+<mat-form-field [ngClass]="{ invalid: hasError }">
+    <mat-label>{{ label }}</mat-label>
+    <textarea
+        (focus)="focusIn($event.target.value)"
+        (focusout)="focusOut($event.target.value)"
+        (input)="onUserChange($event)"
+        [disabled]="disabled"
+        [id]="customId"
+        [name]="name"
+        [value]="text"
+        cdkAutosizeMaxRows="{{ maxRows }}"
+        cdkAutosizeMinRows="{{ minRows }}"
+        cdkTextareaAutosize
+        class="focus360-textarea"
+        cols="120"
+        matInput
+        type="{{ type || 'text' }}"
+    >
+    </textarea>
+</mat-form-field>
+<app-validation [errors]="errors" [hasError]="hasError"></app-validation>
