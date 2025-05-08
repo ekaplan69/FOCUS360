@@ -1,0 +1,127 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+	<groupId>at.sozvers.noegkk</groupId>
+	<artifactId>organization-pom</artifactId>
+	<version>9.1.1</version>
+  </parent>
+  <groupId>at.sozvers.noegkk.focus</groupId>
+  <artifactId>focus</artifactId>
+  <version>2023.2.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+	<build.version>${project.version}</build.version>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	<!-- Plugins -->
+	<version.jaxws-maven-plugin>4.0.3</version.jaxws-maven-plugin>
+	<version.maven-surefire-plugin>3.5.3</version.maven-surefire-plugin>
+	<version.sv-jboss-control-maven-plugin>5.0.3</version.sv-jboss-control-maven-plugin>
+	<version.rdm-maven-plugin>1.0.1</version.rdm-maven-plugin>
+	<version.asciidoctor-maven-plugin>3.1.1</version.asciidoctor-maven-plugin>
+	<!-- ITSV -->
+	<version.itsv-commons>2.0.1</version.itsv-commons>
+	<version.eportal>8.0.9</version.eportal>
+	<!-- ZUP Framework -->
+	<version.zup.framework>6.0.0</version.zup.framework>
+	<!-- Third party -->
+	<version.org.apache.httpclient>4.5.3</version.org.apache.httpclient>
+	<version.org.apache.camel>2.23.0</version.org.apache.camel>
+	<version.org.apache.commons-io>2.6</version.org.apache.commons-io>
+	<version.berez-principal>1.2.0</version.berez-principal>
+	<version.dep.asciidoctorj>3.0.0</version.dep.asciidoctorj>
+	<version.dep.asciidoctorj-pdf>2.3.19</version.dep.asciidoctorj-pdf>
+	<!-- Test -->
+	<mockito.core.version>5.12.0</mockito.core.version>
+	<version.test.java-hamcrest>2.0.0.0</version.test.java-hamcrest>
+	<maven.version.weld.se>6.0.0.CR1</maven.version.weld.se>
+	<maven.version.weld.api>6.0.CR1</maven.version.weld.api>
+	<jakarta.enterprise.cdi.version>4.1.0.redhat-00001</jakarta.enterprise.cdi.version>
+	<!-- Plugin config -->
+	<skipTests>false</skipTests>
+	<skipUTs>${skipTests}</skipUTs>
+	<skipITs>${skipTests}</skipITs>
+	<kva.version>3.0.7</kva.version>
+  </properties>
+  <modules>
+	<module>focus-parent</module>
+	<module>focus-config-dev</module>
+  </modules>
+  <organization>
+	<name>Österreichische Gesundheitskasse</name>
+	<url>https://www.gesundheitskasse.at</url>
+  </organization>
+  <developers>
+	<developer>
+	  <id>15102550</id>
+	  <name>Ing. Sascha Ernst Pucher</name>
+	  <email>sascha.pucher@oegk.at</email>
+	  <organization>Österreichische Gesundheitskasse - Landesstelle Steiermark</organization>
+	  <organizationUrl>https://www.gesundheitskasse.at</organizationUrl>
+	  <roles>
+		<role>Architect</role>
+	  </roles>
+	</developer>
+	<developer>
+	  <id>14203700</id>
+	  <name>Christoph Großauer</name>
+	  <email>christoph.grossauer@oegk.at</email>
+	  <organization>Österreichische Gesundheitskasse - Landesstelle Oberösterreich</organization>
+	  <organizationUrl>https://www.gesundheitskasse.at</organizationUrl>
+	  <roles>
+		<role>Developer</role>
+	  </roles>
+	</developer>
+	<developer>
+	  <id>15102883</id>
+	  <name>Ing. Simon Zirngast</name>
+	  <email>simon.zirngast@oegk.at</email>
+	  <organization>Österreichische Gesundheitskasse - Landesstelle Steiermark</organization>
+	  <organizationUrl>https://www.gesundheitskasse.at</organizationUrl>
+	  <roles>
+		<role>Developer</role>
+	  </roles>
+	</developer>
+  </developers>
+  <issueManagement>
+	<url>https://issue.seu.sozvers.at/jira/projects/FOCUS360/</url>
+	<system>JIRA</system>
+  </issueManagement>
+  <scm>
+	<url>https://gitlab.seu.sozvers.at/FOCUS360/FOCUS360.git</url>
+	<connection>scm:git:https://gitlab.seu.sozvers.at/FOCUS360/FOCUS360.git</connection>
+	<developerConnection>scm:git:https://gitlab.seu.sozvers.at/FOCUS360/FOCUS360.git</developerConnection>
+  </scm>
+  <build>
+	<pluginManagement>
+	  <plugins>
+		<plugin>
+		  <groupId>com.sun.xml.ws</groupId>
+		  <artifactId>jaxws-maven-plugin</artifactId>
+		  <version>${version.jaxws-maven-plugin}</version>
+		</plugin>
+		<plugin>
+		  <groupId>org.apache.maven.plugins</groupId>
+		  <artifactId>maven-surefire-plugin</artifactId>
+		  <version>${version.maven-surefire-plugin}</version>
+		</plugin>
+		<plugin>
+		  <groupId>at.itsv.tools.jbosscontrol</groupId>
+		  <artifactId>sv-jboss-control-maven-plugin</artifactId>
+		  <version>${version.sv-jboss-control-maven-plugin}</version>
+		</plugin>
+		<plugin>
+		  <groupId>at.itsv.tools.rdm</groupId>
+		  <artifactId>rdm-maven-plugin</artifactId>
+		  <version>${version.rdm-maven-plugin}</version>
+		</plugin>
+		<plugin>
+		  <groupId>org.asciidoctor</groupId>
+		  <artifactId>asciidoctor-maven-plugin</artifactId>
+		  <version>${version.asciidoctor-maven-plugin}</version>
+		</plugin>
+	  </plugins>
+	</pluginManagement>
+  </build>
+</project>
