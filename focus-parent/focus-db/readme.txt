@@ -1,2 +1,0 @@
-File for starting up a local instance of the postgres db containing the data from C:**\FRONTEND\focus-db\deploy
-can be found in the folder C:**\FRONTEND\focus-db\misc\local_setup as POSTGRES_FROM_SCRATCH.BAT

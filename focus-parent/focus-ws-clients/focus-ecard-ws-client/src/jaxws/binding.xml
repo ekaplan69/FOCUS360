@@ -1,4 +1,0 @@
-<bindings xmlns="http://java.sun.com/xml/ns/jaxws">
-  <!-- Disable default wrapper style -->
-  <enableWrapperStyle>false</enableWrapperStyle>
-</bindings>

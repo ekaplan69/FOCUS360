@@ -1,4 +1,0 @@
-<deployment xmlns="eportal-xml:3.0" enableJsfFeatures="false">
-  <application id="focus" pageTitle="FOCUS-360" title="FOCUS-360" subTitle="" />
-  <security automaticStartPageRedirect="true" startPage="home" />
-</deployment>

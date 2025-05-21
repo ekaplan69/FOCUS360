@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-  <zugriffsprotokoll zugriffsprotokoll_id="3" zvst="12" idapp="FOCUS360" systemmodus="V" version="1" logid="F360_READ_VD" verarbeitungsmodus="O" traegerid="12" benutzerid="1224012"
-					 berechtigungs_systemid="1234" benutzer_orgeinheit="ORGIT" bearbeitungsgrund="Versichertenauskunft" prot_datum="20190401" prot_zeitpunkt="12383574" protokollierungspflicht="J"
-					 quell_systemid="1234" transaktionskennung="0016189800086" transaktionskennung_kurz="1234567890123" kriterium1_typ="PAID" kriterium1_wert="2280049"
-					 kriterium2_typ="FachschluesselArt" kriterium2_wert="VSNR" kriterium3_typ="Fachschluessel" kriterium3_wert="1234010100" verarbeitetjn="N" verarbdat="[null]" fehler="[null]"
-					 fehlertext="Name is null" zusatz10_10="[null]" zusatz11_10="[null]" zusatz12_30="[null]" zusatz13_50="[null]" zusatz14_60="[null]" zusatz15_130="[null]" zusatz1_10="[null]"
-					 zusatz2_10="[null]" zusatz3_10="[null]" zusatz4_10="[null]" zusatz5_10="[null]" zusatz6_10="[null]" zusatz7_10="[null]" zusatz8_10="[null]" zusatz9_10="[null]" />
-</dataset>
