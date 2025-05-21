@@ -1,6 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="focus360_setupDatabase" type="PowerShellRunType" factoryName="PowerShell" scriptUrl="C:\DEV\workspaces\IntelliJ\projects\FOCUS360\focus-config-dev\database\setupPostgreSQL.ps1" workingDirectory="$ProjectFileDir$\focus-config-dev\database" executablePath="$PROJECT_DIR$/../../../../../WINDOWS/System32/WindowsPowerShell/v1.0/powershell.exe">
-    <envs />
-    <method v="2" />
-  </configuration>
-</component>
